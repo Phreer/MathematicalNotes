@@ -1,0 +1,122 @@
+\chapter{Real Number Theory}
+\section{Field}
+Since rational numbers constitute a set showing some arithmetic 
+properties, we abstract these properties as the definition of the 
+so-called field.
+
+\begin{defn}
+A field is a set $F$ with two operations, called addition and 
+multiplication, which satisfy the following field axioms:
+\begin{description}
+    \item[A] \emph{Axioms for addition}
+    \begin{enumerate}
+        \item \emph{Close}. If $x, y \in F$, then $x + y \in F$;
+        \item \emph{Commutativity}. If $x, y \in F$, then $x + y = y + x$;
+        \item \emph{Associativity}. If $x, y and z \in F$, then 
+        $(x + y) + z = x + (y + z)$.
+        \item There is an element $0$ in $F$, named zero element, which 
+        satisfies that $x + 0 = x$ for all $x \in F$;
+        \item For any $x \in F$, there is corresponding element $-x$, named 
+        negative element, which satisfies that $x + (-x) = 0$.
+    \end{enumerate}
+\end{description}
+\begin{description}
+    \item[M] \emph{Axioms for multiplication}
+    \begin{enumerate}
+        \item \emph{Close}. If $x, y \in F$, then $xy \in F$;
+        \item \emph{Commutativity}. If $x, y \in F$, then $xy = yx$;
+        \item \emph{Associativity}. If $x, y and z \in F$, then 
+        $(xy)z = x(yz)$.
+        \item There is an element $1$ in $F$, named unit element, which 
+        satisfies that $1x = x$ for all $x \in F$;
+        \item For any $x \in F$, there is corresponding element $\frac{1}{x}$, 
+        named inverse element, which satisfies that $x\frac{1}{x} = 1$.
+    \end{enumerate}
+    \item[D] \emph{The distributive law}. If $x, y, z \in F$, then 
+    $x * (y + z) = xy + xz$.
+\end{description}
+\end{defn}
+
+\section{The Construction of Real Field}
+The main theory of this chapter is given as follows.
+
+\begin{thm}
+There exists an ordered field referred as $\bR$, which has the 
+least-upper-bound property and $\bR$ contains $\mathbb{Q}$.
+\end{thm}
+
+\begin{proof}
+We will complete our proof by constructing such a $\bR$. 
+We make $\bR$ contains exactly some subsets of $\mathbb{Q}$, 
+called cuts (denoted by Greek letters). If $\alpha$ is a cut in 
+$\bR$, then by definition, it has the following tree properties:
+\begin{enumerate}
+\item $\alpha$ is not empty and $\alpha \neq \mathbb{Q}$; 
+\item If $p \in \alpha$, $q \in \mathbb{Q}$ and $q < p$, then
+$q \in \alpha$;
+\item If $p \in \alpha$, then there exists some $r \in \alpha$ such that
+$p < r$.
+\end{enumerate}
+From the definition of cuts, we can make some observations:
+\begin{itemize}
+\item Every cut of $\mathbb{Q}$ is bounded above;
+\item If $p \in \alpha$ and $p \notin \alpha$, then $p < q$;
+\item If $r \notin \alpha$ and $r < s$, then $s \notin \alpha$, \ie, 
+there is no maximum element of $\alpha$.
+\end{itemize}
+
+In order to make $\bR$ an ordered set, we define $\alpha < \beta$ 
+as $\alpha \in \beta$. The addition of $\bR$ is defined by
+\begin{equation}
+\gamma = \alpha + \beta = \{r + s : r \in \alpha, s \in \beta\}.
+\end{equation}
+Making $\bR$ fits the axioms of addition, we have to find 
+a zero element by letting $0^*$ be the set of all negative number in 
+$\mathbb{Q}$. Clearly, $0^*$ is a cut, thus in $\bR$.
+
+It would be harder to construct multiplication for $\bR$. First, 
+let us confine us on $\bR^+ = \{\alpha \in \bR : 
+\alpha > 0^*\}$. Likewise, define\ $\alpha \beta$ as all the number 
+less than $rs$ for some $r\in \alpha$, $s \in \beta$, $r > 0$ and $s > 0$. 
+Futhermore, we complete the definition of multiplication by letting 
+\begin{equation}
+    \alpha \beta = 
+\begin{cases}
+    (-\alpha)(-\beta) &\text{ if } \alpha < 0^* \text{ and } \beta < 0^*, \\
+    -[(-\alpha)\beta] &\text{ if } \alpha < 0^* \text{ and } \beta > 0^*, \\
+    -[\alpha(-\beta)] &\text{ if } \alpha > 0^* \text{ and } \beta < 0^*.
+\end{cases}
+\end{equation}
+And we define $1^* = \{ p \in \mathbb{Q} : p < 1\}$.
+
+Finally we define a mapping $\phi: \mathbb{Q} \to \bR$ as 
+$\phi(p) = \{r \in \mathbb{Q} : r < p\}$. Obviously, $\phi$ is a 
+injection and is a homomorphism, \ie, the following conditions is 
+satisfied
+\begin{enumerate}
+\item $\phi(rs) = \phi(r)\phi(s)$;
+\item $\phi(r+s) = \phi(r) + \phi(s)$;
+\item $r < s$ if and only if $\phi(r) < \phi(s)$.
+\end{enumerate}
+In fact, these conditions can be expressed as that $\phi(\mathbb{Q})$ is
+isomorphic to $\mathbb{Q}$. So, in concerns of the arithmetic and 
+ordering properties they are exactly the same.
+
+Then by proving the following lemmas, we show that such $\bR$ 
+satisfies our requirements. The proof is rather tedious and omitted 
+right now, may be presented someday.
+\end{proof}
+
+\begin{lemma}
+$\bR$ is an ordered set and has least-upper-bound property.
+\end{lemma}
+\begin{proof}
+Let $A$ be an nonempty bounded above subset of $\bR$, $\beta$ a 
+upper bound of $A$ and $\gamma = \prod_{\alpha \in A} \alpha$. Then 
+it is trivial to prove that $\gamma = \sup A$.
+\end{proof}
+
+\begin{lemma}
+$R$ with addition, zero element, multiplication and unit element 
+defined above is a field.
+\end{lemma}

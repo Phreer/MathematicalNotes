@@ -1,0 +1,166 @@
+\chapter{Measure Spaces}
+
+\section{Measures}
+\index{finitely additive}
+\index{countably additive}
+\index{$\sigma$-additive}
+Let $\cE$ be a class on a set $X$. 
+A function defined on $\cE$ is called a \emph{set function}, usually 
+denoted by Greek letters $\mu$, $\nu$, \dots. 
+
+An extended real valued set function is \emph{(finitely) additive} 
+if for any disjoint $A, B \in \cE$ such that $A \cup B \in \cE$, we have 
+$\mu(A \cup B) = \mu(A) + \mu(B)$. 
+
+An extended real valued set function is \emph{countably additive (or 
+$\sigma$-additive)} if for every disjoint sequence $\{E_n\}_{n=1}^\infty$ 
+of sets in $\cE$ whose union is also in $\cE$, we have 
+$\mu\left( \bigcup_{n=1}^\infty E_n \right) = \bigcup_{n=1}^\infty E_n$. 
+
+\begin{defn}
+\index{measure}
+\index{measure!finite \~{}}
+\index{measure!$\sigma$-finite \~{}}
+Let $\cE$ be a class on a set $X$ and $\varnothing \in \cE$. 
+A non negative set function $\mu: \cE \to \overline{\bR}$ is called a 
+\emph{measure} on $\cE$ if $\mu$ is countably additive and 
+$\mu(\varnothing) = 0$. 
+
+A measure $\mu$ is called \emph{finite} if $\mu(A) < \infty$ for all 
+$A \in \cE$; 
+A measure $\mu$ called \emph{$\sigma$-finite} if for every $A \in \cE$, 
+there exists a sequence $\{A_n\}_{n=1}^\infty$ in $\cE$ such that 
+$\mu(A_i) < \infty$ and $A \in \bigcup_{n=1}^\infty$. 
+\end{defn}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Properties of Measures
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Properties of Measures}
+\index{set function!monotonic \~{}}
+An extended real valued set function $\mu$ on a class $\cE$ is monotonic if, 
+whenever $E \in \cE$, $F \in \cE$, $E \subseteq F$, then $\mu(E) < \mu(F)$. 
+
+\index{set function!subtractive \~{}}
+An extended real valued set function $\mu$ on a class $\cE$ is subtractive 
+if, whenever $E \in \cE$, $F \in \cE$, $E \subseteq F$, $F \backslash E 
+\in \cE$ and $\abs{\mu(E)} < \infty$, then $\mu(F \backslash E) = \mu(F) - \mu(E)$. 
+
+\begin{thm}
+If $\mu$ is a measure on a ring $\cR$, then $\mu$ is monotonic and 
+subtractive. 
+\end{thm}
+\begin{proof}
+The proof is trivial. 
+\end{proof}
+
+\begin{thm}
+Let $\mu$ be a measure on a ring $\cR$. If $E \in \cR$ and 
+$\{E_n\}_{n=1}^\infty$ is a sequence of sets in $\cR$ such that $E 
+\in \bigcup_{n=1}^\infty E_n$, then 
+\begin{equation*}
+    \mu(E) \le \sum_{n = 1}^\infty \mu(E_n). 
+\end{equation*}
+\end{thm}
+\begin{proof}
+Let $F_n = E_n \cap E$ and $G_n = F_n \backslash \left( \bigcup_{i < n} F_i 
+\right)$. 
+Notice that $G_n \subseteq F_n \subseteq E_n$. 
+Then 
+\begin{equation*}
+    E = \bigcup_{n=1}^\infty F_n = \bigcup_{n=1}^\infty G_n. 
+\end{equation*}
+Since $G_n, n = 1, 2, \ldots$ are disjoint, by countably additivity and 
+monotonicity, 
+\begin{equation*}
+    \mu(E) = \mu\left( \bigcup_{n=1}^\infty G_n \right) 
+    = \sum_{n=1}^\infty \mu(G_n) \le \sum_{n=1}^\infty \mu(E_n).  
+\end{equation*}
+This is the desired result. 
+\end{proof}
+
+\begin{thm}
+Let $\mu$ be a measure on a ring $\cR$. If $E \in \cR$ and $\{E_n\}_{n=1}
+^\infty$ is a disjoint sequence of sets in $\cR$ such that $\mu\left( 
+\bigcup_{n=1}^\infty E_n \right) \subseteq E$, then 
+\begin{equation*}
+    \sum_{n=1}^\infty \mu(E_n) \le \mu(E). 
+\end{equation*}
+\end{thm}
+\begin{proof}
+For a given $N \in \bN^\ast$, 
+\begin{equation*}
+    \bigcup_{n=1}^N E_n \subseteq E. 
+\end{equation*}
+The monotonicity of $\mu$ yields that 
+\begin{equation*}
+    \mu\left( \bigcup_{n=1}^N E_n \right) = \sum_{n=1}^N \mu(E_n) \le \subseteq E. 
+\end{equation*}
+Letting $N \to \infty$, the validity for infinite sequence follows. 
+\end{proof}
+
+\begin{thm}
+\label{thm:measure_spaces:properties:limit}
+Let $\mu$ is a measure on a ring $\cR$. 
+The following hold true: 
+\begin{enumerate}
+    \item \label{thm:measure_spaces:properties:limit:1}
+    If $\{E_n\}_{n=1}^\infty$ is an increasing sequence of sets in 
+    $\cR$ for which $\lim_{n \to \infty} E_n = E \in \cR$, then $\mu\left( 
+    \lim_{n \to \infty} E_n \right) = \lim_{n \to \infty} \mu(E_n)$. 
+    \item \label{thm:measure_spaces:properties:limit:2}
+    If $\{E_n\}_{n=1}^\infty$ is a decreasing sequence of sets in 
+    $\cR$ of which at least one has finite measure and for which 
+    $\lim_{n \to \infty} E_n = E \in \cR$, then $\mu\left( 
+    \lim_{n \to \infty} E_n \right) = \lim_{n \to \infty} \mu(E_n)$. 
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+\ref{thm:measure_spaces:properties:limit:1}
+If we write $E_0 = 0$, then 
+\begin{equation*}
+    \begin{aligned}
+        \mu(\lim_{n \to \infty}E_n) 
+        &= \mu\left( \bigcup_{i=1}^\infty E_i \right) 
+        = \mu\left( \bigcup_{i=1}^\infty (E_i - E_{i - 1}) \right) \\ 
+        &= \sum_{i=1}^\infty \mu\left( E_i - E_{i - 1} \right) 
+        = \lim_{n \to \infty} \sum_{i=1}^n \mu\left( E_i - E_{i - 1} \right) \\ 
+        &= \lim_{n \to \infty} \mu\left( \bigcup_{i=1}^n E_i \right) 
+        = \lim_{n \to \infty} \mu(E_n). 
+    \end{aligned}
+\end{equation*}
+
+\ref{thm:measure_spaces:properties:limit:2}
+If $\mu(E_m) < \infty$, then for $n \ge m$, $\mu(E_n) < \infty$ and 
+therefore $\mu\left( \lim_{n \to \infty} E_n \right) < \infty$. 
+It follows from 
+\begin{equation*}
+    \begin{aligned}
+        \mu(E_m) - \mu(\lim_{n \to \infty} E_n) 
+        &= \mu\left( E_m - \lim_{n \to \infty} E_n \right) 
+        = \mu\left(\lim_{n \to \infty} (E_m - E_n) \right) \\
+        &= \lim_{n \to \infty} \mu(E_m - E_n) 
+        = \lim_{n \to \infty}\left( \mu(E_m) - \mu(E_n) \right) \\
+        &= \mu(E_m) - \lim_{n \to \infty} \mu(E_m).
+    \end{aligned}
+\end{equation*}
+\end{proof}
+
+\index{continuous from below}
+We shall say that an extended real valued set function $\mu$ defined on 
+class $\cE$ is \emph{continuous from below at a set $E$ in $\cE$} if, for 
+every increasing sequence $\{E_n\}_{n=1}^\infty$ of sets in $\cE$ for which 
+$\lim_{n \to \infty} \mu(E_n) = \mu(E)$. 
+\index{continuous from above}
+Similarly, $\mu$ is \emph{continuous from above} at $E$ if for every 
+decreasing sequence $\{E_n\}_{n=1}^\infty$ for which at $\abs{\mu(E_m)} < 
+\infty$ for at least one value of $m$ and for which $\lim_{n \to \infty} 
+E_n = E$, we have $\lim_{n \to \infty} \mu(E_n) = E_n$. 
+
+\begin{thm}
+Let $\mu$ be a finite, non negative, and additive set function on a ring 
+$\cR$. 
+If $\mu$ is either continuous from below at every set $E$ in $\cR$, or 
+continuous from above at $\varnothing$, then $\mu$ is a measure on $\cR$. 
+\end{thm}

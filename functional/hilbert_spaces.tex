@@ -1,0 +1,884 @@
+\chapter{Hilbert Spaces}
+\label{chp:hilbert_spaces}
+Hilbert space is an extension of the Euclidean space. 
+An essential characteristic of Euclidean space is that inner product can be 
+defined on it. 
+
+\section{Inner Product}
+\begin{defn}[inner product][inner product space]
+\index{inner product}
+\index{inner product space}
+\index{space!inner product}
+An \emph{inner product} $<\cdot, \cdot>: X \times X \to \bK$ on on a linear 
+space $X$ over $\bK$ satisfy the following conditions
+\begin{enumerate}
+    \item $\inp{u}{u} \ge 0$ and $\inp{u}{u} = 0$ if and only if $u = 0$ 
+    (positive definiteness);
+    \item $\inp{u}{v} = \conj{\inp{v}{u}}$ (conjugate symmetry);
+    \item $\inp{\alpha u + \beta v}{w} = \alpha \inp{u}{w} + 
+    \beta \inp{v}{w}$ (bilinearity),
+\end{enumerate}
+for any $u, v, w \in X$ and $\alpha, \beta \in \bK$. 
+
+A linear space equipped with an inner product is called a \emph{pre-Hilbert 
+(inner product space)} space.
+\end{defn}
+
+\begin{thm}[Cauchy-Schwarz inequality]
+Suppose $X$ is a pre-Hilbert space. Then for any $u, v \in X$, 
+\begin{equation}
+    \abs{\inp{u}{v}} \le \inp{u}{u}^{\frac{1}{2}} \inp{v}{v}^{\frac{1}{2}}.
+\end{equation}
+Or with notation of norm, 
+\begin{equation}
+    \abs{\inp{u}{v}} \le \norm{u} \norm{v}.
+\end{equation}
+\end{thm}
+\begin{proof}
+Assume that $v \neq 0$; put $\alpha = \frac{\inp{u}{v}}{\inp{v}{v}}$ and 
+then we get 
+\begin{equation}
+\begin{aligned}
+    0 &\le \inp{u-\alpha v}{u-\alpha v} \\ 
+    &= \inp{u}{u} - \frac{\abs{\inp{u}{v}}^2}
+    {\inp{v}{v}} - \frac{\abs{\inp{u}{v}}^2} {\conj{\inp{v}{v}}} - 
+    \frac{\abs{\inp{u}{v}} ^2}{\inp{v}{v} ^2} \inp{v}{v} \\
+    &= \inp{u}{u} - \frac{\abs{\inp{u}{v}} ^2}{\inp{v}{v}},
+\end{aligned}
+\end{equation}
+which is exactly what we want.
+\end{proof}
+
+\begin{thm}
+Each pre-Hilbert space $X$ over $\bK$ is a normed space with respect to 
+the norm 
+\begin{equation}
+    \norm{v} \coloneqq \inp{u}{u} ^\frac{1}{2}.
+\end{equation}
+\end{thm}
+\begin{proof}
+Suppose $u, v \in X$ and $\alpha \in \bK$. Then by positive definiteness 
+of inner product, we get 
+\begin{equation}
+    \norm{\alpha u} \ge 0 \text{ and } \norm{u} = 0 \text{ if and only if }
+    u = 0.
+\end{equation}
+By conjugate symmetry of inner product, 
+\begin{equation}
+    \norm{\alpha u} = \inp{\alpha u}{\alpha u} ^\frac{1}{2}
+    = \left( \abs{\alpha}^2 \inp{u}{u} \right) ^\frac{1}{2}
+    = \abs{\alpha}\norm{u}.
+\end{equation}
+And finally, by Cauchy-Schwarz inequality, 
+\begin{equation}
+    \Re(\inp{u}{v}) \le \abs{\inp{u}{v}} \le 
+    \inp{u}{u} ^\frac{1}{2} \inp{v}{v} ^\frac{1}{2} = \norm{u}\norm{v}.
+\end{equation}
+So
+\begin{equation}
+    \begin{aligned}
+        \norm{u+v}^2 &= \norm{u}^2 + \norm{v}^2 + 2\Re(\inp{u}{v}) \\
+        &\le \norm{u}^2 + \norm{v}^2 + 2\norm{u}\norm{v} \\
+        &= (\norm{u} + \norm{v})^2.
+    \end{aligned}
+\end{equation}
+\end{proof}
+
+Hence, every pre-Hilbert space is a normed space together with the norm 
+induced by its inner product. 
+Henceforth, by the norm of a pre-Hilbert space we implicitly mean the 
+induced norm. 
+
+\begin{defn}[Hilbert space]
+\index{Hilbert space}
+\index{space!Hilbert \~{}}
+A \emph{Hilbert space} is a complete pre-Hilbert space. 
+\end{defn}
+
+There is no much difficulty in verifying the following facts. 
+\begin{example}
+$\bR^n$ is a Hilbert space together with the inner product defined as 
+\begin{equation*}
+    \inp{x}{y} = \sum_{k=1}^{n} x_i y_i 
+\end{equation*}
+for $x = \left(x_1, x_2, \ldots, x_n \right)$, $y = \left(y_1, y_2, \ldots, 
+y_n \right) \in \bR^n$. 
+\end{example}
+
+\begin{example}
+$l^2$ is a Hilbert space together with the inner product 
+\begin{equation*}
+    \inp{x}{y} = \sum_{k=1}^{\infty} x_i \conj{y_i} 
+\end{equation*}
+for $x = \left(x_1, x_2, \ldots \right), y = \left(y_1, y_2, \ldots \right) 
+\in l^2$. 
+\end{example}
+
+\begin{example}
+$L^2[a, b]$ is a Hilbert space together with the inner product 
+\begin{equation*}
+    \inp{x}{y} = \int_{a}^{b} x(t) \conj{y(t)} \diff t, \quad 
+    \text{for all } x, y \in L^2[a, b]. 
+\end{equation*}
+\end{example}
+
+\begin{example}
+Denote by $H$ the linear space of all complex valued continuous functions 
+on $[a, b]$, and define 
+\begin{equation*}
+    \inp{x}{y} = \int_{a}^{b} x(t) \conj{y(t)} \diff t, \quad 
+    \text{for all } x, y \in H.  
+\end{equation*}
+Then $H$ is a pre-Hilbert space but not a Hilbert space. 
+\end{example}
+
+\begin{thm}
+The inner product of a pre-Hilbert space $H$ is a continuous function on 
+$H \times H$, \ie, for any $\{ x_n \}_{n=1}^{\infty}, 
+\{ y_n \}_{n=1}^{\infty} \subset H$, 
+\begin{equation*}
+    \lim_{n \to \infty} x_n = x, \lim_{n \to \infty} y_n = y
+    \implies
+    \lim_{n \to \infty} \inp{x_n}{y_n} = \inp{x}{y}. 
+\end{equation*}
+\end{thm}
+\begin{proof}
+This follows from the fact 
+\begin{equation*}
+    \begin{aligned}
+        \abs{\inp{x_n}{y_n} - \inp{x}{y}} 
+        &= \abs{ \inp{x_n}{y_n} - \inp{x}{y_n} 
+            + \inp{x}{y_n} - \inp{x}{y} } \\
+        &\le \abs{ \inp{x_n}{y_n} - \inp{x}{y_n} } 
+            + \abs{ \inp{x}{y_n} - \inp{x}{y} } \\
+        &\le \norm{x_n - x}\norm{y} + \norm{x}\norm{y_n - y} \to 0
+    \end{aligned}
+\end{equation*}
+as $n \to \infty$.
+\end{proof}
+
+\begin{thm}[Parallelogram Law]
+Let $H$ be a Hilbert space. 
+If $x, y \in H$, then 
+\begin{equation*}
+    \norm{x + y}^2 + \norm{x - y}^2 = 2(\norm{x}^2 + \norm{y}^2). 
+\end{equation*}
+\end{thm}
+\begin{proof}
+It follows from 
+\begin{equation*}
+    \norm{x + y}^2 = \inp{x + y}{x + y} 
+    = \inp{x}{x} + \inp{x}{y} + \inp{y}{x} + \inp{y}{y} 
+    = \norm{x}^2 + \Re\inp{x}{y} + \norm{y}^2
+\end{equation*}
+that 
+\begin{equation}
+    \label{equ:hilbert_spaces:relation_norm_inp}
+    \begin{aligned}
+        \norm{x + y}^2 = \norm{x}^2 + \Re\inp{x}{y} + \norm{y}^2, \\
+        \norm{x - y}^2 = \norm{x}^2 - \Re\inp{x}{y} + \norm{y}^2.
+    \end{aligned}
+\end{equation}
+Then we add and complete the proof. 
+\end{proof}
+
+In particular, if $\inp{x}{y} = 0$, then $\norm{x + y} = \norm{x - y}$ since 
+$\norm{x + y}^2 = \norm{x}^2 + \norm{y}^2 + 2 \Re \inp{x}{y}$. 
+It follows that $\norm{x + y} = \norm{x}^2 + \norm{y}^2$, which is the 
+famous Pythagorean Theorem in general case. 
+
+\begin{thm}[Polarization Identity]
+\label{thm:hilbert_space:polarization_identity}
+Let $H$ be a pre-Hilbert space over $\bK$. 
+\begin{enumerate}
+    \item \label{thm:hilbert_space:polarization_identity:1}
+    If $\bK = \bR$ and $x, y \in H$, then 
+    \begin{equation}
+        \label{equ:hilbert_spaces:polarization_identity:1}
+        \inp{x}{y} = \frac{1}{4} (\norm{x + y}^2 - \norm{x - y}^2). 
+    \end{equation}
+    \item \label{thm:hilbert_space:polarization_identity:2}
+    If $\bK = \bC$ and $x, y \in H$, then 
+    \begin{equation}
+        \label{equ:hilbert_spaces:polarization_identity:2}
+        \inp{x}{y} = \frac{1}{4} (\norm{x + y}^2 - \norm{x - y}^2 
+            + \mi \norm{x - \mi y} - \mi \norm{x + \mi y}). 
+    \end{equation}
+\end{enumerate}
+\end{thm}
+\begin{proof}
+They are straightforward results of the Equation 
+(\ref{equ:hilbert_spaces:relation_norm_inp}). 
+\end{proof}
+
+In fact, a normed space that obeys parallelogram law is essentially 
+pre-Hilbert space. 
+\begin{thm}
+Let $X$ be a normed space. 
+If the norm $\norm{\wdot}$ satisfies parallelogram law, then there exists an 
+inner product $\inp{\wdot}{\wdot}$ by which $\norm{\wdot}$ is induced, \ie, 
+\begin{equation*}
+    \norm{x} = \sqrt{\inp{x}{x}} \quad
+    \text{for all } x \in X. 
+\end{equation*}
+\end{thm}
+\begin{proof}
+If the assumption of the theorem is satisfied, then it can be shown that 
+inner product of form \ref{equ:hilbert_spaces:polarization_identity:1} 
+($\bK = \bR$) or of form \ref{equ:hilbert_spaces:polarization_identity:2} 
+($\bK = \bC$) obeys the requirements of inner product. 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Orthogonality
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Orthogonality}
+\begin{defn}[Orthogonal]
+\index{orthogonal}
+Let $H$ be a pre-Hilbert space. 
+We say $x, y \in H$ are orthogonal, denoted by $x \perp y$, if $\inp{x}{y} 
+= 0$. 
+Let $M, N$ be subsets of $H$, then by $x \perp M$ we mean $x$ is orthogonal 
+to every element in $H$, and by $M \perp N$ we mean $x \perp y$ for any 
+$x \in M$ and $y \in N$. 
+\end{defn}
+
+Letting $M$ be a subset in a pre-Hilbert space $H$, then we call 
+\begin{equation*}
+    M^\perp = \{x \in H: x \perp M\}
+\end{equation*}
+the orthogonal complement of $M$. 
+
+\begin{thm}
+Let $H$ be a pre-Hilbert space. 
+\begin{enumerate}
+    \item If $x, y, z \in H$ are such that $x = y + z$ and $y \perp x$, then 
+    \begin{equation*}
+        \norm{x}^2 = \norm{y}^2 + \norm{z}^2. 
+    \end{equation*}
+    \item If $L$ is a dense subset in $H$ and $x \in H$ is such that 
+    $x \perp L$, then $x = 0$. 
+    \item If $M$ is a subset in $H$, then $M ^\perp$ is a closed subspace 
+    of $H$. 
+\end{enumerate}
+\end{thm}
+\begin{proof}
+Trivial. 
+\end{proof}
+
+\begin{thm}[Projection Theorem]
+\label{thm:hilbert_spaces:projection_theorem}
+\index{thorem!projection \~{}}
+Let $M$ be a complete convex subset in a pre-Hilbert space. 
+Then for each $x \in H$, there exists $x_0 \in M$ such that 
+\begin{equation*}
+    \norm{x - x_0} = d(x, M). 
+\end{equation*}
+\end{thm}
+\begin{proof}
+With no harm to generality, assume that $M \subsetneq H$. 
+Let $\alpha = d(x, M)$. 
+Then we can find a sequence $\{ x_n \}_{n=1}^{\infty}$ in $M$ such that 
+\begin{equation*}
+    \norm{x_n - x_0} \to 0, \quad n \to \infty. 
+\end{equation*}
+Since $M$ is convex, $\frac{x_n + x_m}{2} \in M$ for all $m, n \in \bNs$. 
+Further, we have $\norm{x_0 - \frac{x_n + x_m}{2}} \ge \alpha$. 
+By the parallelogram law, it follows that 
+\begin{equation*}
+    \begin{aligned}
+        \norm{x_n - x_m} &= \norm{x_m - x + x - x_n} \\
+        &= 2\norm{x_n - x}^2 + 2 \norm{x - x_n} 
+            - 4 \norm{x - \frac{x_n + x_m}{2}} \\
+        &\le 2\norm{x_n - x}^2 + 2 \norm{x - x_n} 
+            - 4 \alpha.
+    \end{aligned}
+\end{equation*}
+Letting $n, m \to \infty$, we obtain $\norm{x_n - x_m} \to \infty$. 
+Hence, $\{ x_n \}_{n=1}^{\infty}$ is a Cauchy sequence. 
+The completeness of $M$ finishes the proof. 
+\end{proof}
+
+In particular, since closed subspace of a Hilbert space is a complete convex 
+set, the theorem above is valid. 
+In this case, it is known as the \emph{Hilbert Projection Theorem}. 
+If $M$ is a complete convex subset of a Hilbert space $H$, then we can 
+define an operator $P_M: H \to M$ as follows: 
+\begin{equation*}
+    P_M(x) = x_0 \quad \text{such that } x_0 \in M \text{ and } 
+    \norm{x - x_0} = d(x, M).
+\end{equation*}
+$P_M$ is called a projection operator and $P_Mx$ is the projection of $x$ 
+to subset $M$. 
+
+\begin{thm}[Orthogonal Decomposition Theorem]
+\label{thm:hilbert_spaces:orthogonal_decomposition}
+\index{theorem!orthogonal decomposition \~{}}
+Let $M$ be a closed subspace of a Hilbert space $H$. 
+Then for each $x_0 \in H$, there exists a unique decomposition 
+$x_0 = x_1 + x_2$ where $x_1 \in M$ and $x_2 \in M^\perp$. 
+\end{thm}
+\begin{proof}
+Without loss of generality, assume that $x_0 \notin M$. 
+We apply Projection Theorem \ref{thm:hilbert_spaces:projection_theorem} to 
+$M$, which yields that there exists a unique $x_1 \in M$ such that 
+\begin{equation*}
+    \norm{x_0 - x_1} = d(x_0, M). 
+\end{equation*}
+Set $\norm{x_0 - x_1} = \alpha$. 
+For any $z \in M$ and any $\lambda \in \bK$, clearly $x_1 + \lambda z \in M$, 
+and then 
+\begin{equation*}
+    \begin{aligned}
+        \alpha^2 \le \norm{x_0 - x_1 - \lambda z}^2 
+        = \norm{x_0 - x_1}^2 - 2 \Re (\lambda \inp{z}{x_0 - x_1}) 
+            + \abs{\lambda}^2 \norm{x}^2.
+    \end{aligned}
+\end{equation*}
+Letting $\lambda = \frac{\inp{x_0 - x_1}{z}}{\norm{z}^2}$, then the 
+inequality above reduces to $\abs{\inp{x_0 - x_1}{z}}^2 \le 0$. 
+Hence, $\inp{x_0 - x_1}{z} = 0$, namely, $x_0 - x_1$ is Orthogonal to $M$. 
+Set $x_2 = x_0 - x_1$, then $x_2 \in M^\perp$. 
+
+Now we verify uniqueness. 
+Suppose that $x_0 = x_1' + x_2'$ where $x_1' \in M$ and $x_2' \in M^\perp$, 
+then by subtraction we obtain 
+\begin{equation*}
+    x_1 - x_1' = x_2' - x_2. 
+\end{equation*}
+Since $x_1 - x_1' \in M^\perp$ and $x_2' - x_2 \in M^\perp$, it must be the 
+case $x_1 = x_1'$ and $x_2' = x_2$. 
+\end{proof}
+
+In fact, the preceding theorem states that a Hilbert space $H$ can be 
+written as the direct sum of two orthogonal subspaces, \ie, $H = M \oplus 
+M^\perp$. 
+
+\begin{defn}[Orthogonal system, orthonormal set and orthonormal basis]
+\index{orthonormal system}
+\index{orthonormal basis}
+\index{orthogonal system}
+\index{orthogonal basis}
+Let $H$ be a pre-Hilbert space, and let $\{ x_\alpha \}_{\alpha \in i} \}$ 
+be a subset non zero elements of $H$ where $I$ is an index set. 
+If $\inp{x_\alpha}{x_\beta} = 0$ for all pairs $(\alpha, \beta) \in I 
+\times I$ with $\alpha \neq \beta$, then $\{ x_\alpha \}_{\alpha \in I}$ 
+is said to be an \emph{orthogonal system} of $H$. 
+If further $\norm{x_\alpha} = 1$ for all $\alpha \in I$, then $\{x_\alpha\}
+_{\alpha \in I}$ is said to be an \emph{orthonormal system} of $H$. 
+
+A complete orthogonal (\resp orthonormal) system of a pre-Hilbert space is 
+called an \emph{orthogonal (orthonormal) basis}, \ie, 
+\begin{equation*}
+    \overline{\mspan\left( \{x_\alpha\}_{\alpha \in I} \right)} = H.
+\end{equation*}
+\end{defn}
+
+\begin{example}
+Consider the space $L^2[0, 2\uppi]$, and let 
+\begin{equation*}
+    \begin{aligned}
+        e_n(t) = \frac{1}{\sqrt{2 \uppi}} \me ^{\mi n t}.
+    \end{aligned}
+\end{equation*}
+One can show without difficulty that $\{ e_n \}_{n=1}^{\infty}$ is a 
+orthonormal system of $L^2[0, 2 \uppi]$. 
+Indeed, $\inp{x_n}{e_n}$ is the classic Fourier coefficients of $x \in
+ L^2[0, 2\uppi]$.
+\end{example}
+
+More generally, if $\{e_\alpha\}_{\alpha \in I}$ is an orthonormal system of 
+a Hilbert space $H$, then $\{\inp{x}{e_\alpha}\}_{\alpha \in I}$ are called 
+the Fourier coefficients of $x \in H$. 
+For the sake of simplicity, we consider the case that $I$ is at most 
+countable henceforth. 
+A problem that concerns us is the convergence of Fourier series 
+$\sum_{n=1}^{\infty} \inp{x}{e_n} e_n$. 
+We solve this problem by the following theorems. 
+
+\begin{thm}[Orthogonal projection]
+\label{thm:hilbert_spaces:orthogonal_projection}
+Let $\{ e_n \}_{n=1}^{\infty}$ be an orthonormal system of a Hilbert space 
+$H$, and let $x_0 \in H$. 
+Then 
+\begin{equation*}
+    \norm{x_0 - \sum_{k=1}^{N} \alpha_k e_k}
+\end{equation*}
+obtains its minimun if and only if $\alpha_k = \inp{x_0}{e_k}$ for all $k = 
+1, 2, \ldots, N$. 
+\end{thm}
+\begin{proof}
+Observe that $x_0 - \sum_{k=1}^{N} \perp e_k$ for all $k = 1, 2, \ldots, N$. 
+This theorem follows directly from the computation 
+\begin{equation*}
+    \begin{aligned}
+        \norm{x - \sum_{k=1}^{N} \alpha_k e_k} 
+        &= \norm{x - \sum_{k=1}^{N} \inp{x_0}{e_k} e_k 
+            + \sum_{k=1}^{N} \inp{x_0}{e_k} e_k 
+            - \sum_{k=1}^{N} \alpha_k e_k}^2 \\
+        &= \norm{x_0 - \sum_{k=1}^{N} \inp{x_0}{e_k} e_k}^2
+            + \norm{\sum_{k=1}^{N} (\inp{x_0}{e_k} - \alpha_k) e_k}^2 \\
+        &= \norm{x_0 - \sum_{k=1}^{N} \inp{x_0}{e_k} e_k}^2 
+            + \sum_{k=1}^{N} \abs{\inp{x_0}{e_k} - \alpha_k}^2, 
+    \end{aligned}
+\end{equation*}
+which achieves its minimum if and only if $\alpha_k = \inp{x_0}{e_k}$ for 
+all $k = 1, 2, \ldots, N$> 
+\end{proof}
+
+Set $M = \mspan\left( \{ e_n \}_{n=1}^{N} \right)$, the preceding theorem 
+demonstrates that 
+\begin{equation*}
+    P_M x = \sum_{k=1}^{N} \inp{x}{e_k} e_k.
+\end{equation*}
+
+\begin{cor}[Bessel's Inequality]
+\index{Bessel's Inequality}
+Let $\{ e_n \}_{n=1}^{\infty}$ be an orthonormal system of a pre-Hilbert 
+space $H$, and let $x_0 \in H$. 
+Then 
+\begin{equation*}
+    \sum_{k=1}^{\infty} \abs{\inp{x_0}{e_k}}^2 \le \norm{x_0}^2. 
+\end{equation*}
+\end{cor}
+\begin{proof}
+This follows from the deduction 
+\begin{equation*}
+    \begin{aligned}
+        \norm{x_0 - \sum_{k=1}^{N} \inp{x_0}{e_k} e_k} ^2
+        &= \norm{x_0}^2 - \sum_{k=1}^{N} \abs{\inp{x_0}{e_k}}^2 \ge 0
+    \end{aligned}
+\end{equation*}
+since $x_0 - \sum_{k=1}^{N} \inp{x_0}{e_k} e_k \perp e_k$ for all $k = 1, 2, 
+\ldots, N$. 
+\end{proof}
+
+\begin{thm}[Parseval's Identity]
+\index{Parseval's Identity}
+If and only if $\{ e_n \}_{n=1}^{\infty}$ is an orthonormal basis of a 
+pre-Hilbert space $H$, the \emph{Parseval's Identity} holds true for all 
+$x_0 \in H$:
+\begin{equation}
+    \label{equ:hilbert_spaces:parseval_identity}
+    \sum_{k=1}^{\infty} \abs{\inp{x_0}{e_n}}^2 = \norm{x_0}^2.
+\end{equation}
+\end{thm}
+\begin{proof}
+($\implies$)
+Assume that $\{ e_n \}_{n=1}^{\infty}$ is an orthonormal basis of $H$. 
+Then for any $\epsilon > 0$, there exist an $N_0 \in \bNs$ and coefficients 
+$\alpha_k$ for $k = 1, 2, \ldots, N_0$ such that 
+\begin{equation*}
+    \norm{x_0 - \sum_{k=1}^{N_0} \alpha_k e_k} \le \epsilon. 
+\end{equation*}
+By Theorem \ref{thm:hilbert_spaces:orthogonal_projection}, it follows that 
+\begin{equation*}
+    \norm{x_0 - \sum_{k=1}^{N_0} \inp{x_0}{e_k} e_k} 
+    \le \norm{x_0 - \sum_{k=1}^{N_0} \alpha_k e_k} \le \epsilon. 
+\end{equation*}
+Thus for $N > N_0$, we have 
+\begin{equation*}
+    \norm{x_0 - \sum_{k=1}^{N} \inp{x_0}{e_k} e_k}^2
+    = \norm{x_0}^2 - \sum_{k=N+1}^{\infty} \abs{\inp{x_0}{e_k}}^2 
+    \le \norm{x_0 - \sum_{k=1}^{N_0} \inp{x_0}{e_k} e_k^2}
+    \le \epsilon^2. 
+\end{equation*}
+Therefore, $\sum_{k=1}^{\infty} \inp{x_0}{e_k} e_k = x_0$ and the Parseval's 
+Identity follows. 
+
+($\impliedby$)
+Conversely, assume that Parseval's Identity 
+(\ref{equ:hilbert_spaces:parseval_identity}) holds true for all $x_0 \in H$. 
+Then 
+\begin{equation*}
+    \norm{x_0 - \sum_{k=1}^{N} \inp{x_0}{e_k} e_k}^2 
+    = \norm{x_0}^2 - \norm{\sum_{k=1}^{N} \inp{x_0}{e_k} e_k} 
+    = \norm{x_0}^2 - \sum_{k=1}^{N} \abs{\inp{x_0}{e_k}}^2 
+    \to 0
+\end{equation*}
+as $N \to \infty$, which implies that $\{ e_n \}_{n=1}^{\infty}$ is 
+complete. 
+\end{proof}
+
+\begin{thm}
+Let $H$ be a Hilbert space, and let $\{ e_n \}_{n=1}^{\infty}$ be an 
+orthonormal system of $H$.
+Then $\{ x_n \}_{n=1}^{\infty}$ is complete if and only if $x \perp e_n$ 
+for all $n \in \bNs$ implies $x = 0$. 
+\end{thm}
+\begin{proof}
+Assume that $\{ e_n \}_{n=1}^{\infty}$ is complete and $x_0 \in H$ is such 
+that $x_0 \perp e_n$ for all $n \in \bNs$. 
+Then by the Parseval;s Identity, 
+\begin{equation*}
+    \norm{x_0} = \sum_{n=1}^{\infty} \abs{\inp{x_0}{e_n}}^2 = 0, 
+\end{equation*}
+implying that $x_0 = 0$. 
+
+Conversely, assume that  $x \perp e_n$ for all $n \in \bNs$ implies $x = 0$.
+And suppose for the sake of contradiction that $\{ e_n \}_{n=1}^{\infty}$ 
+is not complete. 
+That is, setting $M = \mspan\left( \{ e_n \}_{n=1}^{\infty} \right)$, 
+$\overline{M}$ is not dense in $H$. 
+Hence, we can find an $x_0 \in H \backslash \overline{M}$. 
+By the theorem of orthogonal decomposition 
+\ref{thm:hilbert_spaces:orthogonal_decomposition} (This requires 
+completeness of $H$), there exists $x_1 \in \overline{M}$ and $x_2 \in 
+\overline{M}^\perp$ such that $x_0 = x_1 + x_2$, $x_2 \neq 0$. 
+However, since $x_2 \in \overline{M}^\perp$, $x_2$ is orthogonal to $e_n$ 
+for all $n \in \bNs$, which is a contradiction to the hypothesis.
+\end{proof}
+
+\begin{thm}[Riesz-Fischer]
+\label{thm:hilbert_spaces:riesz_ficsher}
+Let $H$ be a Hilbert space, and let $x = \{ e_n \}_{n=1}^{\infty}$ be an 
+orthonormal system of $H$. 
+If $\{ \xi_n \}_{n=1}^{\infty} \in l^2$, then there exists $u_0 \in H$ 
+such that for all $n \in \bNs$, 
+\begin{equation*}
+    \xi_n = \inp{u_0}{e_n}, 
+\end{equation*}
+and 
+\begin{equation*}
+    \norm{u_0}^2 = \norm{x}^2
+\end{equation*}
+\end{thm}
+\begin{proof}
+Set for $n \in \bNs$, 
+\begin{equation*}
+    u_n = \sum_{k=1}^{n} \xi_k e_k.
+\end{equation*}
+Then $\inp{u_n}{e_k} = \xi_k$ if $k = 1, 2, \ldots, n$ and $\inp{u_n}{e_k} 
+= 0$ if $k = n+1, n+2, \ldots$. 
+For $m \in \bNs$, 
+\begin{equation*}
+    \norm{u_{n+m} - u_{n}} = \norm{\sum_{k=n+1}^{n+m} \xi_k e_k} 
+    = \sum_{k=n+1}^{n+m} \abs{\xi_k}^2.
+\end{equation*}
+Since $x_0 = \{ \xi_n \}_{n=1}^{\infty} \in l^2$, we know $\{ u_n \}_{n=1}
+^{\infty}$ is a Cauchy sequence, which has a limit $u_0 \in H$ by 
+completeness of $H$. 
+
+Letting $n \to \infty$ in the following 
+\begin{equation*}
+    \inp{u_0}{e_k} = \inp{u_0 - u_n}{e_k} + \inp{u_n}{e_k} 
+    = \inp{u_0 - u_n}{e_k} + \xi_k \quad (n > k)
+\end{equation*}
+yields that $\inp{u_0}{e_k} = \xi_k$ for all $k \in \bNs$. 
+Furthermore, 
+\begin{equation*}
+    \begin{aligned}
+        \norm{u_0 - u_n}^2 &= \norm{x_0 - \sum_{k=1}^{n} \xi_k e_k}^2 \\
+        = &\norm{u_0}^2 - \norm{\sum_{k=1}^{n} \xi_k e_k}^2
+        = \norm{u_0}^2 - \sum_{k=1}^{n} \abs{\xi_k}^2. 
+    \end{aligned}
+\end{equation*}
+Letting $n \to \infty$ yields that $\norm{u_0}^2 = \sum_{k=1}^{\infty} 
+\abs{\xi_k}^2 = \norm{x}^2$.
+\end{proof}
+
+\begin{thm}[The Gram-Schimit Orthogonalization Process]
+\index{Gram-Schimit orthogonalization process}
+\label{thm:hilbert_spaces:gram_schimit_orthogonalization}
+Let $H$ be a Hilbert space, and let $\{ x_n \}_{n=1}^{\infty}$ be a linearly 
+independent subset of $H$. 
+Then there exists an orthonormal set $\{e_1, e_2, \ldots, e_n\}$ such that 
+for every $n \in \bNs$, 
+\begin{equation*}
+    \mspan\{x_1, x_2, \ldots, x_n\} = \mspan\{e_1, e_2, \ldots, e_n\}.
+\end{equation*}
+\end{thm}
+\begin{proof}
+It is easy to verify that the following process satisfies the requirement:
+\begin{equation*}
+    \begin{aligned}
+        h_n &= x_n - \sum_{k=1}^{n-1} \inp{x_k}{e_k}, \\
+        e_n &= \frac{h_n}{\norm{h_n}}.
+    \end{aligned}
+\end{equation*}
+\end{proof}
+
+\begin{cor}
+There exists an orthonormal basis for any sepearable Hilbert space. 
+\end{cor}
+\begin{proof}
+Since $H$ is sepearable, there is a countable dense subset of $H$. 
+Then by the Gram-Schimit Orthogonalization Process, a orthonormal basis 
+$\{e_1, e_2, \ldots\}$ can be constructed, of which the span is dense in 
+$H$.  
+\end{proof}
+
+We point out that any infinite dimensional sepearable Hilbert space is 
+essentially space $l^2$. 
+Before that, we give the definition of isomorphism on HIlbert spaces. 
+\begin{defn}[isomorphism, isomorphic on Hilbert spaces]
+If $H_1$ and $H_2$ are Hilbert spaces, an \emph{isomorphism} between $H_1$ 
+and $H_2$ is a linear surjection $U: H_1 \to H_2$ such that 
+\begin{equation*}
+    \inp{Ux}{Uy} = \inp{x}{y}
+\end{equation*}
+for all $x, y \in H_1$. 
+In this case, $H_1$ and $H_2$ are said to be \emph{isomorphic}. 
+\end{defn}
+
+The concept of isomorphism is universal in Mathematics, which not only 
+builds an bijection between two sets but also preserves the operation 
+between them. 
+
+\begin{thm}
+Let $H$ be a sepearable HIlbert space of infinite dimension. 
+Then there exists an isomorphism between $H$ and $l^2$. 
+\end{thm}
+\begin{proof}
+Since $H$ is sepearable and infinite dimensional, there exists an 
+orthonormal basis $\{e_n: n \in \bNs\}$ of $H$. 
+Define $\phi(x) = \{ \inp{x}{e_n} \}_{n=1}^{\infty}$ for all $x \in H$. 
+Then by the Bessel's Inequality, $\phi(x) \in l^2$ for all $x \in H$. 
+And the linearity of $\phi$ comes from that of inner product. 
+By the Riesz-Fischer's Theorem \ref{thm:hilbert_spaces:riesz_ficsher}, 
+$\phi$ is also onto. 
+Finally, we compute that 
+\begin{equation*}
+    \begin{aligned}
+        \inp{x}{y} &= \inp{\sum_{k=1}^{\infty}\inp{x}{e_k} e_k}
+        {\sum_{k=1}^{\infty} \inp{y}{e_k}e_k} \\
+        &= \sum_{k=1}^{\infty} \inp{x}{e_k}{\conj{\inp{y}{e_k}}} 
+        = \inp{\phi(x)}{\phi(y)}.
+    \end{aligned}
+\end{equation*}
+Therefore, $\phi$ is an isomorphism between $H$ and $l^2$. 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: The Riesz Representation Theorem 
+%%    and Conjugate Spaces of Hilbert Spaces
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Riesz Representation Theorem and Conjugate Spaces of Hilbert Spaces}
+
+\begin{thm}[F.Riesz Representation Theorem]
+\index{theorem:Riesz representation \~{}}
+Let $H$ be a Hilbert space. 
+If $f \in H^\ast$, then there exists a unique $y_f \in H$ such that 
+$\norm{y_f} = \norm{f}$ and 
+\begin{equation*}
+    f(x) = \inp{x}{y_f}
+\end{equation*}
+for every $x \in H$. 
+\end{thm}
+\begin{proof}
+Without loss of generality, we assume that $f \neq 0$. 
+By projection theorem, we can find a $y_0 \in \sN(f)^\perp$, since $\sN(f)$ 
+is a closed subspace of $H$. 
+Setting 
+\begin{equation*}
+    y_f = \frac{\conj{f(y_0)}}{\norm{y_0}^2} y_0, 
+\end{equation*}
+we verify that $y_f$ satisfies the requirements. 
+
+We consider three cases: 
+\begin{enumerate}
+    \item If $x \in \sN(f)$, then obviously $f(x) = 0 = \inp{x}{y_f}$. 
+    \item If $x = \alpha y_0$, then 
+    \begin{equation*}
+        \inp{x}{y_f} = \alpha \inp{y_0}{y_f} 
+        = \inp{y_0}{\frac{\conj{f(y_0)}} {\norm{y_0}^2} y_0 }
+        = \alpha f(y_0) = f(x). 
+    \end{equation*}
+    \item Otherwise, since for every $x \in H$, 
+    \begin{equation*}
+        f(x - \frac{f(x)}{f(y_f)} y_f) 
+        = f(x) - \frac{f(x)}{f(y_f)} f(y_f) 
+        = 0, 
+    \end{equation*}
+    it follows that $x - \frac{f(x)}{f(y_f)} y_f \in \sN(f)$. 
+    Thus 
+    \begin{equation*}
+        \begin{aligned}
+            f(x) &= f\left( x - \frac{f(x)}{f(y_f)} y_f \right) 
+                + f\left( \frac{f(x)}{f(y_f)} y_f \right) \\
+            &= \inp{x - \frac{f(x)}{f(y_f)} y_f}{y_f} 
+                + \inp{\frac{f(x)}{f(y_f)} y_f}{y_f} \\
+            &= \inp{x}{y_f}.
+        \end{aligned}
+    \end{equation*}
+\end{enumerate}
+Consequently, $\phi$ preserves inner product. 
+
+On the one hand, 
+\begin{equation*}
+    \norm{f} = \sup_{\norm{x} \le 1} \abs{f(x)} 
+    = \sup_{\norm{x} \le 1} \abs{\inp{x}{y_f}} \le \norm{y_f}.
+\end{equation*}
+On the other hand, 
+\begin{equation*}
+    \norm{f} = \sup_{\norm{x} \le 1} \abs{f(x)} 
+    \ge \abs{f(\frac{y_f}{\norm{y_f}})} = \inp{\frac{y_f}{\norm{y_f}}}{y_f}
+    = \norm{y_f}.
+\end{equation*}
+Therefore, $\norm{f} = \norm{y_f}$. 
+
+Finally, if there is a $y_f' \in H$ such that $f(x) = \inp{x}{y_f'}$ for 
+all $x \in H$, then 
+\begin{equation*}
+    \inp{x}{y_f - y_f'} = 0
+\end{equation*}
+for all $x \in H$, which implies that $y_f = y_f'$. 
+\end{proof}
+
+The Riesz Representation Theorem tells us the following very fundamental 
+geometry fact. 
+That is, if $f$ is a non-zero bounded linear operator on a Hilbert space, 
+then the null space of $f$ is a hyper-plane and its orthogonal complement 
+has dimension one. 
+
+With the Riesz Representation Theorem, one can construct a bijection 
+between a Hilbert space $H$ and its conjugate space $H^\ast$ as 
+\begin{equation*}
+    \Phi: H \to H^\ast, \quad x \mapsto f_x
+\end{equation*}
+where $f_x$ is the linear functional defined as $f_x(y) = \inp{y}{x}$ 
+for all $y \in H$. 
+The mapping $\Phi$ is called the \emph{duality mapping} of $H$. 
+In the sense of $\Phi$, it is reasonable to identify $H$ with $H^\ast$, 
+thanks to the following proposition. 
+We say Hilbert spaces are self-conjugate. 
+
+\begin{prop}
+The duality mapping $\Phi$ of $H$ is continuous and norm-preserving. 
+
+If $H$ is a real Hilbert space, then $\Phi$ is linear. 
+If $H$ is a complex Hilbert space, then $\Phi$ is antilinear. 
+\end{prop}
+\begin{proof}
+Omitted. 
+\end{proof}
+
+Now we consider the bounded linear operators of Hilbert spaces. 
+Let $H$ be a Hilbert space, and let $A \in \sB(H)$. 
+Define $f_{A, y}(x) = \inp{Ax}{y}$, then clearly $f_{A, y} \in \sB(H)$. 
+By the Riesz Representation Theorem, there exists a unique $z \in H$ such 
+that for all $x \in H$, 
+\begin{equation*}
+    f_{A, y}(x) = \inp{x}{z}. 
+\end{equation*}
+Then it is valid to define 
+\begin{equation}
+    \label{equ:hilbert_spaces:adjoint_operator:B}
+    B: H \to H, \quad y \mapsto z. 
+\end{equation}
+
+\begin{prop}
+The operator $B$ defined in (\ref{equ:hilbert_spaces:adjoint_operator:B}) 
+is a bounded linear operator on $H$. 
+\end{prop}
+\begin{proof}
+Supposing $y_1, y_2 \in H$ and $\alpha, \beta \in \bK$, then 
+\begin{equation*}
+    \begin{aligned}
+        \inp{Ax}{\alpha y_1 + \beta y_2} 
+        &= \conj{\alpha} \inp{Ax}{y_1} + \conj{\beta} \inp{Ax}{y_2} 
+        = \conj{\alpha} \inp{x}{B y_1} + \conj{\beta} \inp{x}{B y_2} \\ 
+        &= \inp{x}{\alpha B y_1} + \inp{x}{\beta B y_2} 
+        = \inp{x}{\alpha B y_1 + \beta B y_2}, 
+    \end{aligned}
+\end{equation*}
+which implies the linearity. 
+
+And the boundedness follows from the computation 
+\begin{equation*}
+    \norm{By}^2 = \inp{By}{By} = \inp{ABy}{y} 
+    \le \norm{ABy} \norm{y} \le \norm{AB} \norm{y}^2. 
+\end{equation*}
+\end{proof}
+
+\begin{defn}[Adjoint operator]
+\index{adjoint operator}
+Let $H$ be a Hilbert space, and let $A \in \sB(H)$. 
+We call the operator $A^\ast \in \sB(H)$ defined by $\inp{Ax}{y} = 
+\inp{x}{A^\ast y}$ the \emph{adjoint operator} of $A$. 
+\end{defn}
+
+\begin{prop}
+Let $H$ be a Hilbert space, and let $A \in \sB(H)$. 
+Then $(\alpha A)^\ast = \conj{\alpha} A^\ast$. 
+\end{prop}
+\begin{proof}
+This follows from $\inp{\alpha Ax}{y} = \alpha \inp{Ax}{y} = \alpha 
+\inp{x}{A^\ast y} = \inp{x}{\conj{\alpha} A^\ast y}$. 
+\end{proof}
+\begin{rmk}
+There's slight difference between the definition of adjoint operator in 
+Hilbert space and that in Banach space. 
+In Banach space, it holds true that $(\alpha A)^\ast = \alpha A^\ast$. 
+\end{rmk}
+
+\begin{defn}
+Suppose that $H$ is a Hilbert space and $A \in \sB(H)$. 
+We say $A$ is a \emph{self-adjoint operator} if $A^\ast = A$. 
+\end{defn}
+
+\begin{prop}
+\label{prop:hilbert_spaces:adjoint_operator:basic_facts}
+Let $A$ be a self-adjoint operator on a Hilbert space $H$. 
+Then the following statements hold true. 
+\begin{enumerate}
+    \item \label{prop:hilbert_spaces:adjoint_operator:basic_facts:1}
+    $\inp{Ax}{x} \in \bR$ for all $x \in H$. 
+    \item \label{prop:hilbert_spaces:adjoint_operator:basic_facts:2}
+    $\norm{A} = \sup_{\norm{x} = 1} \inp{Ax}{x}$. 
+    \item \label{prop:hilbert_spaces:adjoint_operator:basic_facts:3}
+    The eigenvalues of $A$ are real. 
+    \item \label{prop:hilbert_spaces:adjoint_operator:basic_facts:4}
+    If $x_1, x_2$ are eigenvectors of $A$ with respect to $\lambda_1, 
+    \lambda_2$ respectively, then $x_1 \perp x_2$. 
+\end{enumerate}
+\end{prop}
+\begin{proof}
+\ref{prop:hilbert_spaces:adjoint_operator:basic_facts:1}
+$\inp{Ax}{x} = \inp{x}{Ax} = \conj{\inp{Ax}{x}}$. 
+
+\ref{prop:hilbert_spaces:adjoint_operator:basic_facts:2}
+On the one hand, for $x \in H$ with $\norm{x} = 1$, 
+\begin{equation*}
+    \begin{aligned}
+        \inp{Ax}{x} \le \norm{A} \norm{x}^2 \le \norm{A}. 
+    \end{aligned}
+\end{equation*}
+Thus $\sup_{\norm{x} = 1} \inp{Ax}{x} \le \norm{A}$. 
+On the other hand, 
+\begin{equation}
+    \begin{aligned}
+        \inp{A(x + y)}{x + y} 
+        &= \inp{Ax}{x} + \inp{Ax}{y} + \inp{Ay}{x} + \inp{Ay}{y} \\
+        &= \inp{Ax}{x} + \inp{Ax}{y} + \inp{y}{Ax} + \inp{Ay}{y} 
+    \end{aligned}
+\end{equation}
+gives that 
+\begin{align}
+    \inp{A(x + y)}{x + y} = \inp{Ax}{x} + \Re\inp{Ax}{y} + \inp{Ay}{y} \\
+    \inp{A(x - y)}{x - y} = \inp{Ax}{x} - \Re\inp{Ax}{y} + \inp{Ay}{y}
+\end{align}
+Put $M = \sup_{\norm{x} = 1} \inp{Ax}{x}$. 
+Substracting one of these two equations from the other yields 
+\begin{equation*}
+    \begin{aligned}
+        4 \Re\inp{Ax}{y} 
+        &= \inp{A(x + y)}{x + y} + \inp{A(x - y)}{x - y} \\
+        &\le M(\norm{x + y}^2 + \norm{x - y}^2) 
+        = 2 M(\norm{x} ^2 + \norm{y}^2). 
+    \end{aligned}
+\end{equation*}
+Let $x \in B(0, 1)$ and $y = \frac{Ax}{\norm{Ax}}$. 
+It follows that 
+\begin{equation*}
+    4 \Re \inp{Ax}{\frac{Ax}{\norm{Ax}}} = 4 \norm{A x} \le 4 M, 
+\end{equation*}
+which implies that $\norm{A} \le M = \sup_{\norm{x} = 1} \inp{Ax}{x}$. 
+
+\ref{prop:hilbert_spaces:adjoint_operator:basic_facts:3}
+$Ax = \lambda x, x \neq 0 \implies \inp{\lambda x}{x} = \inp{Ax}{x} = 
+\inp{x}{Ax} = \inp{x}{\lambda x}$. 
+\ref{prop:hilbert_spaces:adjoint_operator:basic_facts:4}
+$\inp{x_1}{x_2} = \frac{1}{\lambda_1} \inp{Ax_1}{x_2} = \frac{1}{\lambda_1} 
+\inp{x_1}{Ax_2} = \frac{\lambda_2}{\lambda_1} \inp{x_1}{x_2}$. 
+\end{proof}

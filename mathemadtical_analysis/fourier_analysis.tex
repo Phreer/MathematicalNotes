@@ -1,0 +1,30 @@
+\chapter{Fourier Analysis}
+\section{Fejér's Theorem}
+In this section, we consider continuous function $f$ on circle. 
+\begin{defn}
+Suppose $\sum c_n$ is a complex valued series and $s_n$ the partial sum 
+of $c_n$. The Cesàro mean of sequence $\{s_n\}$ is defined as 
+\begin{equation}
+\sigma_N = \frac{s_1 + s_2 + \ldots + s_N}{N}.
+\end{equation}
+\end{defn}
+\begin{defn}
+The Fejér sum of $f$ is the Cesàro mean of the Fourier series of $f$, \ie, 
+\begin{equation}
+\sigma_N (f)(x) = \frac{S_0(f)(x) + S_1(f)(x) + \ldots + S_{N-1}(f)(x)}
+{N}.
+\end{equation}
+\end{defn}
+
+Fejér's theorem show us the completeness of trigonometric polynomial baasis.
+
+\begin{thm}
+Suppose $f$ is a continuous function on circle, then the Fejér sum of $f$ 
+converges uniformly to $f$.
+\end{thm}
+\begin{rmk}
+This theorem is stronger than the Wierstrass's theorem; the latter one 
+only prove the existence of trigonometric sequence that converges uniformly 
+to any continuous function but the former one exactly specify such a
+sequence.
+\end{rmk}

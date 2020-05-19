@@ -1,0 +1,88 @@
+% chapter 3
+% Convex Functions
+\chapter{Convex functions}
+\section{Convex functions and examples}
+\begin{defn}
+  A function $f:\bR^n \to \bR$ is convex if 
+  $\mathbf{dom} f$ is a convex set and for all $x,y\in \mathbf{dom} 
+  f$, and $\theta \geq 0$, the following equation holds:
+  \begin{equation}
+    \theta f(x)+(1-\theta ) f(y) \leq f(\theta x+(1-\theta) y)
+  \end{equation}
+\end{defn}
+It can be shown that a function is convex if and only if it is 
+convex when its domain is restrictecd to a line.
+A convex function is contiuous on the relative interior of its 
+domain.
+
+\subsection{First-order condition}
+\begin{thm}
+  Assume $f$ is differentiable, then $f$ is convex if and only if
+  $\mathbf{dom}f$ is convex and
+  \begin{equation}
+    f(y) \geq f(x)+\nabla f(x)^{\text{T}}(y-x)
+  \end{equation}
+  holds for all $x, y \in \mathbf{dom}f$.
+\end{thm}
+
+\subsection{Second-order condition}
+\begin{thm}
+  Supppose that $f$ is twice differentiable and $\mathbf{dom}f$ 
+  is open, this is, its \emph{Hession Matrix} $\nabla^2f(x)$ exists 
+  at each point in its domain. Then $f$ is convex if and only if 
+  $mathbf{dom}f$ is convex its Hession Matrix is positive 
+  semidefinitite. 
+\end{thm}
+For strict convexity, we have that if $\nabla^2 f(x) \succ 0$ for
+all $x \in \mathbf{dom}f$, $f$ is strict convex. However, the
+converse is not true.
+
+\subsection{Examples}
+Here are some convex functions on $\bR^2$:
+\begin{itemize}
+  \item Norms.
+  \item Max function.
+  \item Quadratic-over-linear function, i.e., $f(x,y)=x^2/y$, with 
+    \begin{equation*}
+      \mathbf{dom}f=\bR \times \mathbb{R_{++}}.
+    \end{equation*}
+  \item Log-sum-exp function, i.e., $f(\mathbf{x})=\log (e^{x_1}+
+  e^{x_2}+\dots + e^{x_n})$. In fact, this function can be viewed
+  as a differentiable approximation of the max function, since
+    \begin{equation}
+      \max (\mathbf{x}) \leq f(\mathbf{x}) \leq \max (\mathbf{x})+
+      \log (n)
+    \end{equation}
+  holds for any $\mathbf{x}$.
+  \item Geometric mean, i.e., $f(x)=(\prod_{i=1}^{n}x_i)^{\frac{1}
+  {n}}$ with $\mathbf{dom}f=\bR_{++}$ is concave.
+  \item Log-determinant, i.e., $f(\mathbf{X})=\log \det \mathbf{X}$
+  on $\mathbf{dom}f=\mathbb{S}^n_{++}$ is concave. \emph{The proof 
+  of this part is sophisticated and I don't fully understand so I
+  should turn back later.}
+\end{itemize}
+
+\subsection{Sublevel sets}
+\begin{defn}
+  The $\alpha$-sublevel set of a function $f:\bR^n 
+  \leftarrow \bR$ is
+  \begin{equation*}
+    C_\alpha=\{\mathbf{x}\in \mathbf{dom}f\ |\ f(\mathbf{x}) <
+    \alpha\}.
+  \end{equation*}
+\end{defn}
+Sublevel sets of a convex function are convex, while the converse is 
+not true, and this can be used to tell a set is convex by expressing 
+it as a sublevel of a convex function.
+
+\subsection{Epigraph}
+\begin{defn}
+  The epigraph of a function $f:\bR^n \leftarrow
+  \bR$ is
+  \begin{equation*}
+    \mathbf{epi}=\{(\mathbf{x}, t))\ |\ \mathbf{x}\in
+    \mathbf{dom}f, f(\mathbf{x}) \leq t\}.
+  \end{equation*}
+\end{defn}
+The relation between convex function and convex set is that \emph{
+a function is convex if and only if its epigraph is a convex set}.

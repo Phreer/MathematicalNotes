@@ -1,0 +1,915 @@
+\chapter{Metric Spaces}
+\label{chp:metric_spaces}
+\section{The Induction of Metric Spaces}
+\label{sec:metric_space}
+\begin{defn}
+\index{metric}
+\index{distance}
+\label{defn:metric_space}
+A distance on a set $X$ is a function $d: X \times X \to \bR$ satisfying 
+the following conditions:
+\begin{enumerate}
+\item (definitive positiveness) $d(x, y) > 0  \text{  if } 
+x \neq y; d(x, x) = 0$
+\item (symmetry) $d(x, y) = d(y, x)$
+\item (triangle inequality) $d(x, z) \le d(x, y) + d(y, z)$
+\end{enumerate}
+for any $x$, $y$ and $z \in X$. We call $d(x, y)$ is the distance of $x$ and 
+$y$.
+\end{defn}
+
+\begin{prop}
+Let $(X, d)$ be a metric space. Then for any $x, x_1, y, y_1 \in X$, 
+\begin{equation}
+\label{equ:metric_spaces:four_points_inequality}
+\abs{d(x, y) - d(x_1, y_1)} \le d(x, x_1) + d(y, y_1). 
+\end{equation}
+\end{prop}
+\begin{proof}
+From triangle inequality, we have 
+\begin{equation*}
+    \begin{aligned}
+        \abs{d(x, y) - d(x_1, y_1)} 
+        &= \abs{d(x, y) - d(x_1, y) + d(x_1, y) - d(x_1, y_1)} \\
+        &\le \abs{d(x, y) - d(x_1, y)} + \abs{d(x_1, y) - d(x_1, y_1)} \\
+        &\le d(x, x_1) + d(y, y_1). 
+    \end{aligned}
+\end{equation*}
+\end{proof}
+
+Let $(X, d)$ be a metric space. 
+The $\epsilon$-ball centered at $x \in X$ is denoted by 
+\begin{equation*}
+    B_d(x, \epsilon) = \{y \in X: d(x, y) < \epsilon\}. 
+\end{equation*}
+With the definition of distance, a topology on $X$ can be induced by $d$ 
+with basis being the collection $\{B_d(x, \epsilon): x \in X, 
+\epsilon > 0, \epsilon \in \bR\}$. 
+\begin{thm}
+The collection $\{B_d(x, \epsilon): x \in X, \epsilon > 0, \epsilon \in 
+\bR\}$ is a basis for a topology. 
+\end{thm}
+\begin{proof}
+$x \in B_d(x, \epsilon)$ for any $\epsilon > 0$, whence the first 
+condition of the definition of basis. 
+Before verifying the second condition, we first prove the facts: 
+if $y \in B_d(x, \epsilon)$, then there is a basis element $B_d(y, \delta)$ 
+such that $B_d(y, \delta) \subseteq B_d(x, \epsilon)$. 
+Indeed, setting $\delta < \epsilon - d(x, y)$, then for any $z \in 
+B_d(y, \delta)$, $d(x, z) \le d(x, y) + d(y, z) < d(x, y) + \delta 
+< \epsilon$. Hence $B_d(y, \delta) \subseteq B_d(x, \epsilon)$. 
+
+Now we start to prove the second condition. 
+Let $B_1 = B_d(x_1, \epsilon_1)$ and $B_2 = B_d(x_2, \epsilon_2)$ be two 
+basis elements, and $x \in B_1 \cap B_2$. 
+Then there exist basis elements $B_d(x, \delta_1)$ and $B_d(x, \delta_2)$ 
+such that $B_d(x, \delta_1) \in B_1$ and $B_d(x, \delta_2) \subseteq B_2$ 
+respectively. 
+Thus basis element $B_d(x, \min(\delta_1, \delta_2)) \in B_1 \cap B_2$ and 
+the second condition holds.    
+\end{proof}
+
+\begin{defn}
+\index{metric topology}
+\index{distance space}
+\index{metric space}
+\index{space!metric \~{}}
+We call the topology induced by distance $d$ the metric topology. 
+
+A topological space $(X, \mathcal{T})$ is called a metrizable space if 
+$\mathcal{T}$ is induced by a distance $d$ of $X$. 
+A  metric space (or distance space) is a metrizable space $X$ together with 
+a specific metric $d$ that gives the topology of $X$, denoted by $(X, d)$. 
+\end{defn}
+
+With the metric topology, we further introduce the concepts of open/closed 
+set, limit point, neighborhood and convergence from topological space. 
+Note that the following concepts are consistent with those in topological 
+spaces, see Chapter \ref{chp:topological_spaces}. 
+\begin{defn}
+Let $X$ be a metric space. The points and sets mentioned below 
+are understood to be elements and subsets of $X$.
+\begin{enumerate}
+\item A \emph{neighborhood} of $p$ is set $N_r(p)$ consisting of all points 
+in $B(p, r) = \{q \in X : d(p, q) < r\}$.
+\item A point $p$ is a \emph{limit point} of a set $E$ if every neighborhood 
+of $p$ 
+consists a point $q \in E$ such that $q \neq p$.
+\item A set $E$ is \emph{closed} if every limit point of $E$ is a point 
+of $E$.
+\item A point $p$ is an \emph{interior point} of a set $E$ there exists a 
+neighborhood of $p$ contained in $E$.
+\item A set $E$ is \emph{open} if every point of $E$ is an interior point 
+of $E$.
+\end{enumerate}
+\end{defn}
+
+Every metric space is a Hausdorff space. 
+Indeed, supposing $x_1$ and $x_2$ are two distinct points of a metric space 
+$(X, d)$, then the neighborhoods $B_d(x, \epsilon)$ and $B_d(y, \epsilon)$ 
+are disjoint with $\epsilon = \frac{d(x, y)}{2}$ by triangle inequality. 
+Therefore, convergence in metric spaces makes sense.
+\begin{defn}
+Let $(X, d)$ be a metric space. A sequence $\{x_1, x_2, \ldots\}$ of $X$ is said 
+to converge to $x \in X$ if $lim_{n \to \infty} d(x_n, x) = 0$. 
+In this case, we say that sequence $\{x_1, x_2, \ldots\}$ is convergent 
+and $x$ is called a limit of $\{x_1, x_2, \ldots\}$. 
+\end{defn}
+
+We have some basic facts about convergence in metric spaces. 
+\begin{prop}
+\label{prop:metric_spaces:basic_facts_convergence}
+Suppose that sequences $\{x_1, x_2, \ldots\}$ and $\{y_1, y_2, \ldots\}$ 
+of a metric space $(X, d)$ converges to $x, y \in X$ respectively. Then
+\begin{enumerate}
+    \item \label{prop:metric_spaces:basic_facts_convergence:1}
+    the limit of $\{x_1, x_2, \ldots\}$ is unique. 
+    \item \label{prop:metric_spaces:basic_facts_convergence:2}
+    any subsequence of $\{x_1, x_2, \ldots\}$ converges to $x$. 
+    \item \label{prop:metric_spaces:basic_facts_convergence:3}
+    $\lim_{n \to \infty} d(x_n, y_n) = d(x, y)$. 
+\end{enumerate}
+\end{prop}
+\begin{proof}
+The proofs of \ref{prop:metric_spaces:basic_facts_convergence:1} 
+and \ref{prop:metric_spaces:basic_facts_convergence:2} is trivial 
+and have been omitted. 
+\ref{prop:metric_spaces:basic_facts_convergence:3} is straitforward result 
+of Equation \ref{equ:metric_spaces:four_points_inequality}. 
+\end{proof}
+
+% Tree examples of metric space. 
+\begin{example}
+The sets $\bR^d$ and $\bC^d$ equipped with the Euclidean distance $d(x, y) = 
+\sqrt{\sum_{i=1}^d(\xi_i - \zeta_i)^2}$ for $x = (\xi_1, \xi_2, \ldots, 
+\xi_d)$ and $y = (\zeta_1, \zeta_2, \ldots, \zeta_d)$ is a metric space and 
+convergence in them is equivalent to convergence by coordinates. 
+\end{example}
+
+\begin{example}[Discreate space $D$]
+Let $X$ be a nonempty set. 
+The distance $d$ is defined as 
+\begin{equation*}
+    d(x, y) = \begin{cases}
+        0, & x = y,  \\
+        1, & x \neq y.
+    \end{cases}
+\end{equation*}
+Then $\lim_{n \to \infty} x_n = x$ if and only if there exists a positive 
+interger $N$ such that for any $n > N$, $x_n = x$. 
+\end{example}
+
+\begin{example}
+\label{ex:metric_spaces:induction:cab}
+Let $C([a, b])$ be the set of all continuous functions defined on $[a, b]$, 
+and the distance defind as $d(f, g) = max_{t \in [a, b]} \abs{f(t) - g(t)}$. 
+The convergence in $C([a, b])$ is equivalent to uniform convergence. 
+\end{example}  
+
+\begin{example}[The space $S$ of Lebesgue mesurable functions]
+Let $S$ be the set of all lebesgue measurable functions on a measurable set 
+set $E$ such that $0 < m(E) < \infty$ where $m$ is the Lebesgue measure. 
+The distance is $d(f, g) = \int_{E} \frac{\abs{f(t) - g(t)}}
+{1 + \abs{f(t) - g(t)}} \diff t$. 
+We contend that convergence in space $S$ is equivalent to convergence in 
+measure. 
+
+Indeed, Let $\{f_1, f_2, \ldots\}$ be a sequence in $S$ and $lim_{n \to 
+\infty} = f$. 
+Supposing $0 < \epsilon < 1$, then 
+\begin{equation*}
+    \begin{aligned}
+        \int_E \frac{\abs{f_n - f}}{1 + \abs{f_n - f}} \diff t 
+        &\ge \int_{E[\abs{f_n - f} > \epsilon]} 
+        \frac{\abs{f_n - f}}{1 + \abs{f_n - f}} \diff t \\ 
+        &\ge \int_{E[\abs{f_n - f} > \epsilon]} 
+        \frac{\epsilon}{1 + \epsilon} \diff t 
+        \ge \frac{\epsilon}{2} m\left( m[\abs{f_n - f} > \epsilon] \right).        
+    \end{aligned}
+\end{equation*}
+Thus $m\left( m[\abs{f_n - f} > \epsilon] \right) 
+\le \frac{2d(f_n, f)}{\epsilon} \to 0$ as $n \to \infty$. 
+
+Conversely, suppose that $\{f_1, f_2, \ldots\}$ converges to $f \in S$ such 
+in measure. 
+Setting $\epsilon > 0$, by assumption, $\lim_{n \to \infty} m\left( 
+E[\abs{f_n - f} > \epsilon] \right) = 0$. 
+That is, there exists a positive interger $N$ such that for any $n > N$, 
+$m\left(E[\abs{f_n - f} > \epsilon] \right) < \epsilon$. 
+Thus, for $n > N$, 
+\begin{equation*}
+    \begin{aligned}
+        d(f_n, f) &= \int_E \frac{\abs{f_n - f}}{1 + \abs{f_n - f}} \diff t \\
+        &= \int_{E[\abs{f_n - f} > \epsilon]} \frac{\abs{f_n - f}}{1 + \abs{f_n - f}} \diff t + 
+        \int_{E[\abs{f_n - f} < \epsilon]} \frac{\abs{f_n - f}}{1 + \abs{f_n - f}} \diff t \\
+        &\le \epsilon + \epsilon  m(E)
+        = \epsilon (1 + m(E)). 
+    \end{aligned}
+\end{equation*}
+Therefore, $\lim_{n \to \infty} f_n = f$. 
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Two equivalent definitions of continuous function
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+For metric space, we have two equivalent definitions of continuous function. 
+\begin{thm}
+Let $(X_1, d_1)$ and $(X_2, d_2)$ be two metric spaces. A function 
+$f: X_1 \to X_2$ is continuous if and only if for any $x \in X$ and 
+$\epsilon > 0$, there exists a $\delta > 0$ such that for any $y \in X$ 
+satisfying $d_1(x, y) < \delta$, 
+\begin{equation*}
+    d_2(f(x), f(y)) < \epsilon. 
+\end{equation*}
+\end{thm}
+\begin{proof}
+$\Leftarrow$
+Let $V$ be a open subset $Y$ and $x \in f^{-1}(V)$. 
+Then $f(x) \in V$ and there exits a open ball $B_{d_Y}(f(x), \epsilon) 
+\in V$. 
+Hence, by assumption, there exits a open ball $B_{d_X}(x, \delta)$ such 
+that for any $y \in B_{d_X}(x, \delta)$, $y \in B_{d_Y}(f(x), \epsilon) 
+\subseteq V$. 
+That is, for any $B_{d_X}(x, \epsilon) \subseteq f^{-1}(V)$, whence $f$ is 
+continuous. 
+
+$\Rightarrow$ 
+Let $f$ be a continuous function and $\epsilon$ be an arbitrary positive 
+real number. 
+By definition, $f^{-1}(B_{d_Y}(f(x), \epsilon))$ is an open set for each 
+$x \in X$. 
+Thus there exists open ball $B_{d_X}(x, \delta) \subseteq 
+f^{-1}(B_{d_Y}(f(x), \epsilon))$. 
+\end{proof}
+
+\begin{thm}
+\label{thm:metric_space:continuous_function:2}
+Let $X$ and $Y$ be topological spaces and $f$ be a function from $X$ to $Y$. 
+If $X$ is a metric space, then $f$ is continuous if and only if for every 
+convergent sequence $\{x_1, x_2, \ldots\} \subseteq X$ such that 
+$\lim_{n \to \infty} x_n = x$, the sequence $\{f(x_1), f(x_2), \ldots\} 
+\subseteq Y$ converges to $f(x)$. 
+\end{thm}
+
+Before we start to prove this theorem, we introduce the following lemma:
+\begin{lemma}[Sequence Lemma]
+\label{thm:metric_spaces:sequence_lemma}
+Let $X$ be a topological space and $A \subseteq X$. 
+If sequence $\{x_1, x_2, \ldots\} \subseteq X$ converges to $x \in X$, then 
+$x \in \overline{A}$. 
+If $X$ is a metric space, then the converse is true. 
+\end{lemma}
+\begin{proof}
+The first statement is trivial. 
+Now we prove the second statement. 
+Suppose that $X$ is a metric space and $x \in \overline{A}$. 
+Then for every $n \in \bN^\ast$, the neighborhood $B(x, \frac{1}{n})$ 
+intersects $A$. 
+Thus, for each $n$, we choose a element from $B(x, \frac{1}{n}) \cap A$ 
+as $x_n$. 
+Obviously, the sequence $\{x_1, x_2, \ldots\}$ converges to $x$. 
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm:metric_space:continuous_function:2}]
+$\Leftarrow$ 
+Suppose that $f$ is continuous and sequence $\{x_1, x_2, \ldots\} \subseteq X$ 
+converging to $x$. 
+Then for every neighborhood $V$ of $f(x)$, $U = f^{-1}(V)$ is a 
+neighborhood of $x$. 
+Thus there exists $N \in \bN^\ast$ such that for $n > N$, $x_n \in V$. 
+That is, for $n > N$, $f(x_n) \in V$, whence $\{f(x_1), f(x_2), \ldots\}$ 
+converges to $f(x)$. 
+
+$\Rightarrow$ 
+Suppose that the convergent sequence condition is satisfied. 
+It suffices to prove $f(\overline{A}) \subseteq \overline{f(A)}$ for any 
+$A \subseteq X$. 
+Let $y \in f(\overline{A})$. 
+There exists $x \in \overline{A}$ such that $f(x) = y$. 
+Thus, there exists a sequence $\{x_1, x_2, \ldots\}$ converging to $x$, by 
+by Sequence Lemma \ref{lemma:rings:finite_chain_of_principal_ideal_domain}. 
+Therefore, $\{f(x_1), f(x_2), \ldots\}$ converges to $f(x) = y$, whence 
+$y \in \overline{f(A)}$. 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Isometry
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+As homeomorphism in topological space preserves the topological properties, 
+we define isometry in metric space that preserves the metric properties. 
+\begin{defn}
+\index{isometry}
+\index{isometric mapping}
+Let $(X_1, d_1)$ and $(X_2, d_2)$ be two metric spaces. 
+A function $f: X_1 \to X_2$ is said to be an isometry (or isometric mapping) 
+if for any $x_1, x_2 \in X_1$, $d_1(x_1, x_2) = d_2(f(x_1), f(x_2))$. 
+If there exists an isometry $f$ maps $X_1$ onto $X_2$, then we say $X_1$ is 
+isometric to $X_2$. 
+\end{defn}
+Clearly, isometry is a equivalent relation and a isometric mapping is 
+injective. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Complete Metric Spaces
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Complete Metric Spaces}
+\subsection{Cauchy Sequences}
+\begin{defn}
+\index{Cauchy sequence}
+A sequence $\{x_1, x_2, \ldots\}$ in a metric space $(X, d)$ is a 
+\emph{Cauchy sequence} if for any $\epsilon > 0$, there exists an $N \in \bN 
+^\ast$ such that 
+\begin{equation*}
+    d(x_m, x_n) < \epsilon, \text{ for any } n, m \ge N. 
+\end{equation*}
+\end{defn}
+
+There is a geometry perspective of Cauchy sequences.
+\begin{defn}
+The diameter of a nonempty set $E$ is defined as 
+\begin{equation}
+    \diam E = \sup_{p, q \in E} d(p, q).
+\end{equation}
+\end{defn}
+By definition, a sequence $\{p_n\}$ is a Cauchy sequence if and only if 
+\begin{equation*}
+    \lim _{N\to \infty} \diam E_N = 0, 
+\end{equation*}
+where $E_N = \{p_i : i \ge N\}$.
+
+\begin{prop}
+Every convergent sequence is a Cauchy sequence. 
+\end{prop}
+\begin{proof}
+The proof is trivial. 
+\end{proof}
+
+\begin{defn}
+\index{complete metric space}
+A metric space $(X, d)$ is said to be \emph{complete} if every Cauchy 
+sequence in $X$ converges. 
+\end{defn}
+
+\begin{thm}
+\label{thm:metric_spaces:completeness:convergent_subsequence}
+If every Cauchy sequence in a metric space $X$ has an convergent 
+subsequence, then $X$ is complete. 
+\end{thm}
+\begin{proof}
+Supposing that $\{ x_n \}_{n=1}^{\infty}$ is a Cauchy sequence in $X$, 
+we contend that if $\{ x_n \}_{n=1}^{\infty}$ has subsequence $\{x_{n_k}\}
+_{k=1}^\infty$ converging to some $x \in X$, then $\{ x_n \}
+_{n=1}^{\infty}$ converges to $x \in X$. 
+Indeed, for any $\epsilon > 0$, there exist $N_1, N_2 > 0$ such that 
+\begin{align*}
+    d(x_n, x_m) < \frac{\epsilon}{2}, \quad & \text{for every } n, m \ge N_1, \\
+    d(x_{n_k}, x) < \frac{\epsilon}{2}, \quad & \text{for every } k > N_2. 
+\end{align*} 
+Therefore, it yields that for given $m > \max\{N_1, N_2\}$, 
+\begin{equation*}
+    d(x_n, x) \le d(x_n, x_m) + d(x_m, x) < \epsilon, \quad 
+    \text{for every } n > \max\{N_1, N_2\}. 
+\end{equation*} 
+This has completed the proof. 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Subsection: Completion of Metric Spaces
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Completion of Metric Spaces}
+There is a very interesting fact about metric space: every metric space can 
+is isometric to a dense subspace of a complete. 
+\begin{thm}[Completion of Metric Spaces]
+For every metric space $(X, d)$, there exists a complete metric space 
+$\tilde{X}, \tilde{d}$ such that $(X, d)$ is isometric to a dense subspace in 
+$(\tilde{X}, \tilde{d})$. 
+The subspace $(\tilde{X}, \tilde{d})$ is unique up to an isometric mapping. 
+\end{thm}
+\begin{proof}
+Let $\tilde{X}$ be the set of all Cauchy sequences in $X$ and the distance 
+of $\tilde{x} = \{x_n\}$ and $\tilde{y} = \{y_n\}$ is defined as 
+\begin{equation}
+    \label{equ:metric_spaces:completion:distance}
+    \tilde{d}(\tilde{x}, \tilde{y}) = \lim_{n \to \infty} d(x_n, y_n). 
+\end{equation}
+
+\textbf{Step 1.} 
+The limit in (\ref{equ:metric_spaces:completion:distance}) exists. 
+Assuming that $\epsilon > 0$, by Equation 
+(\ref{equ:metric_spaces:four_points_inequality}), we have 
+\begin{equation*}
+    \abs{(x_n, y_n) - d(x_m, y_m)} \le d(x_n, x_m) + d(y_n, y_m) 
+    \le \epsilon. 
+\end{equation*}
+Thus $\{d(x_n, y_n)\}$ is a Cauchy sequence in $\bN$ and thus has a limit. 
+For two Cauchy sequences $\tilde{x} = \{x_n\}$ and $\tilde{y} = \{y_n\}$, 
+we regard $\tilde{x}$ and $\tilde{y}$ as the same element of $\tilde{X}$ if 
+$d(\tilde{x}, \tilde{y})$. 
+
+\textbf{Step 2.}
+The metric $d$ is well-defined. 
+That is, for elements $\tilde{x} = \tilde{x}'$ and $\tilde{y} = \tilde{y}'$ 
+of $\tilde{X}$, $\lim_{n \to \infty} \tilde{d}(\tilde{x}, \tilde{y}) = 
+d(\tilde{x}', \tilde{y}')$. 
+Indeed, $\abs{d(x_n, y_n) - d(x_n', y_n')} \le d(x_n, x_n') + d(y_n, y_n') 
+\to 0$ when $n \to \infty$.
+
+\textbf{Step 3.}
+The metric space $(\tilde{X}, \tilde{d})$ is complete. 
+Suppose that $\{\tilde{x}_n\}$ is a Cauchy sequence in $\tilde{X}$. 
+For any $n \in \bN^\ast$, there exists $N_n \in \bN^\ast$ such that 
+\begin{equation*}
+    d(x_{nk} - x_{nk'}) < \frac{1}{n} \quad \text{for } k, k' > N. 
+\end{equation*}
+Let $y_n = x_{n(N_n+1)}$, and set $\tilde{y} = \{y_n\}$. 
+Then $\tilde{y}$ is an element of $\tilde{X}$ and $\lim_{n \to \infty} 
+\tilde{x}_n = \tilde{y}$. 
+Indeed, for any $m, n \in \bN$ and $k > \max(N_n, N_m)$, 
+\begin{equation*}
+    \begin{aligned}
+        d(y_n, y_m) &= d(x_{n(N_n + 1)}, x_{m(N_m + 1)}) \\
+        &< d(x_{n(N_n} + 1), x_{nk}) + d(x_{nk}, x_{mk}) 
+        +  d(x_{m(N_m + 1)}, x_k) \\
+        &< \frac{1}{n} + d(x_{nk}, x_{mk}) + \frac{1}{m}.
+    \end{aligned}
+\end{equation*}
+Thus $d(y_n, y_m) \to 0$ as $n, m \to \infty$. 
+And 
+\begin{equation*}
+    \begin{aligned}
+        \tilde{d}(\tilde{y}, \tilde{x}_n) 
+        & \le \tilde{d}(\tilde{y}, \tilde{y}_n) 
+        + \tilde{d}(\tilde{y}_n, \tilde{x}_n) \\
+        &< \lim_{k \to \infty} d(y_k, y_n)+ \frac{1}{n}. 
+    \end{aligned}
+\end{equation*}
+tends to $0$ as $n \to \infty$. 
+
+\textbf{Step 4.}
+$(X, d)$ is isometric to a dense subspace in $(\tX, \td)$. 
+Let $G$ be the set of all constant sequences in $\tX$ and define 
+\begin{equation*}
+    \begin{aligned}
+        T: X &\to \tX,  \\
+        x &\mapsto \tx = \left\{ x, x, \ldots \right\}. 
+    \end{aligned}
+\end{equation*}
+Then obviously $d(x, y) = \td(\tx, \ty)$, whence $(X, d)$ is isometric to 
+$(T(X) = G, \td)$. 
+Supposing that $\ty = \left\{ y_n\right\}$ is a Cauchy sequence in $\tX$, 
+then $\ty_n = \left\{ y_n, y_n, \ldots \right\}$ is a constant sequence. 
+Observing that 
+\begin{equation*}
+    \td(\ty, \ty_n) = \lim_{m \to \infty} d(y_m, n), 
+\end{equation*}
+we have $\ty_n \to \ty$ as $n \to \infty$, which means $G = T(X)$ is dense 
+in $\tX$. 
+
+\textbf{Step 5.}
+Suppose that $(\tX, \td)$ and $(\tX', \td')$ are two complete metric spaces 
+and there exist two isometric mappings $T$ and $T'$ such that $T: X \to \tX$ 
+and $T': X \to \tX'$ are dense in $\tX$ and $\tX'$ respectively. 
+We contend that $(\tX, \td)$ is isometric to $(\tX', \td')$. 
+Indeed, for any $\tx \in \tX$, there exists a sequence $\left\{ x_n\right\}$ 
+such that $\left\{ Tx_n \right\}$ converges to $\tx$. 
+Define $T_1; \tX_1 \to \tX_2, \tx \mapsto \lim_{n \to \infty} T'x_n$. 
+For any $\tx$ and $\ty$ of $\tX$, 
+\begin{equation*}
+    \begin{aligned}
+        \td'(T_1\tx, T_1\ty) &= \lim_{n \to \infty} \td'(T'\tx_n, T'\ty_n)
+        = \lim_{n \to \infty} d(x_n, y_n) \\ 
+        &= \lim_{n \to \infty} \td(Tx_n, Ty_n) 
+        = \td(\lim_{n \to \infty}Tx_n, \lim_{n \to \infty}Ty_n) \\ 
+        &= \td(\tx, \ty). 
+    \end{aligned}
+\end{equation*}
+Thus $T_1$ is an isometry. 
+
+The conclusion now has been established. 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Compact Sets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Compact Sets}
+\begin{defn}
+\index{open cover}
+Let $\{G_\alpha\}$, $\alpha \in I$ be a collection of open subsets of 
+metric space $X$ and $E$ a set in $X$. 
+Then $\{G_\alpha\}$ is a open cover of $E$ if $E \in \bigcup_{\alpha \in I} 
+G_\alpha$. 
+\end{defn}
+
+
+\begin{defn}
+\index{compact set}
+A subset $K$ in a metric space $X$ is a compact if every open cover of
+$K$ contains a finite subcover. 
+In other words, for every open cover $\{G_\alpha: \alpha \in I\}$ of $K$ 
+there exist a finite subcover $\left\{G_{\alpha_n}: 0 \le n \le N, 
+\alpha_n \in I \right\}$ such that 
+\begin{equation*}
+    A \subseteq \bigcup_{n=1}^N G_{\alpha_n}. 
+\end{equation*}
+\end{defn}
+
+While the concepts of closed set and open set is relative to the 
+metric space we considered, compactness is not. We have the following 
+theorem.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Basic Properties of Compact Sets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Basic Properties of Compact Sets}
+\begin{thm}
+Suppose $K\subseteq Y \subseteq X$. Then $K$ is compact relative to $X$ if 
+and only if $K$ is compact relative to $Y$. Here, compact relative to 
+set $Y$ means that the open cover is considered in $Y$.
+\end{thm}
+\begin{proof}
+$\Rightarrow$ Suppose $K$ is compact relative to $X$ and $\{U_\alpha\}$ is 
+an open cover of $K$ relative to Y, \ie, $U_\alpha$ is open relative to 
+$Y$ and $K \subseteq \bigcup_\alpha U_\alpha$. From the previously presented 
+theorem, we know for any $U_\alpha$, there exists a corresponding open 
+set $V_\alpha \in X$ which makes $U_\alpha = V_\alpha \cap Y$. So we 
+can choose a finite open cover from $\{V_\alpha\}$, say $V_1, V_2, \ldots, 
+V_n$. Evidently, the corresponding $\{U_1, U_2, \ldots, U_n\}$ where 
+$U_i = V_i \cap Y$ is an open cover of $K$.
+
+$\Leftarrow$ Conversely, suppose $K$ is compact relative to $Y$ and 
+$\{V_\alpha\}$ is an open cover relative to $X$. Then the collection of 
+all $U_\alpha = V_\alpha \cap Y$ is an open cover of $K$. Thus we 
+can draw a finite open subcover from $U_\alpha$, say $U_1, U_2, \ldots, 
+U_n$, which indicates that $V_1, V_2, \ldots, V_n$ where $U_i = V_i \cap 
+Y$ is also a finite open subcover of $K$.
+\end{proof}
+
+Compactness is a stronger requirement to a set than the closedness.
+
+\begin{thm}
+Compact sets in a metric space are closed and bounded.
+\end{thm}
+\begin{proof}
+Assume $X$ is a metric space and $K$ is a compact set in $X$. In order 
+to go to a contradiction, suppose $K$ is not closed, \ie, there exists 
+a limit point $p$ of $K$ such that $p \notin K$. 
+Then $\left\{B(q, \frac{1}{2} d(q, p)) : q \in k\right\}$ is an open cover 
+of $K$. 
+Note that $p \notin \bigcup_{p \in K} B\left(p, \frac{1}{2}d(p, q)\right)$. 
+Since $K$ is compact, we can draw a finite subcover from 
+$\left\{B(q, \frac{1}{2} d(q, p)) : q \in K\right\}$, say 
+$\{B(q_i, \frac{1}{2} d(q_i, p)) : q_i \in K, i = 1, 2, \ldots , n\}$. 
+Let $\delta = \min_{i} \frac{1}{2}d(p, q_i)$ and $N = B(p, \delta)$. 
+Then we obtain $N \cap K = \varnothing$, which is a contradiction to the 
+condition that $p$ is a limit point of $K$. 
+
+Since $\left\{ B(q, \frac{1}{2}): q \in K \right\}$ is a open cover of $K$, 
+there exists a subcover 
+\begin{equation*}
+    \left\{ B(q_i, \frac{1}{2}): 0 \le i \le N, q_i \in K\right\} 
+\end{equation*}
+of $K$, which is obviously bounded. 
+\end{proof}
+
+\begin{rmk}
+Note the theorem above is quite general, illustaring that compactness is a 
+stronger condition than closedness. 
+The converse holds true for finite-dimensional metric space. 
+However, for infinite-dimensional space, the converse is not true.     
+\end{rmk}
+
+\begin{thm}
+Closed subset of a compact set is compact.
+\end{thm}
+\begin{proof}
+Suppose $A \subseteq X$ be compact and $B \subseteq A$ be closed. 
+Let $G = \left\{ G_\alpha: \alpha \in I\right\}$ be an open cover of $B$. 
+As $B$ is compact, $B$ is closed, whence $B^C$ is open. 
+Thus $G \cup \left\{ B^C \right\}$ is an open cover of $A$, and then it 
+contains a finite subcover $G'$ of $A$. 
+Hence $G' \backslash \left\{ B^C\right\} \subseteq G$ is a finite subcover of 
+$B$. 
+\end{proof}
+
+\begin{thm}
+\label{thm:compact_intersect_nonempty}
+If $\{K_\alpha\}$ is a collection of compact subsets of a metric space $X$ 
+such that the intersection of any finite subcollection of $\{K_\alpha\}$ is 
+nonempty, then $\bigcap_{\alpha} K_\alpha$ is nonempty.
+\end{thm}
+\begin{proof}
+Fix a subset $K_1$ from $\{K_\alpha\}$ and put $G_\alpha = K_\alpha ^C$.
+With no loss of generality, suppose that for any point $p \in K_1$, there 
+exists a subset $K_\alpha$ such that $p \notin K_\alpha$. Then $G_\alpha$
+is an open cover of $K_1$; thus we can choose a finite number of indices 
+such that $\{G_{\alpha_1}, G_{\alpha_2}, \ldots, G_{\alpha_n}\}$ is an 
+open subcover of $K_1$, \ie, $K_1 \subseteq \bigcup_{i = 1}^n G_{\alpha_i}$, 
+which means $K_1 \cap (\bigcap _{i = 1}^n K_{\alpha_i})$ is empty, 
+contradicting the condition that the intersection of any finite 
+subcollection of $K_\alpha$ is nonempty.
+\end{proof}
+
+\begin{rmk}
+This theorem is the key to prove the so-called nested interval theorem 
+when we set the metric space to $\bR$.
+\end{rmk}
+
+The next theorem is an extension to the classical nested closed ball 
+theorem. 
+\begin{thm}
+Let $K_n$ is a sequence of compact sets in a metric space $X$ such that 
+$K_n \supset K_{n+1}, n = 1, 2, \ldots$. If 
+\begin{equation}
+    \lim_{n \to \infty} \diam K_n = 0, 
+\end{equation}
+then $K = \bigcap _{n=1}^\infty K_n$ contains exactly one point.
+\end{thm}
+\begin{proof}
+By Theorem \ref{thm:compact_intersect_nonempty}, $\bigcap _{n=1}^\infty K_n$ 
+is nonempty. If $K$ consists of more than one point, then $\diam K
+= a > 0$. Since $K \subseteq K_n$ for all positive integer $n$, we have 
+$0 < a \le \diam K < \diam K_n$, which is a contradiction to 
+the condition.
+\end{proof}
+
+\begin{thm}
+Let $X$ and $Y$ be two metric spaces and $f: X \to Y$ be a continuous 
+mapping. 
+If $A \subseteq X$ is compact in $X$, then $f(A)$ is compact in $Y$. 
+\end{thm}
+\begin{proof}
+This is trivial with the definition \ref{def:topology:continuous_function} 
+of continuous function. 
+\end{proof}
+
+\begin{cor}
+Let $A \subseteq X$ be compact and $f: A \to \bR$ be continuous. 
+Then $f$ achieves its maximum and minimum on $A$. 
+\end{cor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Subsection: Compactness in Metric Spaces
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Compactness in Metric Spaces}
+\begin{defn}[sequentially compact]
+\index{sequentially compact}
+Let $X$ be a metric space. 
+A subset $A$ in $X$ is said to be \emph{sequentially compact} if every 
+sequence in $A$ has a convergent subsequence. 
+\end{defn}
+
+\begin{defn}[$\epsilon$-net, totally bounded]
+\index{$\epsilon$-net}
+\index{totally bounded}
+Let $A, B$ be subsets in $X$ and $\epsilon > 0$. 
+If 
+\begin{equation*}
+    A \subseteq \bigcup_{b \in B} B(b, \epsilon), 
+\end{equation*}
+then we call $B$ an \emph{$\epsilon$-net} of $A$. 
+If for any $\epsilon > 0$, $A$ has a finite $\epsilon$-net, then $A$ is 
+said to be \emph{totally bounded}. 
+\end{defn}
+
+Clearly, a totally bounded set is bounded, while the converse may not be 
+true. 
+For instance, consider the open ball $B(0, 2)$ in the infinite-dimensional 
+metric space $l^\infty$. 
+Let $e_i = \left( 0, 0, \ldots, 1, \ldots \right)$ where the the 
+nonzero element appear in the $i$-th entry. 
+Then $e_i \in B(0, 1)$ for $i \in \bN^\ast$ and $d(e_i, e_j) = 1$ 
+if $i \neq j$. 
+Thus for all $\epsilon < 1$, there is no $\epsilon$-net of $A$. 
+
+\begin{thm}
+\label{thm:metric_spaces:compact_sets:characterizations}
+Let $X$ be a complete metric space and $A \subseteq X$ be closed. 
+Then the following are equivalent 
+\begin{enumerate}
+    \item \label{thm:metric_spaces:compact_sets:characterizations:1}
+    $A$ is compact. 
+    \item \label{thm:metric_spaces:compact_sets:characterizations:2}
+    $A$ is totally bounded. 
+    \item \label{thm:metric_spaces:compact_sets:characterizations:3}
+    $A$ is sequentially compact. 
+\end{enumerate}
+\end{thm}
+\begin{proof}
+\ref{thm:metric_spaces:compact_sets:characterizations:1} $\implies$ 
+\ref{thm:metric_spaces:compact_sets:characterizations:2}
+Supposing that $A$ is compact and $\epsilon > 0$, then 
+\begin{equation*}
+    \left\{ B(a, \epsilon): a \in A\right\}
+\end{equation*}
+is an open cover of $A$, and thus has a finite subcover, which is a 
+$\epsilon$-net of $A$. 
+It follows that $A$ is totally bounded. 
+
+\ref{thm:metric_spaces:compact_sets:characterizations:1} $\implies$
+\ref{thm:metric_spaces:compact_sets:characterizations:3}
+\footnote{Requires only compactness of $A$. Compactness is stronger than 
+sequentially compactness.}
+Supposing $A$ is compact and $\{x_n\}_{n=1}^\infty$ is a sequence in $A$ 
+consisting of infinitely many distinct elements of $X$. 
+We want to prove that $A$ has a limit point of $\{x_n\}_{n=1}^\infty$. 
+Assume to the contrary that every $a \in A$ is not a limit point of 
+$\{x_n\}_{n=1}^\infty$. 
+Then for every $a \in A$, there exists an $\epsilon_a > 0$ such that 
+\begin{equation*}
+    B(a, \epsilon_a) \cap \{x_n\}_{n=1}^\infty \text{ is finite}. 
+\end{equation*}
+Thus $\left\{ B(a, \epsilon_a): a \in A \right\}$ is an open cover of $A$, 
+which has no finite subcover, contradicting the assumption. 
+
+\ref{thm:metric_spaces:compact_sets:characterizations:3} $\implies$ 
+\ref{thm:metric_spaces:compact_sets:characterizations:2}
+Suppose that $A$ is sequentially compact and $\epsilon > 0$. 
+Assume that $A$ does not have a finite $\epsilon$-net. 
+Choose an arbitrary $x_1 \in A$ and consider $B(x_1, \epsilon)$. 
+Then $A \not \subseteq B(x_1, \epsilon)$. 
+Choose $x_2 \in A$ such that $x_2 \notin B(x_1, \epsilon)$. 
+Repeatedly, we obtain a sequence $\{x_n\}$ in $A$ that has no limit point, 
+which is a contradiction. 
+
+\ref{thm:metric_spaces:compact_sets:characterizations:2} $\implies$ 
+\ref{thm:metric_spaces:compact_sets:characterizations:1}
+\footnote{Requires completeness of $X$ and Closedness of $A$.}
+Let $A$ be totally bounded and closed. 
+Assume $A$ is not compact. 
+Then there exists an open cover $\{G_\alpha: \alpha \in I\}$ that does not 
+have a finite subcover of $A$. 
+Firstly, as $A$ is totally bounded, there exists a finite $1$-net 
+covering $A$, \ie, $A \subseteq \bigcup_{i=1}^n B(x_i, 1)$. 
+Thus $A = \bigcup_{i=1}^n \left[ A \cap \overline{B(x_i, 1)} \right]$. 
+Hence, there exists some $x_i$ such that $A_1 = A \cap \overline{B(x_i, 1)}$ 
+cannot be covered by any finitely many $G_\alpha$. 
+Secondly, as $A_1 \subseteq A$ is totally bounded, there exists a finite 
+$\frac{1}{2}$-net $\{B(y_i, \frac{1}{2}): i=1, 2, \ldots, n_1\}$ covering 
+$A_1$. 
+Then $A_1 = \bigcup_{i=1}^n \left[ A_1 \cap \overline{B(y_i, \frac{1}{2})} 
+\right]$. 
+Likewise, there exists $y_i$ such that 
+$A_2 = A_1 \cap \overline{B(y_i, \frac{1}{2})}$ cannot be covered by 
+finitely many $G_\alpha$. 
+Repeating this process, we get a collection $\left\{ A_i \right\}$ 
+such that for all $n \in \bN$ 
+\begin{equation*}
+    \left\{
+    \begin{aligned}
+        & A_1 \supset A_2 \supset A_3 \supset \cdots,  \\
+        &\diam(A_n) \le \frac{2}{n}, \\
+        & A_n \text{ cannot be covered by any finitely many } G_\alpha. 
+    \end{aligned}
+    \right.
+\end{equation*}
+Choosing $x_n \in A_n$, then for $n > m$, $x_n, x_m \in A_m$, which implies 
+$d(x_m, x_n) \frac{2}{m}$ and thus $\{x_n\}$ is a Cauchy sequence in $X$. 
+By completeness of $X$, we assume that $\{x_n\}$ converges to $x \in X$. 
+Since $A$ is closed and $x_n \in A$, it follows that $x \in A$. 
+Hence $x \in G_\alpha$ for some $\alpha \in I$. 
+That $G_\alpha$ is open yields that there exists $B(x, \delta) \in G_\alpha$ 
+and there exists $N \in \bN$ such that for every $n > N$, 
+\begin{equation*}
+    d(x_n, a) < \frac{\delta}{2}.
+\end{equation*}
+Therefore, for $n > \max \left\{ \frac{4}{\delta}, N \right\}$ and $x \in 
+A_n$ 
+\begin{equation*}
+    d(x, a) \le d(x, x_n) + d(x_n, a) < \frac{2}{n} + \frac{\delta}{2} 
+    < \delta. 
+\end{equation*}
+\ie, $A_n \subseteq B(a, \delta) \subseteq G_\alpha$. which contradicts the 
+hypothesis. 
+\end{proof}
+
+\begin{cor}
+\label{cor:metric_spaces:compact_sets:totally_bounded_rn}
+A bounded subset $F$ in $\bR^n$ is totally bounded. 
+\end{cor}
+\begin{proof}
+$F$ is bounded in $\bR^n$ $\implies$ $\bar{F}$ is a compact set in $\bR^n$ 
+$\implies$ $\bar{F}$ is totally bounded $\implies$ $F$ is totally bounded. 
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Subsection: Arzelà–Ascoli Theorem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Arzelà–Ascoli Theorem}
+As metric space $C[a, b]$ is of fundamental importance in analysis, there 
+is a theorem describing the compactness of $C[a, b]$, which is the well-
+known Arzelà–Ascoli Theorem. 
+Before stating the theorem, we need the following definitions: 
+\begin{defn}[uniformly bounded, equicontinuous]
+\index{uniformly bounded}
+\index{equicontinuous}
+Let $F$ be a subset of $C[a, b]$ where $-\infty < a < b < \infty$. 
+We call functions in $F$ are \emph{uniformly bounded} if there exists a 
+constant $M \ge 0$ such that for every $f \in F$, 
+\begin{equation*}
+    \abs{f(x)} \le M, \quad \text{for any } x \in [a, b].
+\end{equation*}
+
+$F$ is called \emph{equicontinuous} if for every $\epsilon > 0$, there 
+exists $\delta > 0$ such that for all $t_1, t_2 \in [a, b]$ such that 
+$\abs{t_1 - t_2} < \epsilon$ and $f \in F$, 
+\begin{equation*}
+    \abs{f(t_1) - f(t_2)} < \epsilon. 
+\end{equation*}
+\end{defn}
+
+\begin{thm}[Arzelà–Ascoli Theorem]
+Let $F \subseteq C[a, b]$ be closed where $-\infty < a < b < \infty$. 
+Then $F$ is compact if and only if $F$ is uniformly bounded and 
+equicontinuous. 
+\end{thm}
+\begin{proof}
+By Theorem \ref{thm:metric_spaces:compact_sets:characterizations}, it 
+suffices to prove that $F$ is totally compact if and only if $F$ is 
+uniformly bounded and equicontinuous. 
+
+$\Rightarrow$
+Suppose $F$ is totally bounded. 
+Then $F$ is bounded, implying uniform boundedness of $F$. 
+Setting $\epsilon > 0$, there exist $f_1, f_2 \ldots, f_m \in C[a, b]$ 
+such that 
+\begin{equation*}
+    F \subseteq \bigcup_{i=1}^m B(f_i, \frac{\epsilon}{3}). 
+\end{equation*}
+Noting that for every $i \in \{1, 2, \ldots, m\}$, $f_i$ is uniformly 
+continuous, thus there exists $\delta_i > 0$ such that for $t_1, t_2 \in 
+[a, b]$ satisfying $\abs{t_1 - t_2} < \delta_i$, 
+\begin{equation*}
+    \abs{f_i(t_1) - f_i(t_2)} < \epsilon. 
+\end{equation*}
+Take $\delta = \min \{\delta_1, \delta_2, \ldots, \delta_m\}$. 
+Thus for every $f \in F$, there exists $i \in \{1, 2, \ldots, m\}$ 
+such that $f \in B(f_i, \frac{\epsilon}{3})$. 
+This is, for $t_1, t_2 \in [a, b]$ satisfying $\abs{t_1 - t_2} < \delta$, 
+\begin{equation*}
+    \abs{f(t_1) - f(t_2)} \le \abs{f(t_1) - f_i(t_1)} 
+    + \abs{f_i(t_1) - f_i(t_2)} + \abs{f_i(t_2) - f(t_2)} < \epsilon. 
+\end{equation*}
+Hence, $F$ is equicontinuous. 
+
+$\Leftarrow$
+Suppose that $F$ is uniformly bounded and equicontinuous.
+Letting $\epsilon > 0$, as $F$ is equicontinuous, there exists $\delta > 0$ 
+such that for any $\abs{t_1 - t_2} < \delta$ and $f \in F$, 
+\begin{equation*}
+    \abs{f(t_1) - f(t_2)} < \frac{\epsilon}{5}. 
+\end{equation*}
+Uniformly divide the closed interval $[a, b]$ into $a = t_0 < t_1 < t_2 
+< \cdots < t_m = b$ such that 
+\begin{equation*}
+    \abs{t_{i+1} - t_i} = \frac{b - a}{m} < \delta. 
+\end{equation*}
+Hence, for every $i \in \{1, 2, \ldots, m\}$, $t \in [t_i, t_{i+1}]$ 
+implies $\abs{f(t) - f(t_i)} < \frac{\epsilon}{5}$. 
+Consider the set 
+\begin{equation*}
+    E = \left\{ (f(t_0), f(t_1), \ldots, f(t_m)): f \in \cF \right\} 
+    \subseteq \bC^m. 
+\end{equation*}
+By uniform boundedness of $F$, $E$ is bounded and thus totally bounded with 
+Corollary \ref{cor:metric_spaces:compact_sets:totally_bounded_rn}. 
+Therefore, there exists $f_1, f_2, \ldots, f_p \in F$ such that for any 
+$f \in F$ and $i \in \{1, 2, \ldots, m\}$, there exists $j \in \{1, 2, 
+\ldots, p\}$ such that 
+\begin{equation*}
+    \abs{f(t_i) - f_j(t_i)} < \frac{\epsilon}{5}. 
+\end{equation*} 
+We claim that 
+\begin{equation*}
+    F \subseteq \bigcup_{i = 1}^p B(f_i, \epsilon). 
+\end{equation*}
+Indeed, for every $f \in F$, there exists $f_i \in F$ such that 
+$\abs{f(t_j) - f_i(t_j)} < \frac{\epsilon}{5}$ for any 
+$j \in \{1, 2, \ldots, m\}$. 
+Supposing $t \in [a, b]$ and $t \in [t_j, t_{j+1}]$, then 
+\begin{equation*}
+    \begin{aligned}
+        \abs{f(t) - f_i(t)} \le \abs{f(t) - f(t_j)} + \abs{f(t_j) - f_i(t_j)} 
+        + \abs{f_i(t_j) - f_i(t)} \le \frac{3}{5} \epsilon < \epsilon. 
+    \end{aligned}
+\end{equation*}
+Thus we have proven that $F$ is totally bounded. 
+\end{proof}
+
+\section{Cauchy Sequences}
+
+
+\begin{defn}
+By the upper limit of a sequence $\{x_k\}$, we mean 
+\begin{equation}
+    l = \lim_{n\to \infty} \sup _{k\ge n} x_k, 
+\end{equation}
+denoted by $\limsup_{n\to\infty} x_n$. If $\{x_k\}$ is unbounded above, then 
+$\limsup_{n\to\infty} x_n = \infty$.
+Likewise, the lower limit of $\{x_k\}$ is 
+\begin{equation}
+    \liminf _{n \to \infty} x_n = \lim_{n\to\infty}\sup_{k\ge n} x_k.
+\end{equation}
+\end{defn}
+
+Let $b_n = \sup_{k > n} x_k, \ldots\}$. We have $b_n > b_{n+1}$ for any $n$;
+so $\lim_{n\to\infty}b_n = \inf b_n$ is either a finite number or $\infty$.
+

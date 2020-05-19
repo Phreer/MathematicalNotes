@@ -1,0 +1,354 @@
+\chapter{Metric Spaces}
+This chapter is based on metric space, and the basic definition of 
+metric space is presented in chapter \ref{sec:metric_space}.
+
+\section{Fixed Point Theorem of Banach}
+The fixed point theorem of Banach, also known as 
+contraction principle, plays a fundamental role in
+the analysis of iterative algorithm. 
+
+\begin{thm}[Fixed Point Theorem of Banach]
+\index{theorem!Banach fixed-point \~{}}
+\index{fixed point theorem of Banach}
+\label{thm:metric_spaces:fixed_point_theorem_of_banach}
+Suppose that $X$ is a nonempty complete metric space and 
+operator $A: X \to X$ is $k$-contractive, \ie, 
+\begin{equation}
+d(Ax, Ay) \le kd(x, y) \text{  for any } x, y \in X
+\end{equation}
+where $k \in [0, 1)$. Then we have the following results:
+\begin{enumerate}
+\item \emph{Existence and Uniqueness of the fixed-point}. 
+\label{thm:metric_spaces:fixed_point:existence_uniqueness}
+The equation 
+\begin{equation}
+Ax = x
+\end{equation}
+has a unique solution in $X$.
+\item \emph{Convergence of the Iterative Method}. 
+\label{thm:metric_spaces:fixed_point:convergence}
+For a given $x_0 \in X$, the sequence $\left\{ x_n \right\}$ generated 
+by the iterative equation 
+\begin{equation*}
+    x_{n+1} = Ax_n
+\end{equation*}
+converges to the unique solution to equation $Ax = x$ (fixed point). 
+\item \emph{Error estimates.}
+\label{thm:metric_spaces:fixed_point:error}
+For all $n \in \bN$, we have the so-called \apri error estimate 
+\begin{equation}
+    \label{equ:metric_spaces:fixed_point:apriori_error}
+    d(x_n, x) \le \frac{k^n}{1-k} d(x_1, x_0), 
+\end{equation}
+and the so-called \apost error estimate 
+\begin{equation}
+    \label{equ:metric_spaces:fixed_point:aposterior_error}
+    d(x_{n+1}, x) \le \frac{k}{1-k} d(x_{n+1}, x_n). 
+\end{equation}
+\item \emph{Rate of Convergence}.
+\label{thm:metric_spaces:fixed_point:convergent_rate}
+For all $n \in \bn$, we have 
+\begin{equation*}
+    d(x_{n+1}, u) \le k d(x_n, x). 
+\end{equation*}
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+\ref{thm:metric_spaces:fixed_point:existence_uniqueness}
+\ref{thm:metric_spaces:fixed_point:convergence}
+\textbf{Step 1. $\{x_n\}$ is a Cauchy sequence in $X$.}
+Since $A$ is a $k$-contractive operator, we have 
+\begin{equation*}
+    \begin{aligned}
+        d(x_{n+1}, x_n) &= d(Ax_n, Ax_{n-1}) 
+        \le k d(x_n, x_{n-1}) \\ 
+        &\le k^2 d(x_{n-1}, x_{n-2}) 
+        \le k^n d(x_1, x_0). 
+    \end{aligned}
+\end{equation*}
+Now let $n, m \in \bN$, by triangle inequality and the sum formula for 
+geometric series, it yields that 
+\begin{equation*}
+    \begin{aligned}
+        d(x_n, x_m) &\le \sum_{i=0}^{m-n-1} d(x_{n+i}, x_{n+i+1}) 
+        \le \sum_{i=0}^{m-n-1} k^{n+i} d(x_1, x_0) \\ 
+        &\le \frac{k^n}{1-k} d(x_1, x_0). 
+    \end{aligned}
+\end{equation*}
+It follows that $d(x_n, x_m) \to 0$ as $n \to \infty$ since $0 \le k < 1$. 
+Hence $\left\{ x_n\right\}$ is Cauchy and $\{x_n\}$ converges to some point 
+$u \in X$ since $X$ is complete. 
+
+\textbf{Step 2. $x$ is a solution to fixed-point of $A$. }
+The definition of contractive operator yields that $A$ is a continuous 
+operator. 
+Thus $x = \lim_{n \to \infty} x_n = \lim_{N \to \infty} Ax_{n-1} = A\left( 
+\lim_{n \to \infty} x_{n-1} \right) = Ax$. 
+
+\textbf{Step 3. Uniqueness of fixed-point. }
+Supposing that $x, x' \in X$ such that $x = Ax$ and $x' = Ax'$, it follows 
+that $d(x, x') = d(Ax, Ax') \le kd(x, x') < d(x, x')$, whence 
+$d(x, x') = 0$. 
+
+\ref{thm:metric_spaces:fixed_point:error} 
+Letting $m \to \infty$, it follows from 
+\begin{equation*}
+    d(x_n, x_{n+m}) \le \frac{k^n}{1 - k} d(x_1, x_0)
+\end{equation*}
+that for every $n \in \bn$, 
+\begin{equation*}
+    d(x_n, x) \le \frac{k^n}{1 - k} d(x_1, x_0). 
+\end{equation*}
+This is the estimate (\ref{equ:metric_spaces:fixed_point:apriori_error}).
+
+To prove estimate (\ref{equ:metric_spaces:fixed_point:aposterior_error}), 
+observe that 
+\begin{equation*}
+    d(x_{n+1}, x_{n+m+1}) \le \sum_{i=1}^{m} d(x_{n+i}, x_{n+i+1}) 
+    \le \sum_{i=1}^{m} k^{i} d(x_{n}, x_{n+1}). 
+\end{equation*}
+Letting $m \to \infty$, we get 
+\begin{equation*}
+    d(x_{n+1}, x) \le \frac{k}{1-k} d(x_n, x_{n+1}).  
+\end{equation*}
+
+\ref{thm:metric_spaces:fixed_point:convergent_rate}
+Observing that 
+\begin{equation*}
+    d(x_{n+1}, x) = d(Ax_n, Ax) \le k d(x_n, x). 
+\end{equation*}
+\end{proof}
+
+\begin{rmk}
+The condition that $A: X \to X$ can be replaced with that $A: M \to M$, 
+where $M$ is a closed subset of $X$. 
+\end{rmk}
+
+\begin{cor}
+Supposing that $(X, d)$ is a complete metric space and $T: X \to X$ is an 
+operator such that $T^{n_0}$ is a contractive operator for given $n_0 \in 
+\bN$, then $T$ has a unique fixed-point. 
+\end{cor}
+\begin{proof}
+As $T^{n_0}$ is a contractive operator, it has a unique fixed point $x_0$. 
+Observe that 
+\begin{equation*}
+    T^{n_0}(Tx_0) = T(T^{n_0}x_0) = T(x_0), 
+\end{equation*}
+which implies that $Tx_0$ is a fixed-point of $T^{n_0}$. 
+Thus $Tx_0 = x_0$. 
+
+Assume that $x_0$ and $x_0'$ are fixed-points of $T$. 
+It follows that $T^{n_0}(x_0) = x_0$ and $T^{n_0}(x_0') = x_0'$, 
+whence $x_0 = x_0'$. 
+\end{proof}
+
+\begin{example}[Existence and Uniqueness of Solution to ODE]
+For a given point $(t_0, x_0$ in $\bR^2$ consider the initial value problem 
+of ordinary differential equation 
+\begin{equation}
+    \label{equ:metric_spaces:fixed_point_theorem_ode}
+    \left\{
+    \begin{aligned}
+        \frac{\diff x}{\diff t} &= f(t, x), \quad
+        t \in \left[ t_0 - a, t_0 + a \right] \\
+        x(t_0) &= x_0
+    \end{aligned}
+    \right.
+\end{equation}
+where $f$ is continuous and satisfies a Lipschitz condition with respect to 
+$x$, \ie, 
+\begin{equation*}
+    \abs{f(t, x) - f(t, x')} \le K \abs{x - x'}. 
+\end{equation*}
+If $F(x, y, u)$ is of the form 
+\begin{equation*}
+    F(x, y, u) = K(x, y)u, 
+\end{equation*}
+then it is called an linear integral equation. 
+We are looking for a solution $x = x(t)$ to Equation 
+(\ref{equ:metric_spaces:fixed_point_theorem_ode}) such that $x(t)$ is 
+differentiable and $(t, x(t)) \in S$ with the retangular area $S = \left\{ 
+(t, x) \in \bR^2: \abs{t - t_0} \le a, \abs{x - x_0} \le b \right\}$ for 
+given $a, b > 0$. 
+Then we have the following result: 
+\begin{thm}[The Picard-Lindelof Theorem]
+\index{theorem!Picard-Lindelof \~{}}
+\index{Picard-Lindelof theorem}
+The Equation (\ref{equ:metric_spaces:fixed_point_theorem_ode}) has a unique 
+solution defined on the interval $[t_0 - h, t_0 + h]$ where $h \in (0, b]$ 
+satisfying $h K < 1$ and $hM \le b$ where $M = \max_{(t, x) \in S} 
+\abs{f(t, x)}$. 
+\end{thm}
+\begin{proof}
+\textbf{Step 1.}
+The solution of Equation (\ref{equ:metric_spaces:fixed_point_theorem_ode}) 
+is a solution to the integral equation 
+\begin{equation}
+    \label{equ:metric_spaces:fixed_point_theorem_ode:integral}
+    x(t) = x_0 + \int_{t_0}^{t} f(x(\tau), \tau) \diff \tau, \quad 
+    t \in [t_0 - a, t_0 - b]
+\end{equation}
+and vice versa. 
+
+\textbf{Step 2.}
+Let $E$ be the subspace of $X = C[t_0 - h, t_0 + h]$ such that 
+$d(x - x_0) \le b$ and consider the integral operator $A: E \to E$ 
+defined as  
+\begin{equation*}
+    Ax = x_0 + \int_{t_0}^{t} f(\tau, x(\tau)) \diff \tau, \quad
+    t \in [t_0 - h, t_0 + h]
+\end{equation*}
+where $x_0(t) = x_0$. 
+We then show that $A(M) \subseteq M$. 
+Indeed, letting $x \in M$, then 
+\begin{equation*}
+        \abs{\int_{t_0}^{t} f(\tau, x(\tau)) \diff \tau} 
+        \le \abs{t - t_0} \max_{(t, x) \in S} f(x, t)
+        \le h M \le b, 
+\end{equation*}
+and hence 
+\begin{equation*}
+    d(Ax, x) = \max_{t \in [t_0 - h, t_0 + h]} 
+    \abs{\int_{t_0}^{t} f(\tau, x(\tau)) \diff \tau} \le b. 
+\end{equation*}
+
+\textbf{Step 3.}
+We now prove that $A$ is a contractive operator. 
+By the assumption of Lipschitz continuity, 
+\begin{equation*}
+    \begin{aligned}
+        d(Ax_1, Ax_2) &= \max_{t \in [t_0 - h, t_0 + h]}
+        \abs{\int_{t_0}^{t} f(\tau, x_1(\tau))
+        - f(\tau, x_2(\tau)) \diff \tau} \\ 
+        &\le h K d(x_1, x_2) = k d(x_1, x_2) 
+    \end{aligned}
+\end{equation*}
+where $k = hK < 1$. 
+Hence $A$ is a $k$-contractive operator and there is a unique solution to 
+Equation (\ref{equ:metric_spaces:fixed_point_theorem_ode}). 
+\end{proof}
+\end{example}
+
+\begin{example}[Freholm Integral Equations]
+Consider the integral equation 
+\begin{equation}
+    \label{equ:metric_spaces:fixed_point_theorem_integral_equation:integral}
+    u(x) = f(t) + \lambda \int_{a}^{b} F(x, y, u(y)) u(y) \diff y, \quad 
+    x \in [a, b].
+\end{equation}
+along with the iteration method 
+\begin{equation}
+    \label{equ:metric_spaces:fixed_point_theorem_integral_equation:iteration}
+    u_{n + 1} = f(t) + \lambda \int_{a}^{b} F(x, y, u_n(y)) \diff y, \quad 
+    x \in [a, b], n = 1, 2, \dots
+\end{equation}
+where $u_0 \equiv 0$ and $-\infty < a < b < \infty$. 
+\begin{thm}
+Assume the following:
+\begin{enumerate}
+    \item The function $f: [a, b] \to \bR$ is continuous. 
+    \item The function $F: [a, b] \times [a, b] \times \bR \to \bR$ and the 
+    partial derivative $F_u: [a, b] \times [a, b] \times \bR \to 
+    \bR$ are continuous. 
+    \item There is a number $L$ such that $\abs{F_u(x, y, u)} \le L$ for all 
+    $x, y \in [a, b]$ and $u \in \bR$. 
+    \item Let the real number $\lambda$ be given such that $(b - a) 
+    \abs{\lambda} L < 1$. 
+    \item Set $X = C[a, b]$. 
+\end{enumerate}
+Then the sequence $\{u_n\}$ constructed by 
+(\ref{equ:metric_spaces:fixed_point_theorem_integral_equation:iteration}) 
+converges to the unique solution of 
+(\ref{equ:metric_spaces:fixed_point_theorem_integral_equation:integral}).
+\end{thm}
+\begin{proof}
+Define the operator 
+\begin{equation*}
+    A(u)(x) \coloneqq f(x) + \lambda \int_{a}^{b} F(x, y, u(y)) \diff y, \quad
+    \text{for all } x \in [a, b]. 
+\end{equation*}
+Then the original equation 
+(\ref{equ:metric_spaces:fixed_point_theorem_integral_equation:integral}) 
+corresponds to the fixed-point problem $u = Ax$. 
+By the classical mean value theorem, 
+\begin{equation*}
+    \abs{F(x, y, u) - F(x, y, v)} \le L \abs{u - v}, 
+\end{equation*}
+which implies 
+\begin{equation*}
+    \begin{aligned}
+        d(Au, Av) &= \max_{a \le x \le b} \abs{(Au)(x) - (Av)(x)} \\
+        &= \max_{a \le x \le b} 
+        \abs{ \lambda \int_{a}^{b} F(x, y, u(y)) - F(x, y, v(y)) \diff y}\\
+        &\le \abs{\lambda} (b - a)L \max_{a \le x \le b} \abs{u(x) - v(x)} 
+        = k d(x, u). 
+    \end{aligned}
+\end{equation*}
+where $k \coloneqq \abs{\lambda} (b - a) L < 1$. 
+Hence $A: X \to X$ is a $k$-contractive operator ad has a unique solution. 
+\end{proof}
+\end{example}
+
+\begin{example}[Volterra Integral Equations]
+Consider the Equation 
+\begin{equation}
+    x(t) = f(t) + \lambda \int_{a}^{t} K(t, s) x(s) \diff s, \quad 
+    a \le t \le b
+\end{equation}
+where $K$ is continous on $[a, b] \times [a, b]$. 
+Letting $M = \max_{a \le s, t \le b} \abs{K(t, s)}$, then we have following: 
+\begin{thm}
+Let $X = C[a, b]$ and define 
+\begin{equation}
+    (Tx)(t) = f(t) + \lambda \int_{a}^{b} K(s, t) x(s) \diff s, \quad 
+    a \le t \le b.
+\end{equation} 
+Then $T$ has a unique fixed-point in $X$. 
+\end{thm}
+\begin{proof}
+We shall prove that there exists some $n > 0$ such that $T^n$ is a 
+contractive mapping. 
+This is proved by showing 
+\begin{equation}
+    \label{equ:metric_spaces:fixed_point_theorem:volterra:target}
+    \abs{(T^nx_1)(t) - (T^n x_2)(t)} \le \abs{\lambda}^n M^n 
+    \frac{(t - a)^n}{n!}d(x_1, x_2). 
+\end{equation}
+We prove the above equation by induction as follows. 
+For $n = 1$, 
+\begin{equation*}
+    \begin{aligned}
+        \abs{(Tx_1)(t) - Tx_2(t)} &= \abs{\lambda} 
+            \abs{\int_{a}^{t} K(t, s) (x_1(s) - x_2(s)) \diff s} \\
+        &\le \abs{\lambda} M (t - a) d(x_1, x_2). 
+    \end{aligned}
+\end{equation*}
+Supposing Equation (\ref{equ:metric_spaces:fixed_point_theorem:volterra:target}) 
+holds true for $n$, then for $n + 1$, 
+\begin{equation*}
+    \begin{aligned}
+        \abs{(T^{n+1})(x_1) - (T^{n+1}) (x_2)} 
+        &= \abs{T\left( T^n x_1 \right)(t) - T\left( T^n x_2  \right)(t)} \\
+        &= \abs{\lambda} \abs{\int_{a}^{t} K(t, s) 
+            \left( (T^n x_1)(t) - (T^n x_2)(t) \right) \diff s
+        } \\ 
+        &\le \abs{\lambda} M \int_{a}^{t} 
+            \abs{(T^n x_1)(t) - (T^n x_2)(t)} \diff s \\ 
+        &\le \abs{\lambda} M \int_{a}^{t} 
+            \frac{\abs{\lambda}^n M^n}{n!} d(x_1, x_2) \diff s \\
+        & = \frac{\abs{\lambda}^{n+1} 
+            M^{n+1}}{(n+1)!} (t - a)^{n+1} d(x_1, x_2). 
+    \end{aligned}
+\end{equation*}
+Therefore, 
+\begin{equation*}
+    d(T^nx_1, T^nx_2) \le \frac{\abs{\lambda}^n M^n}{n!} (b - a)^n 
+        d(x_1, x_2) = k_n d(x_1, x_2)
+\end{equation*}
+where $k_n \coloneqq \frac{\abs{\lambda}^n M^n}{n!} (b - a)^n$. 
+Since $k_n \to \infty$ as $n \to \infty$, $T^n$ is a contractive mapping 
+for $n$ big enough. 
+\end{proof}
+\end{example}

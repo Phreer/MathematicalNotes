@@ -1,0 +1,572 @@
+\chapter{Set Theory and Logic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Set Theory
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Set Theory}
+Set theory is the foundation of modern Mathematics. 
+Here, we discuss about axiomatic set theory. 
+
+Intuitively, sets are collections of objects. 
+However, we have no way to give a further definition for collection and 
+object. 
+The only thing we can deal with sets is to give a axiomatic definition of 
+sets. 
+Most proofs in this section which are just direct applications of the axioms 
+presented below is omitted. 
+
+First, we should specify hwo can be sets generated. 
+
+\begin{axiom}[Sets are objects]
+If $A$ is a set, then $A$ is an object. 
+In particular, given two sets $A$ and $B$, it is meaningful to ask whether 
+$A$ is also an element of $B$. 
+\end{axiom}
+
+\begin{axiom}[Equality of sets]
+Two sets $A$ and $B$ are equal, denoted by $A = B$ if every element of $A$ 
+is an element of $B$ and vice versa. 
+\end{axiom}
+
+\begin{axiom}[Empty set]
+There exists a set $\varnothing$ which contains no elements, \ie, for every 
+object $x$ we have $x \notin \varnothing$. 
+\end{axiom}
+
+\begin{lemma}
+If $A$ is a nonempty set, then there exists an object $x$ such that $x \in 
+A$. 
+\end{lemma}
+
+\begin{axiom}[Singleton sets]
+If $a$ is an object, then there exists a set $\{a\}$ whose only element is 
+$a$. 
+\end{axiom}
+
+\begin{axiom}[Pairwise union]
+Given any two sets $A$ and $B$, there exists a set $A \cup B$, called the 
+union of $A$ and $B$, whose elements of all the elements which belong to $A$ 
+or $B$ or both, namely, for any object 
+\begin{equation*}
+    x \in A \cup B \iff x \in A \text{ or } x \in B.
+\end{equation*}
+\end{axiom}
+
+\begin{prop}
+\begin{enumerate}
+    \item If $a, b$ are objects, then $\{a, b\} = \{a\} \cup \{b\}$. 
+    \item The union operation is commutative, \ie, $A \cup B = B \cup A$ 
+    for any sets $A, B$. 
+    \item $A \cup A = A \cup \varnothing = A$.
+\end{enumerate}
+\end{prop}
+
+\begin{defn}[Subsets]
+Let $A$, $B$ be sets. 
+We say that $A$ is a subset of $B$, denoted $A \subseteq B$, if for any object 
+$x$, $x \in B$ implies $x \in B$. 
+\end{defn}
+
+\begin{prop}[Sets are partially ordered by set inclusion]
+Let $A, B, C$ be sets. 
+If $A \subseteq B$ and $B \subseteq C$, then $A \subseteq C$. 
+If $A \subsetneq B$ and $B \subsetneq C$, then $A \subsetneq C$. 
+\end{prop}
+
+\begin{axiom}[Specification]
+Let $A$ be a set, and for each $x \in A$, let $P(x)$ be a property 
+pertaining to $x$ (\ie, $P(x)$ is either a true statement or a false 
+statement). 
+Then there exists a set $\{x \in A: P(x)\}$ whose elements are precisely 
+those elements in $A$ for which $P(x)$ is true, \ie 
+\begin{equation*}
+    y \in \{x \in A: P(x)\} \iff y \in A \text{ and } P(y) \text{ is true}.
+\end{equation*}
+\end{axiom}
+
+\begin{defn}[Intersection]
+The intersection $A \cap B$ of two sets $A, B$ is defined to be the set 
+\begin{equation*}
+    A \cap B = \{x \in A: x \in B\}. 
+\end{equation*}
+\end{defn}
+
+\begin{defn}[Disjoint set]
+Two sets $A$ and $B$ are said to be \emph{disjoint} if $A \cap B = 
+\varnothing$. 
+\end{defn}
+
+\begin{defn}[Difference set]
+Let $A, B$ be sets. 
+We define the set $A \backslash B$ (or $A - B$) to be the set
+\begin{equation*}
+    A \backslash B = \{x \in A: x \notin B\}. 
+\end{equation*}
+\end{defn}
+
+\begin{prop}[Sets form a boolean algebra]
+Let $A, B, C$ be sets and let $X$ be a set containing $A, B, C$ as subsets. 
+Then we have 
+\begin{enumerate*}
+    \item (Minimal element) $A \cup \varnothing = A$ and $A \cap \varnothing 
+    = \varnothing$; 
+    \item (Maximal element) $A \cup X = X$ and $A \cap X = A$; 
+    \item (Identity) $A \cup A = A$ and $A \cap A = A$; 
+    \item (Commutativity) $A \cup B = B \cup B$ and $A \cap B = B \cap A$; 
+    \item (Associativity) $(A \cup B) \cup C = A \cup (B \cup C)$ and 
+    $(A \cap B) \cap C = A \cap (B \cap C)$; 
+    \item (Distributivity) $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$ 
+    and $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$; 
+    \item (Partition) $A \cup (X \backslash A) = X$ and 
+    $A \cap (X \backslash) = \varnothing$; 
+    \item (De Morgan laws) $X \backslash (A \cup B) = (X \backslash A) 
+    \cap (X \backslash B)$ and $X \backslash (A \cap B) = (X \backslash A) 
+    \cup (X \backslash B)$. 
+\end{enumerate*}
+\end{prop}
+
+\begin{axiom}[Replacement]
+\label{axiom:set_theory:replacement}
+Let $A$ be a set. 
+For any object $x \in A$ and any object $y$, suppose that we have a 
+statement $P(x, y)$ pertaining to $x$ and $y$ such that for each $x \in A$ 
+there exists at most one $y$ for which $P(x, y)$ is true. 
+Then there exists a set $\{y: P(x, y), x \in A\}$ such that for any 
+object $z$, 
+\begin{equation*}
+    z \in \{y: P(x, y), x \in A\} \iff 
+    P(x, z) \text{ is true for some } x \in A. 
+\end{equation*}
+\end{axiom}
+
+For instance, let $A = \{2, 4, 5\}$ and $P(x, y)$ be the statement $y = x++$. 
+Then $\{y: P(x, y), x \in A\} = \{3, 5, 6\}$. 
+We often abbreviate a set of the form 
+\begin{equation*}
+    \{y: y = f(x) \text{ for some } x \in A\}
+\end{equation*}
+as $\{f(x): x \in A\}$. 
+
+\begin{axiom}[Existence of infinity]
+There exists a set $\bN$, whose elements are called natural numbers, as 
+well as an object $0 \in \bN$, and an object $n++$ assigned to every natural 
+number $n \in \bN$, such that the Peano axioms hold. 
+\end{axiom}
+
+To avoid Russell's Paradox, we need the following axiom that restrain the 
+extent of sets we considered. 
+\begin{axiom}[Regularity]
+If $A$ is a nonempty set, then there is at least one element $x$ of $A$ 
+which is either not a set, or is disjoint from $A$. 
+\end{axiom}
+
+This axiom filters out ``too large'' sets. 
+This axiom is less intuitive and fortunately is never need in the study of 
+analysis, in which the sets we consider are of very low hierarchy. 
+
+In analysis, we need a further axiom for our set theory. 
+\begin{axiom}[Union]
+\label{axiom:set_theory:union}
+Let $A$ be a set, all of whose elements are themselves sets. 
+Then there exists a set $\bigcup A$ whose elements are precisely those 
+objects which are elements of the elements of $A$, \ie, 
+\begin{equation*}
+    x \in \bigcup A \iff x \in S \text{ for some } S \in A. 
+\end{equation*}
+\end{axiom}
+
+If one has a set $I$ to which we often refer as an \emph{index set} and for 
+every element $\alpha \in I$, we have a set $A_\alpha$, then we can form 
+the union set $\bigcup_{\alpha \in I} A_\alpha$ by defining 
+\begin{equation*}
+    \bigcup_{\alpha \in I} A_\alpha 
+    = \bigcup \left\{ A_\alpha: \alpha \in I \right\}, 
+\end{equation*}
+which is a set thanks to the Axiom of Replacement 
+\ref{axiom:set_theory:replacement}. 
+Besides, the set $\left\{ A_\alpha: \alpha \in I \right\}$ is called a 
+\emph{family of set}. 
+However, given a family of sets $\{ A_\alpha: \alpha \in I \}$ such that 
+$I$ is nonempty, notice that the existence intersection of  defined as 
+\begin{equation*}
+    \bigcap_{\alpha \in I} A_\alpha 
+    = \left\{ x \in A_\beta: 
+        x \in A_\alpha \text{ for all } \alpha \in I \right\}
+\end{equation*}
+where $\beta$ is an element of $I$ (We can do this since $I$ is nonempty), 
+is guaranteed by the Axiom of Specification. 
+One can show that result of $\left\{ x \in A_\beta: x \in A_\alpha 
+\text{ for all } \alpha \in I \right\}$ does not depend on the choice of 
+$\beta$, whence $\bigcap_{\alpha \in I} A_\alpha$ is well-defined. 
+
+\index{Zermelo-Fraenkel axioms}
+\index{Zermelo-Fraenkel-Choice (ZFC) axioms of set theory}
+The collection of axioms of set theory we have given are known as the 
+\emph{Zermelo-Fraenkel axioms of set theory}. 
+There is one further axiom we need, the famous axiom of choice, giving rise 
+to the \emph{Zermelo-Fraenkel-Choice (ZFC) axioms of set theory}. 
+
+Although a large portion of the foundation of analysis can be developped 
+without it, the Axiom of Choice is a very powerful and even essential tool 
+for further development. 
+
+Before giving the Axiom of Choice, we present the definition of Cartesian 
+product:
+\begin{defn}[Cartesian product]
+Let $I$ be a set, and for each $\alpha \in I$, let $X_\alpha$ be a set. 
+We then define the Cartesian product $\prod_{\alpha \in I} X_\alpha$ to be 
+the set 
+\begin{equation*}
+    \prod_{\alpha \in I} X_\alpha 
+    = \left\{ (x_\alpha)_{\alpha \in I} \in 
+        \left( \bigcup_{\beta \in I}X_\beta \right)^I: 
+        x_\alpha \in X_\alpha \quad \text{for all } \alpha \in I 
+        \right\}
+\end{equation*}
+\end{defn}
+
+\begin{axiom}[Choice]
+Let $I$ be a set, and for each $\alpha \in I$, let $X_\alpha$ be a non-empty 
+set. 
+Then $\prod_{\alpha \in I} X$ is also a non-empty set. 
+\end{axiom}
+
+There are some other forms of the Axiom of Choice. 
+\begin{prop}
+Let $X$ and $Y$ be sets, and let $P(x, y)$ be a property pertaining to 
+objects $x \in X, y \in Y$ such that for every $x \in X$ there exists at 
+least one $y \in X$ such that $P(x, y)$ is true. 
+Then there exists a function $f: X: \to Y$ such that $P(x, f(x))$ holds 
+true for all $x \in X$. 
+\end{prop}
+\begin{proof}
+We will show that this proposition is equivalent to the Axiom of Choice. 
+Let $Y_x = \{y \in Y: P(x, y) \text{ is true}\}$. 
+Then by the Axiom of Choice, the set $\prod_{x \in X} Y_x$ is non-empty. 
+Therefore, there exists a function 
+\begin{equation*}
+    (f: X \to Y) \in \left( \bigcup_{x \in X} Y_x \right)^X
+\end{equation*}
+such that $P(x, f(x))$ is true.  
+
+On the other hand, suppose the proposition holds true. 
+Let $I$ be a set such that for every $\alpha \in I$ there is a corresponding 
+set $X_\alpha$, and let $P(\alpha, x)$ be a property that holds true if and 
+only if $x \in X_\alpha$ for $\alpha \in I$ and $x \in \bigcup_
+{\alpha \in I} X_\alpha$. 
+Then there exists a function $f: I \to \bigcup_{\alpha \in I} X_\alpha$ such 
+that $P(\alpha, f(\alpha))$ holds true for all $\alpha \in I$. 
+It is clear that $f \in \prod_{\alpha \in I} X_\alpha$, which completes the 
+proof. 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Functions}
+\begin{defn}[Function]
+Let $X, Y$ be sets, and let $P(x, y)$ be a property pertaining to an object 
+$x \in X$ and an object $y \in Y$, such that for every $x \in X$, there is 
+exactly one $y \in Y$ for which $P(x, y)$ is true (this is sometimes known as 
+the vertical line test). 
+Then we define the function $f : X \to Y$ defined by $P$ on the domain $X$ 
+and range $Y$ to be the object which, given any input $x \in X$, assigns an 
+output $f(x) \in Y$, defined to be the unique object $f(x)$ for which 
+$P(x, f(x))$ is true. 
+Thus, for any $x ∈ X$ and $y ∈ Y$,
+\begin{equation*}
+    y = f(x) \iff P(x, y) \text{ is true}.
+\end{equation*}
+
+The set $X$ is said to be the domain of function $f: X \to Y$. 
+We refer the range of a function $f: X \to Y$ the subset $f(X) \coloneqq 
+\{f(x): x \in X\}$ of $Y$. 
+\end{defn}
+
+
+\begin{rmk}
+Sometimes, functions are referred to as maps, mappings and transformations. 
+And on some context, the terminlogy ``function'' means functions that whose 
+range is number filed. 
+\end{rmk} 
+
+\begin{defn}[Equality of functions]
+Two functions $f: X \to Y$, $g: X \to Y$ with the same domain and range are 
+said to be equal, denoted as $f = g$ if $f(x) = g(x)$ for all $x \in X$. 
+\end{defn}
+
+\begin{defn}[Composition]
+Let $f: X \to Y$ and $g: Y \to Z$ be two functions. 
+We then define the \emph{composition} $g \circ f$ of $g$ and $f$ to be the 
+function defined explicitly by the formula 
+\begin{equation*}
+    (g \circ f)(x) \coloneqq g(f(x)). 
+\end{equation*}
+\end{defn}
+
+\begin{prop}[Composition is associative]
+Let $f: X \to W$, $g: Y \to Z$ and $h: X to Y$ be functions. 
+Then $f \circ (g \circ h) = (f \circ g) \circ h$. 
+\end{prop}
+
+\begin{defn}[One-to-one function, Onto function, Bijective function]
+A function $f: X \to Y$ is \emph{one-to-one} (or \text{injective}) if 
+different elements map to different elements: 
+\begin{equation*}
+    x \neq x' \implies f(x) \neq f(x'). 
+\end{equation*}
+
+A function $f: X \to Y$ is \emph{onto} (or \emph{surjective}) if $f(X) = Y$, 
+\ie, for every element $y \in Y$, there exists $x \in X$ such that 
+$f(x) = y$.
+
+A function $f: X \to Y$ is said to be \emph{bijective} if it is both one-
+to-one and onto. 
+\end{defn}
+
+\begin{rmk}
+If a function $f: X \to Y$ is bijective, then we sometimes call $f$ a 
+\emph{perfect function} or \emph{one-to-one correspondence}. 
+In this case, denote the action of $f$ using the notation $x \leftrightarrow 
+f(x)$ instead of $x \mapsto f(x)$. 
+\end{rmk}
+
+If $f: X \to Y$ is a bijective function, then for each $y \in Y$, there 
+exists exactly one element $x \in X$ such that $f(x) = y$. 
+In this way, denoting $x$ by $f^{-1}(y)$, we obtains a function $f^{-1}$ 
+from $Y$ to $X$ by $y \mapsto f^{-1}(y)$. 
+We call $f^{-1}$ the inverse of $f$. 
+
+To consider the set of all functions from $X$ to $Y$, we need the following 
+axiom of set theory. 
+\begin{axiom}[Power set]
+Let $X$, $Y$ be two sets. 
+Then there exists a set, denoted $Y^X$, that consists of all the functions 
+from $X$ to $Y$. 
+\end{axiom}
+
+\begin{prop}
+Let $X$ be a set. 
+Then $\{Y: Y \subseteq X\}$ is a set. 
+\end{prop}
+\begin{proof}
+By the axiom of power set, there exists a set $\{0, 1\}^X$ consisting of 
+all functions from $X \to \{0, 1\}$. 
+For each subset $Y$ of $X$, we can construct a function $f_Y: X \to 
+\{0, 1\}$ such that $f(x) = 1$ if $x \in Y$, else $f(x) = 0$, whence 
+\begin{equation*}
+    \left\{ f(\{1\}): f \in \{0, 1\} ^X \right\}
+    \supseteq \{ Y: Y \subset X\}. 
+\end{equation*}
+Conversely, for each $f \in \{0, 1\}^X$, $f(\{1\})$ is exactly one subset 
+of $X$. 
+Hence, 
+\begin{equation*}
+    \left\{ f(\{1\}): f \in \{0, 1\} ^X \right\}
+    \subseteq \{ Y: Y \subset X\}. 
+\end{equation*}
+Then we can draw a conclusion that 
+\begin{equation*}
+    \left\{ f(\{1\}): f \in \{0, 1\} ^X \right\}
+    = \{ Y: Y \subset X\}
+\end{equation*}
+does exist.
+\end{proof}
+If $X$ is a set, we denote the set $\{Y: Y \subset X\}$ by $2^X$, which is 
+conventionally called the power set of $X$. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Ordered Sets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ordered Sets}
+\begin{defn}[Partially ordered set]
+\index{partially ordered set}
+\index{poset}
+A \emph{partially ordered set} (or \emph{poset}) is a pair $(X, \le_X)$ 
+where a set $X$ and $\le_X$ a relation on $X$ (That is, for any two objects 
+$x, y \in X$, the statement $x \le y$ is either a true or a false one) that 
+obeys the following three properties: 
+\begin{enumerate}
+    \item (Reflexivity) For any $x \in X$, we have $x \le_X x$. 
+    \item (Anti-symmetry) If $x, y in X$ are such that $x \le_X y$ and 
+    $y \le_X x$, then $x = y$. 
+    \item (Transitivity) If $x, y, z \in X$ are such that $x \le_X y$ and 
+    $y \le_X z$, then $x \le_X z$. 
+\end{enumerate}
+\end{defn}
+
+We refer to $\le_X$ as the \emph{ordering relation} and sometimes write 
+$\le$ for short when there is no ambiguity. 
+By $x <_X y$ for $x, y \in X$, we mean $x \le_X y$ and $x \neq y$. 
+Note that for a partially ordered set $X$, it may occur that two elements 
+$x, y \in X$ are such that neither $x \le_X y$ nor $y \le_X x$ is true. 
+
+
+\begin{defn}[Totally ordered set]
+    A subset $Y$ in a partially ordered set $(X, \le_X)$ is said to be a 
+    \emph{totally ordered set} if for any $y, y' \in Y$, we either have 
+    $y \le_X y'$ or $y' \le_X y$ or both. 
+\end{defn}
+
+\begin{example}
+Let $X$ be a set. 
+Then $(2^X, \subseteq)$ is a partially ordered set but is not a totally 
+ordered set. 
+\end{example}
+
+\begin{defn}[Maximal and minimal element]
+\index{minimal element}
+\index{maximal element}
+Let $X$ be a partially ordered set and let $Y$ be a subset of $X$. 
+We say that $y \in Y$ is a \emph{minimal element} of $Y$ if there is no 
+element $y' \in Y$ such that $y ' < y$, \ie, 
+\begin{equation*}
+    y' \le y \implies y' = y \quad \text{for any } y' \in Y.
+\end{equation*}
+Likewise, $y$ is said to be a \emph{maximal element} of $Y$ if there is 
+no element $y' \in Y$ such that $y < y'$. 
+\end{defn}
+
+\begin{defn}[Well-ordered set]
+\index{well-ordered set}
+Let $X$ be a partially ordered set and let $Y$ be a totally ordered subset 
+of $X$. 
+We say that $Y$ is \emph{well-ordered} if every non-empty subset of $Y$ has 
+a minimal element $\min(Y) \in Y$. 
+\end{defn}
+
+\begin{example}
+The natural numbers $\bN$ together with the canonical order is a totally 
+ordered and well-ordered set, while the integers $\bZ$, the rational numbers 
+$\bQ$ and the rational numbers $\bR$ are not well-ordered. 
+\end{example}
+
+One can show that finite totally ordered sets are well-ordered and every 
+subset of a well-ordered set is again well-ordered. 
+
+\begin{thm}[Principle of strong induction]
+Let $X$ be a well-ordered set with an ordering relation $\le$, and let 
+$P(x)$ be a property pertaining to element $x \in X$ (\ie, for each $x \in 
+X)$, $P(x)$ is either a true or false statement). 
+If for every $x \in X$, we have the following implication: 
+\begin{equation*}
+    P(m) \text{ is true for all } x' < x \implies P(x) \text{ is true}, 
+\end{equation*}
+then $P(x)$ is true for all $x \in X$. 
+\end{thm}
+\begin{proof}
+Suppose the hypothesis is satisfied, and consider the set 
+\begin{equation*}
+    Y = \{x \in X: P(x') \text{ is false for some } x' \le x\}.
+\end{equation*}
+Then since $X$ is well-ordered, $Y$ has a minimal element $x_0$. 
+Thus for every $x \in X$ with $x < x_0$, $P(x')$ holds true for every 
+$x' \in X$ such that $x' \le x$. 
+This means that for every $x < x_0$, $P(x)$ holds true, which implies 
+$P(x')$ holds true for all $x' \le x_0$, which is a contradiction to the 
+fact $x_0 \in Y$. 
+\end{proof}
+
+Until now the Axiom of Choice hasn't played a role in our text. 
+\begin{defn}[Upper bound and strict upper bound]
+\index{upper bound}
+\index{strict upper bound}
+Let $X$ be a partially ordered set and let $Y$ be a totally ordered subset 
+of $X$. 
+If $x \in X$, we say $x$ is a \emph{upper bound} of $Y$ if $y \le x$ for all 
+$y \in Y$. 
+If in addition $x \neq Y$, then we say that $x$ is a \emph{strict upper 
+bound} of $Y$. 
+Equivalently, $x$ is a strict upper bound of $Y$ if and only if $y < x$ 
+for every $y \in Y$
+\end{defn}
+
+With Axiom of Choice, we can prove the following lemma: 
+\begin{lemma}
+Let $X$ be a partially ordered set with ordering relation $\le$, and let 
+$x_0$ be an element of $X$. 
+Then there exists a well-ordered subset $Y$ of $X$ which has $x_0$ as its 
+minimal element and which has no strict upper bound. 
+\end{lemma}
+\begin{proof}
+
+\end{proof}
+
+Now we are ready to demostrate the well-known Zorn's Lemma: 
+\begin{lemma}[Zorn's Lemma]\label{lemma:zorn_lemma}
+\index{lemma!Zorn's \~{}}
+Let $X$ be a non-empty partially ordered set, with the property that every 
+totally ordered subset $Y$ of $X$ has an upper bound. 
+Then $X$ contains at least one maximal element. 
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Cardinality
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Cardinality}
+For sets $\{1, 2, 3\}$ and $\{4, 5, 6\}$, we have a intuition that these two 
+sets are the the same size. 
+But now we have not defined what does ``have the same size'' mean. 
+Besides, the natural number constructed on Peano axioms behaves much more 
+like ordinals (first, second, third, \dots) but not cardinality (one, two, 
+three, \dots). 
+In this section, we are dealing with this problem. 
+\begin{defn}[Equal cardinality]
+Two sets $X$ and $Y$ are said to have equal cardinality if there is a 
+bijective function from $X$ to $Y$. 
+\end{defn}
+
+\begin{example}
+The set $\bN$ of all natural numbers and the set $Y = \{2n: n \in \bN \}$ 
+of all non-negative even numbers have equal cardinality since $f: \bN \to Y, 
+n \mapsto 2n$ is a bijective function. 
+\end{example}
+
+From the example above, we find that two sets having equal cardinality does 
+not preclude one of the sets from containing the other. 
+In fact, this property can be viewed as the definition of infinite sets, 
+which we will see below. 
+
+\begin{prop}
+Having equal cardinality is a equivalence relation. 
+\end{prop}
+
+\begin{defn}
+Let $n$ be a natural number. 
+A set $X$ is said to have $n$ elements or have cardinality $n$ if $X$ have 
+equal cardinality with the set $\{1, 2, \ldots, n\}$. 
+\end{defn}
+
+\begin{prop}[Uniqueness of cardinality]
+\label{prop:set_theory:uniqueness_cardinality}
+Let $n, m$ be distinct natural numbers. 
+If $X$ is a set having cardinality $n$, then $X$ cannot have cardinality $m$. 
+\end{prop}
+
+Before we proceed with the proof, we need the following lemma. 
+\begin{lemma}
+Let $X$ be a set having cardinality $n > 0$. 
+Then $X$ is non-empty if $x$ is an element of $X$, then $X \backslash \{x\}$ 
+has cardinality $n - 1$. 
+\end{lemma}
+\begin{proof}[Proof of Proposition \ref{prop:set_theory:uniqueness_cardinality}]
+This can be done by inducting on $n$ using lemma above. 
+\end{proof}
+
+\begin{defn}[Finite sets]
+A set $X$ is \emph{finite} if it has cardinality $n \in \bN$, and we write 
+$\#(X)$ for the cardinality of $X$. 
+Otherwise, $X$ is said to be infinite. 
+\end{defn}
+
+\begin{prop}
+The set $\bN$ of all natural numbers is infinite. 
+\end{prop}
+\begin{proof}
+Suppose for the sake of contradiction that $\bN$ has cardinality $n \in \bN$. 
+Then there exists a bijective function from $\{1, 2, \ldots, n\}$ to $\bN$. 
+However, $f(\{1, 2, \ldots, n\})$ is bounded while $\bN$ is unbounded, which 
+is absurd. 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Intergers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,122 @@
+\chapter{Linear Programming}
+\section{Standard Form of Linear Progamming}
+The optimization problem like 
+\begin{equation}
+    \label{equ: std_lp}
+    \begin{aligned}
+        \text{minimize} \quad & f(x) = c^Tx \\
+        \text{subject to} \quad & Ax=b \\
+        & x \succeq 0.
+    \end{aligned}
+\end{equation}
+where $x, c \in \br ^n$, $A \in \br^{m \times n}$ and $b \in \br^n$, is 
+called the standard form of linear programming. We may always assume that 
+$m < n$. Otherwise, redundant rows of $A$ can be eliminated or one/no 
+solution obeys $Ax = b$, which can be solved by numerical algebra methods, 
+such as LR or QR factorization. 
+
+Without loss of generality, we suppose that $c \ne 0$ and $\rank(A) = m$.
+Obviously, the feasible set of \ref{equ: std_lp} $F=\{x \in \br^n : 
+Ax = b, x \succeq 0\}$ is a closed convex set. 
+
+\section{Simplex Method}
+Simplex method is a prevailing approach to solve linear programming problem. 
+
+Since $A$ has the attribute that $\rank(A) = m$, we can split $A$ to 
+\begin{equation*}
+    A = \begin{pmatrix}
+        B, N
+    \end{pmatrix}
+\end{equation*}
+where $B \in \br^{m \times m}$ is non-singular and 
+$N \in \br^{m \times (n - m)}$. 
+Correspondingly, $x$, $c$ are split in the same manner that 
+\begin{align*}
+    x = \begin{pmatrix}
+        x_B \\
+        x_N
+    \end{pmatrix}, 
+    c = \begin{pmatrix}
+        c_B \\
+        c_N
+    \end{pmatrix}.
+\end{align*}
+
+Thus $Ax=b$ is equivalent to $Bx_B + Nx_N = b$. Owing to non-singularity of 
+$B$, we obtain $x_B = B^{-1} (b - N x_N)$. With the knowledge of linear 
+algebra, we contend that 
+\begin{equation}
+    x = \begin{pmatrix}
+        x_B \\
+        x_N
+    \end{pmatrix}
+    = \begin{pmatrix}
+        B^{-1}(b - N x_N) \\
+        x_N
+    \end{pmatrix}
+\end{equation}
+is the general solution to equation $Ax = b$, and $x_N$ is the free 
+variable that can be any vector in $\br^{n - m}$, $x_B$ is the basic 
+variable. 
+The choice of free variable and basic variable is somewhat arbitrary, 
+since interchanging the position of variables do no harm to correctness of 
+$Ax = b$, as long as $B$ is non-singular. 
+With a fixed non-singular $B$, setting $x_N$ to zero, then we have 
+\begin{equation}
+    x = \begin{pmatrix}
+        B^{-1}b \\
+        0
+    \end{pmatrix}, 
+\end{equation}
+which we call a basic solution to \ref{equ: std_lp} or a basic 
+feasible solution if further $B^{-1}b \succeq 0$. 
+
+\begin{thm}
+A point $x \in \br^n$ is a basic feasible solution to \ref{equ: std_lp} 
+if and only if it is a vertice feasible polytope $F = \{x \in \br^n: 
+Ax = 0, x \succeq 0\}$.
+\end{thm}
+
+The basic idea of simplex method is to construct a sequence of vertices 
+$\{x^{(k)}\}$ of $F$ (basic feasible solutions) with descending value of 
+the target function $f(x) = c^T x$. 
+Suppose now we have the $k$th iterative result $x^{(k)}$, then we are 
+confronted with the problem that \emph{how to decide whether we have 
+obtained an optimal point}. 
+
+Assume that  
+\begin{equation*}
+    \label{equ: lp_xk}
+    x^{(k)} = \begin{pmatrix}
+        x_B^{(k)} \\
+        x_N^{(k)}
+    \end{pmatrix} = 
+    \begin{pmatrix}
+        B^{(k)-1}b \\
+        0
+    \end{pmatrix}
+\end{equation*}
+where $x_B^{(k)}$ is the basic variable and $x_N^{(k)}$ is the free 
+variable. Otherwise, it is always reasonable to interchange the order of 
+variables and columns of $A$ to adapt it to the form \ref{equ: lp_xk}.
+Thus $f(x^{(k)}) = c_B^{(k)T} B^{(k)-1}b$. For any $x \in F$, $x$ can be 
+written in the form 
+\begin{equation}
+    x = \begin{pmatrix}
+        x_B \\
+        x_N
+    \end{pmatrix}
+    = \begin{pmatrix}
+        B^{-1}(b - Nx_N) \\
+        x_N
+    \end{pmatrix}.
+\end{equation}
+Then 
+\begin{equation*}
+    \begin{aligned}
+        f(x) 
+        &= c_B^{T} x_B + c_N^T x_N 
+        = c_B^T B^{-1}(b - N x_N) + c_N^T x_N \\
+        &= f(x^{(k)}) + (c_N^T - c_B^T B^{-1})x_N
+    \end{aligned}
+\end{equation*}

@@ -1,0 +1,159 @@
+\chapter{Inequality}
+\section{Inequality in Integer Field}
+\begin{thm}
+\label{thm:pow_diff_ineq}
+Let $a, b$ be two positive real numbers, $a < b$ and $n$ a 
+positive integer, then
+\begin{equation}
+b^n - a^n < n(b - a)b^{n - 1}.
+\end{equation}
+\end{thm}
+
+This formula can be easily obtained from Theorem \ref{thm:pow_diff_eq}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Cauchy Schwarz's Inequality
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Cauchy Schwarz's Inequality}
+\begin{thm}[Cauchy Schwarz's Inequality]
+\index{inequality!Cauchy Schwarz's \~{}}
+Let $u = \left(u_1, u_2, \ldots, u_n \right), v = \left(v_1, v_2, \ldots, 
+v_n \right)$ be elements of $\bR^n$, then 
+\begin{equation}
+    \label{equ:inequality:cauchy_schwarz_inequality_rn}
+    \left(\sum _{i=1}^{n}u_{i}v_{i}\right)^{2} 
+    \leq \left(\sum _{i=1}^{n}u_{i}^{2}\right) 
+         \left(\sum _{i=1}^{n}v_{i}^{2}\right).
+\end{equation}
+\end{thm}
+\begin{proof}
+Consider the following quadratic polynomial in $x$: 
+\begin{equation*}
+    0\leq (u_{1}x+v_{1})^{2}+\cdots +(u_{n}x+v_{n})^{2} 
+    =\left(\sum_{i=1}^n u_{i}^{2}\right)x^{2} 
+        + 2\left(\sum_{i=1}^n u_{i}v_{i}\right)x + \sum v_{i}^{2}.
+\end{equation*}
+Since it is nonnegative, it has at most one real root, whence its 
+discriminant satisfying 
+\begin{equation*}
+    \Delta = 4 \left( \sum_{i=1}^{n} u_i v_i \right)^2 
+        - 4 \left( \sum_{i=1}^{n} u_i^2 \right) \left( \sum_{i=1}^{n} v_i^2 \right) 
+    \le 0, 
+\end{equation*}
+which is exactly the inequality we want. 
+\end{proof}
+
+\section{Hölder's Inequality}
+\begin{lemma}[Young's Inequality]
+Let $p, q$ be positive real numbers such that $\frac{1}{p} + \frac{1}{q}
+= 1$. 
+Then for all $a, b \in \bC$, 
+\begin{equation}
+    \abs{ab} \le \frac{\abs{a}^p}{p} + \frac{\abs{b}^q}{q}. 
+\end{equation}
+\end{lemma}
+\begin{proof}
+Define $\phi(t) = \frac{t^p}{p} + \frac{\abs{b}^q}{q} - \abs{b} t, t \ge 0$. 
+It suffices to show that $\phi$ is non negative. 
+Observing that 
+\begin{equation*}
+    \phi'(t) = t^{p-1} - \abs{b}
+\end{equation*}
+is negative when $t < \abs{b}^\frac{1}{p-1}$ and positive when 
+$t > \abs{b}^\frac{1}{p-1}$, thus $\phi$ achieves its minium at 
+$\abs{b}^\frac{1}{p-1}$, which is 
+\begin{equation*}
+    \frac{1}{p} \abs{b}^\frac{p}{p - 1} 
+        - \abs{b}^{1+ \frac{1}{p - 1}} 
+        + \frac{1}{q} \abs{b}^q 
+    = \frac{1}{p} \abs{b} ^q + \frac{1}{q} \abs{b}^q - \abs{b}^q 
+    = 0, 
+\end{equation*}
+which is what we want.
+\end{proof}
+
+\begin{thm}[Hölder's inequality]
+Let $(X, \Sigma, \mu)$ be a measure space and let $p, q \in [1, \infty]$ 
+with $\frac{1}{p} + \frac{1}{q} = 1$. 
+Then for all measurable real- or complex-valued function $f$ and $g$ on $X$, 
+\begin{equation*}
+    \label{equ:inequalities:holder_inequality}
+    \norm{fg} \le \norm{f}_p \norm{g}_q, 
+\end{equation*}
+where norm $\norm{\wdot}_p$ is defined in Chapter \ref{chp:lp_spaces} and 
+Chapter \ref{chp:banach_spaces}.  
+\end{thm}
+\begin{proof}
+If $\norm{f}_p = 0$, then $f$ vanishes almost anywhere thus $fg$ does too. 
+Hence Hölder's inequality holds true. 
+The same is true for $\norm{g}_q = 0$. 
+Suppose that $\norm{f}_p \neq 0$ and $\norm{g}_q \neq 0$ in the following. 
+
+\textbf{Case 1. $p \in (1, \infty)$. }
+Consider 
+\begin{equation*}
+    a = \frac{\abs{f(t)}}{\norm{f}_p}, \quad 
+    b = \frac{\abs{g(t)}}{\norm{g}_q}. 
+\end{equation*}
+By Young's inequality, we have 
+\begin{equation*}
+    \frac{\abs{f(t)} \abs{g(t)}}{\norm{f}_p \norm{g}_q} 
+    \le \frac{1}{p} \frac{\abs{f(t)}^p}{\norm{f}_p^p} 
+        + \frac{1}{q} \frac{\abs{g(t)}^q}{\norm{g}_q^q}. 
+\end{equation*}
+Integrating both sides of the above inequality yields 
+\begin{equation*}
+    \frac{1}{\norm{f}_p \norm{g}_q} \int_{X} \abs{f g} \diff t 
+    \le \frac{1}{p \norm{f}_p^p} \int_{X} \abs{f}^p \diff p 
+        + \frac{1}{q \norm{g}_q^q} \int_{X} \abs{g}^q \diff q, 
+\end{equation*}
+which is 
+\begin{equation*}
+    \frac{\norm{fg}_1}{\norm{f}_p \norm{g}_q} \le 1. 
+\end{equation*}
+
+\textbf{Case 2. $p = 1$ and $q = \infty$. }
+Inequality (\ref{equ:inequalities:holder_inequality}) follows directly from 
+the monotonicity of Lebesgue integration. 
+\end{proof}
+
+\section{Minkowski's Inequality}
+\begin{thm}
+\label{thm:inequality:minkowski_inequality}
+\index{inequality!Minkowski's ~{}}
+\index{Minkowski's inequality}
+Let $(X, \Sigma, \mu)$ be a measure space and let $p \in [1, \infty]$. 
+Then for all measurable real- or complex-valued function $f$ and $g$ on $X$, 
+\begin{equation*}
+    \norm{f + g}_p \le \norm{f}_p + \norm{g}_p. 
+\end{equation*}
+\end{thm}
+\begin{proof}
+The result is clearly true if $p = 1$. 
+
+Assume that $p \in (1, \infty)$, then let $q > 0$ such that $\frac{1}{p} + 
+\frac{1}{q} = 1$. 
+Observing that 
+\begin{equation*}
+    \begin{aligned}
+        \norm{f + g}_p^p &= \int_X \abs{f + g} \abs{f + g}^{p - 1} \diff t \\ 
+        &\le \int_X \left( \abs{f} + \abs{g} \right) \abs{f + g}^{p - 1} \diff t \\
+        &= \int_X \abs{f} \abs{f + g}^{p - 1} \diff t 
+            + \int_X \abs{g} \abs{f + g}^{p - 1} \diff t \\ 
+        &\le \norm{f \abs{f + g}^{p-1}}_1 + \norm{g \abs{f + g}^{p-1}}_1 \\ 
+        \text{(Hölder's inequality)} &\le \norm{f}_p \norm{\abs{f + g}^{p-1}}_q 
+            + \norm{g}_p \norm{\abs{f + g}^{p-1}}_q 
+    \end{aligned}
+\end{equation*}
+Since $(p - 1)q = p$, it follows that 
+\begin{equation*}
+    \norm{f + g}_p^p \le \left( \norm{f}_p + \norm{g}_p \right) 
+        \norm{f + g}_p^\frac{p}{q}, 
+\end{equation*}
+whence 
+\begin{equation*}
+    \norm{f + g}_p^{p - \frac{p}{q}} 
+    = \norm{f _ g}_p \le \norm{f}_p + \norm{g}_p. 
+\end{equation*}
+
+\end{proof}

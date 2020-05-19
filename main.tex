@@ -1,0 +1,110 @@
+\documentclass{phreebook}
+
+\usepackage{makeidx}
+\makeindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Setting glossaries
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[acronym, nomain, nonumberlist]{glossaries}
+\newglossary{symbols}{sym}{sbl}{Notations}
+
+\newglossaryentry{real}{type=symbols, name={\ensuremath{\bR}}, 
+description={Real number field}}
+\newglossaryentry{integer}{type=symbols, name={\ensuremath{\bZ}}, 
+description={Integer number field}}
+\newglossaryentry{integern}{type=symbols, name={\ensuremath{\bZ _n}}, 
+description={The set \ensuremath{\{0, 1, \ldots, n - 1\}}}}
+\newglossaryentry{integernp}{type=symbols, name={\ensuremath{\bZ ^+ _n}}, 
+description={The set \ensuremath{\{1, 2, \ldots, n\}}}}
+\newglossaryentry{natural}{type=symbols, name={\ensuremath{\bZ ^+ _n}}, 
+description={Natural numbers \ensuremath{\{0, 2, \ldots\}}}}
+\makeglossaries
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% metadata
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\theTitle}{Notes on Mathematics}
+\newcommand{\theAuthor}{Weifeng Liu}
+
+\title{\theTitle}
+
+\author{\theAuthor}
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Setup hyperref
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+    bookmarks=true,              % show bookmarks bar?
+    unicode=true,                % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=false,            % show Acrobat’s toolbar?
+    pdfmenubar=false,            % show Acrobat’s menu?
+    pdffitwindow=false,          % window fit to page when opened
+    pdfstartview={FitH},         % fits the width of the page to the window
+    pdftitle={\theTitle},        % title
+    pdfauthor={\theAuthor},      % author
+    pdfnewwindow=true,           % links in new PDF window
+    colorlinks=true,             % false: boxed links; true: colored links
+    linkcolor=black,             % color of internal links (change box color with linkbordercolor)
+    citecolor=black,             % color of links to bibliography
+    filecolor=black,             % color of file links
+    urlcolor=black               % color of external links
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\tableofcontents
+
+\part{General Theorem}
+\include{general/set_theory_and_logic}
+\include{general/inequalities}
+\include{general/identities}
+\include{general/special_functions}
+
+\part{Algebra}
+\include{algebra/rings}
+\include{algebra/linear_algebra/eigen}
+
+\part{Topology}
+\include{topology/topological_spaces}
+\include{topology/countability_and_seperation_axioms}
+
+\part{Mathematical Analysis}
+\include{mathemadtical_analysis/real_number}
+\include{mathemadtical_analysis/basic_topology}
+\include{mathemadtical_analysis/fourier_analysis}
+
+\part{Real Analysis}
+\include{real_analysis/measurable_sets}
+\include{real_analysis/measure_spaces}
+\include{real_analysis/measurability}
+\include{real_analysis/lp_spaces}
+\include{real_analysis/bounded_variation_functions}
+
+\part{Functional Analysis}
+\include{functional/metric_spaces}
+\include{functional/banach_spaces}
+\include{functional/linear_bounded_operators}
+\include{functional/hilbert_spaces}
+\include{functional/topological_linear_spaces}
+\include{functional/generalized_functions}
+\include{functional/variational_methods}
+
+\part{Numerical Optimization}
+\include{optimization/convex_sets}
+\include{optimization/convex_functions}
+\include{optimization/gradient}
+\include{optimization/linear_programming}
+
+\part{Probability and Statistics}
+\include{prob_stat/sufficient_statistics}
+
+\glsaddall
+
+\printglossaries
+\printindex
+\end{document}

@@ -1,0 +1,56 @@
+% chapter2.tex
+% notes of the Convex Optimization, chapter 2
+\chapter{Convex Sets}
+\section{Cones}
+\begin{defn}
+A set $C$ is a cone if for every $x \in C$ and $\theta \geq 0$, $\theta 
+x \in C$ always holds.
+\end{defn}
+Cone is also named \emph{nonnegative homogeneous}. It is easy to prove 
+that a cone is closed.
+\section{Dual cones}
+\subsection{Dual cones}
+\begin{defn}
+  Let $K$ be a cone. The set is called dual cone of $K$ if
+  \begin{equation*}
+    K^*=\{y|y^{\text{T}}x \geq 0 \text{ for all } x \in K\}.
+  \end{equation*}
+\end{defn}
+\subsection{Examples}
+\subsubsection{Dual of a norm cone}
+The dual cone of $K=\{(x,t) \in \bR^{n+1}|\norm{x} \le t\}$ is
+
+\begin{equation*}
+  K^*=\{(u,v) \in \bR^{n+1}|\norm{u} \le v\},
+\end{equation*}
+where the dual norm is given by $\norm{u}_*=\sup\{u^Tx|\norm{x} \le 1\}$.
+
+\subsubsection{Nonnegative orthant}
+The cone $\bR_+^n$ is self-dual.
+
+\subsubsection{Positive semi-definitive matrix}
+The set of positive semi-definitive matrix $\mathbf{S}_+^n$ is also 
+self-dual.
+
+\subsection{Property of dual cone}
+\begin{itemize}
+  \item $K^*$ is a cone and convex.
+  \item $K$ is closed and convex.
+  \item $K_1 \subseteq K_2 \text{ implies } K_2^* \subseteq K_1^* $
+
+\end{itemize}
+
+\section{Generalized inequalities}
+\subsection{Proper cones}
+\begin{defn}
+A cone $K \in \bR^n$ is a proper cone if satisfies the following 
+conditions:
+  \begin{itemize}
+    \item $K$ is convex.
+    \item $K$ is closed.
+    \item $K$ is solid, i.e., it has nonempty interior.
+    \item $K$ is pointed, i.e., it contains no line.
+  \end{itemize}
+\end{defn}
+Then we can define generalized inequalities on $K$, which is a partial 
+ordering on $mathbb{R}^n$. We write $y$

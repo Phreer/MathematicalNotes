@@ -1,0 +1,28 @@
+\chapter{Functions of Bounded Variation}
+\begin{defn}[total variation]
+\index{total variation}
+The \emph{total variation} of a continuous real-valued function $f$, 
+defined on an interval $[a, b] \subseteq \bR$ is the quantity 
+\begin{equation*}
+    V_a^b(f) = \sup_{P \in \cP} \sum_{i=0}^{n_P - 1} 
+        \abs{f(x_{i+1}) - f(x_i)}
+\end{equation*}
+where the supremum is taken over the set 
+\begin{equation*}
+    \cP = \left\{ P = \left\{ \left(x_0, x_1, \ldots, x_{n_P} 
+        \right)\right\}: a = x_0 < x_1 < \cdots < x_{n_{P}} = b \right\}
+\end{equation*}
+of all partitions of the interval $[a, b]$. 
+Denote by $V_P(f)$ the variation of $f$ over partion $P$, \ie, 
+\begin{equation*}
+    V_P(f) = \sum_{i=0}^{n_P-1} \abs{f(x_{i+1}) - f(x_i)}. 
+\end{equation*}
+\end{defn}
+
+\begin{defn}[BV function]
+\index{BV function}
+\index{function of bounded variation}
+\label{def:bounded_variation_function}
+A function $f \in C[a, b]$ is of bounded variation (BV function) if its 
+total variation is finite. 
+\end{defn}

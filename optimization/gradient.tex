@@ -1,0 +1,52 @@
+\chapter{Gradient Methods}
+
+\section{Conjugate Gradient Method}
+Consider minimizing the quadratic form 
+\begin{equation}
+\label{equ: quadratic_form}
+    f(x) = \frac{1}{2}x^TGx + b
+\end{equation}
+where $G \in \bs^n_{++}$ and $x \in \br^n$. First let's restrict the case 
+to $n=2$. If $G$ is a diagonal matrix, then intuitively we can find the 
+solution of \ref{equ: quadratic_form} in two steps by exact line searching 
+along with two coordinates, since the contour of \ref{equ: quadratic_form} 
+is a ellipse with its major and minor axes parallel to the coordinates. 
+
+In general case, we can diagonalize $G$ by introducing a linear transform, 
+denoted by $D = (d_1, \cdots, d_n)$. 
+Substituting $x = D\tilde x$ for \ref{equ: quadratic_form} we get 
+\begin{equation}
+    \tilde{f}(\tilde x) = f(Dx)
+    = \frac{1}{2} x^TD^T G Dx. 
+\end{equation}
+The $(i, j)$th entry of $D^TGD$ is $d_i^T G d_j$ and $d_i^TGd_j = 0$ 
+if $i \neq j$. Here we encounter a very interesting condition, which can be 
+denoted as 
+\begin{equation}
+\label{equ: conjugate}
+    \inp{d_i}{d_j}_G = d_i^TGd_j = 0, 
+\end{equation}
+if we introduce a new inner product 
+\begin{equation}
+    \inp{x}{y}_A = x^TAy.
+\end{equation}
+where $A \in \bs^n_{++}$. Then condition \ref{equ: conjugate}, called 
+conjugate, can be viewed as a generalization of orthogonality. 
+
+\begin{defn}
+Let $G \in \bs^n_{++}$ and $x, y \in \br ^n$ are nonzero vectors. $x$ and 
+$y$ is conjugate with respect to $G$ if 
+\begin{equation}
+    \inp{x}{y}_G = x ^T G y = 0.
+\end{equation}
+A sequence of vectors $\{d_i\}$, $i = 1, 2, \cdots, m$ is conjugate if 
+any two vectors of them are conjugate. 
+\end{defn}
+
+We have the following simple theorem, of which the proof is straightforward.
+\begin{thm}
+Conjugate vectors are linear independent. 
+\end{thm}
+
+
+\subsection{Connection with linear equations}

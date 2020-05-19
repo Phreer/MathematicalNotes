@@ -1,0 +1,384 @@
+\chapter{Measurable Sets}
+\section{Classes of Sets}
+To establish measure on a set $X$, we should give a set of subsets of $X$ 
+(also call a set of sets a class) that are measurable. 
+For the class of measurable sets, we should impose some constraints on them. 
+
+\begin{defn}
+\index{$\pi$-system of sets}
+A $\pi$-system on a set $X$ is a nonempty class $\mathcal{P}$ of subsets in 
+$X$ that are closed under intersections, \ie, 
+\begin{equation*}
+    A, B \in \mathcal{P} \implies A \cap B \in \mathcal{P}.
+\end{equation*}
+\end{defn}
+
+\begin{example}
+The class $\mathcal{P}_\bR = \{(-\infty, a]: a \in \bR\}$ is a $\pi$-system. 
+In fact, class that consists of all open intervals is a $\pi$-system. 
+So do left open right closed intervals and left closed right open intervals.
+\end{example}
+
+\begin{defn}
+\index{semiring of sets}
+A \emph{semiring of sets} is a $\pi$-system $\mathcal{D}$ on a set $X$ 
+such that for any $B \subseteq A \in \mathcal{D}$, there exists a finite 
+disjoint subclass $\{C_k \in \mathcal{D}: k = 1, 2, \ldots, n\}$ of 
+$\mathcal{D}$ such that 
+\begin{equation*}
+    A \backslash B = \bigcup_{k=1}^n C_k. 
+\end{equation*}
+\end{defn}
+
+Since semirings are $\pi$-systems, for any $A, B$ in a semiring $\cD$, 
+$A \backslash B = A \backslash (A \cap B) = \bigcup_{k=1}^n C_k$, 
+$C_k \in \cD, k = 1, 2, \ldots, n$. 
+
+\begin{example}
+The class $\mathcal{D}_\bR = \{(a, b]: a, b \in \bR\}$ is a semiring on 
+$\bR$.
+\end{example}
+
+\begin{example}
+Let $X$ be a finite set. Then the class of all sets of single point is a 
+semiring on $X$. 
+\end{example}
+\begin{defn}
+\index{ring of sets}
+A \emph{ring of sets} on a set $X$ is a nonempty class $\mathcal{R}$ of sets 
+of $X$ that is closed under the union and difference of pairs of sets, \ie, 
+\begin{equation*}
+    A, B \in \mathcal{R} \implies A \cup B \in \mathcal{R}, 
+    A \backslash B \in \mathcal{R}. 
+\end{equation*}
+\end{defn}
+
+\begin{example}
+The class $\mathcal{R}_\bR = \bigcup_{n=1}^\infty 
+\left\{ \bigcup_{k=1}^n (a_k, b_k]: a_k, b_k \in \bR \right\}$ is a ring on 
+$\bR$. 
+\end{example}
+
+\begin{prop}
+\label{prop:measurable_sets:ring_semiring}
+A ring is a semiring. 
+\end{prop}
+\begin{proof}
+Let $A, B$ be elements of a ring $\mathcal{R}$. 
+Then $A \backslash B \in \mathcal{R}$, $B \backslash A \in \mathcal{R}$ and 
+$A \cap B = A \backslash (A \backslash B)$. 
+\end{proof}
+\begin{defn}
+\index{algebra}
+\index{field of sets}
+An algebra (or Boolean algebra) over a set $X$ is a nonempty $\pi$-system 
+$\mathcal{A}$ on $X$ that is closed under the complement, \ie, 
+$E\ in \mathcal{A} \implies A^C \in \mathcal{A}$. 
+\end{defn}
+
+\begin{prop}
+\label{prop:measurable_sets:ring_algebra}
+A ring $\mathcal{R}$ on a set $X$ is an algebra if and only if 
+$X \in \mathcal{R}$.
+\end{prop}
+\begin{proof}
+Let $A$ and $B$ be elements of an algebra $\mathcal{A}$. 
+Then $A \backslash B = A \cap B^C \in \mathcal{A}$ and $A \cup B = 
+\left( A^C \cap B^C \right)^C \in \mathcal{A}$. 
+Since $\mathcal{A}$ is nonempty, there is an element $E \in \mathcal{A}$, 
+whence $X = E \cup E^C \in \mathcal{A}$. 
+
+Obviously, let $A$ and $B$ be elements of a ring $\mathcal{R}$ containing 
+$X$. 
+Then $A^C = X \backslash A \in \mathcal{R}$. 
+By Proposition \ref{prop:measurable_sets:ring_semiring} and definition of 
+algebra, $\mathcal{R}$ is an algebra. 
+\end{proof}
+
+The classes defined above have the property of closedness under finite 
+operations, which is insufficient for measurable sets. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Monotone class
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{defn}
+\index{monotone class}
+A nonempty class $\mathcal{M}$ of sets is \emph{monotone} if, for every 
+monotone sequence $\{E_n\}$ of sets in $\mathcal{M}$, we have 
+\begin{equation*}
+    \lim_{n \to \infty} E_n \in \cM. 
+\end{equation*}
+\end{defn}
+
+\begin{defn}
+\index{$\lambda$-system}
+A \emph{$\lambda$-system} on a set $X$ is a class $\cL$ of sets of $X$ 
+such that 
+\begin{enumerate}
+    \item $X \in \cL$; 
+    \item $A, B \in \cL \text{ and } B \subseteq A 
+    \implies A \backslash B \in \cL$; 
+    \item $\{A_n\}$ is an increasing sequence of sets $\cL$ of $\implies 
+    \bigcup_{n=1}^\infty A_n \in \cL$. 
+\end{enumerate}
+\end{defn}
+
+\begin{prop}
+A $\lambda$-system is a monotone class. 
+\end{prop}
+\begin{proof}
+It is trivial. 
+\end{proof}
+
+\begin{defn}
+\index{$\sigma$-algebra}
+A \emph{$\sigma$-system} on a set $X$ is a class of sets $\cF$ of $X$ 
+such that 
+\begin{enumerate}
+    \item $X \in \cF$; 
+    \item $A \in \cF \implies A^C \in \cF$; 
+    \item $A_n \in \cF, n = 1, 2, \ldots 
+    \implies \bigcup_{i=1}^\infty A_n \in \cF$. 
+\end{enumerate}
+\end{defn}
+If $\{B_n\}$ is a sequence in a $\sigma$-algebra, then 
+\begin{equation*}
+    \bigcap_{n=1}^\infty B_n = \left( \bigcup_{n=1}^\infty B_n^C \right)^C 
+    \in \cF. 
+\end{equation*}
+
+\begin{example}
+Let $X$ be a set. The class $\{\varnothing, X\}$ is the minimal $sigma$-
+algebra on $X$ while the power set of $X$ is the maximal $\sigma$-
+algebra on $X$. 
+\end{example}
+
+\begin{prop}
+A $\sigma$-algebra is a $\lambda$-system. 
+\end{prop}
+\begin{proof}
+Let $A$ and $B$ belong to a $\sigma$-algebra $\cF$. 
+Then $A \backslash B = A \cap B^C \in \cF$. 
+\end{proof}
+
+\begin{prop}
+A $\sigma$-algebra is an algebra. 
+\end{prop}
+\begin{proof}
+Trivial. 
+\end{proof}
+
+In conclusion, we have the following relations: 
+\begin{quote}
+$\pi$-systems $\supset$ semirings $\supset$ rings $\supset$ algebras 
+$\supset$ $\sigma$-algebras. 
+
+monotone classes $\supset$ $\lambda$-systems $\supset$ $\sigma$-algebras. 
+\end{quote}
+
+Amongst these classes, the most essential one is $\sigma$-algebra, which is 
+used to establish measure. 
+The elements of $\sigma$-algebra on which the $measure$ is defined are what 
+we call measurable sets. 
+
+\begin{prop}
+\label{prop:measurable_sets:construction_of_sigma_algebra}
+A class is a $\sigma$-algebra if 
+\begin{enumerate}
+    \item it's a monotone algebra; 
+    \item it's both a $\pi$-system and a $\lambda$-system. 
+\end{enumerate}
+\end{prop}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Sigma-ring
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{defn}
+\index{$\sigma$-ring}
+A \emph{$\sigma$-ring} on a set $X$ is a ring $\cS$ on $X$ that is closed under the 
+formation of countable unions. 
+\end{defn}
+If $\cS$ is a $\sigma$-ring on $X$, there is an element in $\cS$ and thus 
+$\varnothing \in \cS$. 
+Furthermore, $X \in \cS$ and $A \in \cS \implies A^C \in \cS$. 
+It is easy to verify that a $\sigma$-ring containing $X$ is a 
+$\sigma$-algebra. 
+
+\begin{prop}
+A $\sigma$-ring is a monotone class; a monotone ring is a $\sigma$-ring. 
+\end{prop}
+\begin{proof}
+The first statement is obvious. 
+To prove the second assertion, we must show that a monotone ring is closed 
+under the formation of countable union. 
+If $\cM$ is a monotone ring and if $\{A_n\}$ is a sequence of sets of $\cM$, 
+then the sequence 
+\begin{equation*}
+    B_n = \bigcup_{k=1}^n A_n
+\end{equation*}
+is a monotone sequence of sets whose limit is $\bigcup_{k=1}^{\infty} A_n$. 
+Since $\cM$ is monotone, $\bigcup_{k=1}^\infty A_k = \lim_{n \to \infty} B_n 
+\in \cM$. 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: generated rings and algebras
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Generated Rings and Algebras}
+\begin{prop}
+\label{prop:measurable_sets:existence_of_generated_rings}
+Let $X$ be a set. 
+If $\cE$ is a class of sets of $X$, then there is a unique ring 
+$\cR$ (\resp, monotone class, $\lambda$-system, or $\sigma$-algebra) 
+such that $\cR \supset \cE$ and if $\cR'$ is another ring (\resp, monotone 
+class, $\lambda$-system, or $\sigma$-algebra) on $X$ containing $\cE$, 
+then $\cR \subseteq \cR'$. 
+\end{prop}
+\begin{proof}
+Since the class of all subsets of $X$ is a ring, the collection of rings 
+containing $\cE$ is nonempty. 
+It is easy to verify that the intersection any collection of rings is also 
+a ring. 
+Thus the the intersection of all rings containing $\cE$ is the ring with 
+disired property. 
+The proofs of other cases are similar. 
+\end{proof}
+
+\begin{defn}
+\index{ring!generated by a class}
+The ring (\resp, monotone class, $\lambda$-system, $\sigma$-algebra) is 
+called the ring (\resp, monotone class, $\lambda$-system, $\sigma$-algebra) 
+generated by $\cE$; it will be denoted by $\cR(\cE)$ (\resp, $\cM(\cE))$, 
+$\cA(\cE)$). 
+\end{defn}
+
+The tree core theorems of this section are as follows. 
+
+\begin{thm}
+If $\cD$ is a semiring, then 
+\begin{equation}
+    \label{equ:measurable_sets:generated_ring_of_semiring}
+    \cR(\cD) = \left\{ \bigcup_{k=1}^n U_k: 
+    n \in \bN^\ast, 
+    U_k \in \cD \text{ are disjoint} \right\}. 
+\end{equation}
+\end{thm}
+\begin{proof}
+Denote by $\cB$ the set given by Equation 
+(\ref{equ:measurable_sets:generated_ring_of_semiring}).
+Clearly, $\cB \subseteq \cR(\cD)$. 
+Supposint that $A = \bigcup_{k=1}^{n_1} A_k \in \cD$ and 
+$B = \bigcup_{k=1}^{n_2} B_k \in \cD$, then 
+\begin{equation*}
+    \begin{aligned}
+        A \backslash B 
+        &= \left( \bigcup_{k=1}^{n_1}A_k \right) \backslash
+        \left( \bigcup_{l=1}^{n_2}B_k \right) 
+        = \bigcup_{k=1}^n \left( 
+        A_k \backslash \bigcup_{l=1}^{n_2} B_l\right) \\
+        &= \bigcup_{k=1}^{n_1} \bigcap_{l=1}^{n_2} 
+        \left( A_k \backslash B_l \right) 
+        = \bigcup_{k=1}^{n_1} \bigcap_{l=1}^{n_2} 
+        \left( A_k \backslash (A_k \cap B_l) \right) \\ 
+        &= \bigcup_{k=1}^{n_1} \bigcap_{l=1}^{n_2} 
+        \left( \bigcup_{i=1}^{n_{kl}} C_i^{k, l} \right)
+        \in \cB
+    \end{aligned}
+\end{equation*}
+where $\{C_i^{k, l} \in \cD : i = 1, 2, \ldots, n_{kl}\}$ are disjoint for 
+each pair $(k, l)$. 
+
+Then $A \cup B = A \cup (B \backslash A)$ since $A$ and $B \backslash A$ 
+are disjoint and are elements of $\cB$ and thus can be written as unions 
+of finite disjoint sets of $\cD$. 
+Thus, $\cB$ is a ring. 
+
+Now we have to show that $\cB$ is a minimal ring containing $\cD$. 
+This is true because of closedness of the formation of finite unions. 
+\end{proof}
+
+\begin{thm}
+\label{thm:measurable_sets:algebra_ma_fa}
+If $\cA$ is a algebra on a set $X$, then $\cM(A) = \cF(A)$. 
+\end{thm}
+\begin{proof}
+On the one hand, $\cM(\cA) \subseteq \cF(\cA)$, since $\cF(\cA)$ is monotone. 
+On the other hand, to prove $\cF(\cA) \subseteq \cM(\cA)$, it suffices to 
+prove that $\cM(\cA)$ is a $\sigma$-algebra, by Proposition 
+\ref{prop:measurable_sets:construction_of_sigma_algebra}. 
+However, to show this it suffices to show that $\cM(\cA)$ is a ring since 
+$X \in \cA \subseteq \cM(\cA)$ by Proposition 
+\ref{prop:measurable_sets:ring_algebra}. 
+
+First, we show that for any $A \in \cA$ and $B \in \cM(\cA)$, 
+\begin{equation}
+    \label{equ:measurable_sets:algebra_ma_fa:1}
+    A \cup B \in \cM(\cA) \text{ and } A \backslash B \in \cM(\cA). 
+\end{equation}
+Setting 
+\begin{equation*}
+    \cH_A = \{B \in \cM(\cA): B \cup A \in \cM(\cA), 
+    A \backslash B \in \cM(\cA)\}, 
+\end{equation*}
+it is not difficult to verify that $\cH_A$ is monotone and $\cA \subseteq 
+\cH_A$, whence $\cM(\cA) \subseteq \cH_A$ and Equation 
+(\ref{equ:measurable_sets:algebra_ma_fa:1}) follows. 
+
+Second, setting 
+\begin{equation*}
+    \cG_B = \{A \in \cM(\cA): A \cup B \in \cM(\cA), 
+    A \backslash B \in \cM(\cA)\}, 
+\end{equation*}
+likewise, $\cG_B$ is monotone and by Equation 
+(\ref{equ:measurable_sets:algebra_ma_fa:1}), $\cG_B \supset \cA$, 
+whence $\cM(\cA) \subseteq \cG_B$. 
+Therefore, for any $A, B \in \cM(\cA)$, 
+\begin{equation*}
+    A \cup B \in \cM(\cA) \text{ and } A \backslash B \in \cM(\cA). 
+\end{equation*}
+The conclusion is established. 
+\end{proof}
+
+In practice, an equivalent form of Theorem 
+\ref{thm:measurable_sets:algebra_ma_fa} is frequently used. 
+\begin{cor}
+If $\cA$ is an algebra and $\cM$ is a monotone class, then 
+\begin{equation*}
+    \cA \subseteq \cM \implies \cF(\cA) \subseteq \cM. 
+\end{equation*}
+\end{cor}
+
+\begin{thm}
+If $\cP$ is a $\pi$-system on a set $X$, then $\cL(\cP) = \cF(\cP)$. 
+\end{thm}
+\begin{proof}
+Since $\sigma$-algebras are $\pi$-systems, we have $\cF(\cP) \subseteq 
+\cL(\cP)$. 
+Now we prove $\cF(\cP) \supset \cL(\cP)$ and it suffices to prove that 
+$\cL(\cP)$ is a $\pi$-system thus a $\sigma$-algebra. 
+
+Putting $A \in \cP$ and $B \in \cL(\cP)$, let 
+\begin{equation*}
+    \cH_A = \{B \in \cL(\cP): B \cap A \in \cL(\cP)\}, 
+\end{equation*}
+which is a $\lambda$-system containing $\cP$, whence $\cL(\cP) \subseteq 
+\cH_A$. 
+
+Further, set 
+\begin{equation*}
+    \cG_B = \{A \in \cL(\cP): A \cap B \in \cL(\cP)\}, 
+\end{equation*}
+which is also a $\lambda$-system containing $\cP$, whence $\cL(\cP) \subseteq 
+\cG_B$, \ie, for $A, B \in \cL(\cP)$ 
+\begin{equation*}
+    A \cap B \in \cL(\cP). 
+\end{equation*}
+The conclusion is established. 
+\end{proof}
+
+This theorem has an equivalent form: 
+\begin{cor}
+If $\cP$ is a $\pi$-system and $\cL$ is a $\lambda$-system, then 
+\begin{equation*}
+    \cP \subseteq \cL \implies \cF(\cP) \subseteq \cL. 
+\end{equation*}
+\end{cor}

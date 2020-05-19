@@ -1,0 +1,523 @@
+\chapter{Topological Linear Spaces}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Basic Properties of Topological Linear Spaces
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Norms and inner products are common ways to introduce topology to a linear 
+space. 
+But there are other ways to endow topology. 
+The main aim of this chapter is to generalize the results we have studied 
+in Banach spaces and Hilbert spaces to more general topological linear 
+space. 
+
+\section{Basic Properties of Topological Linear Spaces}
+\begin{defn}[Topological linear space]
+\index{topological linear space}
+Let $X$ be a linear space over number field $\bK$, and let $\cT$ be a 
+topology on $X$. 
+The topological space $(X, \cT)$ is said to be a topological linear space 
+if the following are satisfied: 
+\begin{enumerate}
+    \item ($T_1$ axiom) Every set of single element is closed. 
+    \item The linear space operations (addition and scalar multiplication) 
+    is continuous with respect to $\cT$. 
+\end{enumerate}
+Under these conditions, $\cT$ is called a \emph{linear topology} on $X$. 
+\end{defn}
+
+More specifically, by continuity of addition we mean the mapping 
+\begin{equation*}
+    (x, y) \mapsto x + y 
+\end{equation*}
+is a continuous function from $X \times X$ to $X$ is continuous: 
+If $x_1, x_2 \in X$ and $V$ is a neighborhood of $x_1 + x_2$, then there 
+should exist neighborhoods $V_1, V_2$ of $x_1, x_2$ respectively such that 
+$V_1 + V_2 \subseteq V$. 
+Likewise, by continuity of scalar multiplication we mean for every 
+$x \in X$ nad $\alpha \in \bK$, if $V$ is a neighborhood of $\alpha x$, 
+then there should exist $\delta > 0$ and neighborhood $U_1$ of $x$ such 
+that $\beta U \subseteq V$ whenever $\abs{\beta - \alpha} < \delta$. 
+
+Whenever the topology is clear according to context, we write a topological 
+linear space $(X, \cT)$ for convenience. 
+For a topological linear space $X$, we define the translation operator and 
+scalar product operator as 
+\begin{equation*}
+    T_y(x) = x + y, \quad M_\alpha(x) = \alpha x. 
+\end{equation*}
+One can easily show that for any $y \in X$ and $\alpha \neq 0$, the 
+operators $T_y$ and $M_\alpha$ is a homeomorphism between $X$ and $X$. 
+
+Since a subset $E \subseteq X$ is open if and only if for every $y \in X$, 
+we have $T_{y}(E)$ is open, we know that the topology of a topological 
+linear space is represented by its local base at $0$. 
+By local base we mean the the class $\cB$ of neighborhoods of $0$ such that 
+any neighborhood of $0$ contains at least one element of $\cB$. 
+
+\subsection{Seperation Properties}
+\begin{lemma}
+\label{lemma:topological_linear_spaces:seperation_lemma}
+Let $X$ be a topological linear space. 
+If $W$ is a neighborhood of $0$, then there exists a neighborhood $U$ of $0$ 
+which is symmetric (in the sense that $U = -U$) such that $U + U \subseteq 
+W$. 
+\end{lemma}
+\begin{proof}
+Note that $0 = 0 + 0$, that addition is continuous, and that $W$ is a 
+neighborhood of $0$. 
+Therefore, there are neighborhoods $V_1$, $V_2$ of $0$ such that $V_1 + V_2
+\subseteq W$. 
+Setting $U = V_1 \cap V_2 \cap (-V_1) \cap (-V_2)$, then $U$ is a 
+neighborhood of $0$ and has the required properties. 
+\end{proof}
+
+\begin{thm}
+\label{thm:topological_linear_spaces:seperation_theorem}
+Suppose $K$ and $C$ are subsets of a topological linear space $X$, $K$ is 
+compact, $C$ is closed, and $K \cap C = \varnothing$. 
+Then $0$ has a neighborhood $V$ such that 
+\begin{equation*}
+    (K + V) \cap (C + V) = \varnothing. 
+\end{equation*}
+\end{thm}
+\begin{proof}
+Without loss of generality, assume that $K \neq \varnothing$. 
+Let $x \in K$. 
+Then $x \notin C$. 
+Since $C$ is closed, there exists a neighborhood $W_x$ of $0$ such that 
+$x + W_x \cap C = \varnothing$. 
+By Lemma \ref{lemma:topological_linear_spaces:seperation_lemma}, $0$ has 
+neighborhood $V_x$ which is symmetric such that $V_x + V_x + V_x + V_x 
+\subseteq W$. 
+Hence, $(x + V_x + V_x + V_x + V_x) \cap C = \varnothing$, which is 
+equivalent to $(x + V_x + V_x + V_x) \cap (C + V_x) = \varnothing$. 
+This implies 
+\begin{equation}
+    \label{equ:topological_linear_spaces:seperation_theorem:1}
+    (x + V_x + V_x) \cap (C + V_x) = \varnothing.
+\end{equation} 
+
+On the other hand, by the comppactness of $K$, there exists finitely many 
+elements $x_1, x_2, \ldots, x_n$ of $K$ such that $K \subset \bigcup_{k=1}
+^n (x_k + V_{x_k})$. 
+Putting $V = \bigcap_{k=1}^n V_{x_k}$, then 
+\begin{equation*}
+    K + V \subset \bigcup_{k=1}^n (x_k + V_{x_k} + V) 
+    \subset \bigcup_{k=1}^n (x_k + V_{x_k} + V_{x_k}).
+\end{equation*}
+By the Equation (\ref{equ:topological_linear_spaces:seperation_theorem:1}), 
+$(K + V) \cap (C + V_{x_i}) = \varnothing$, and therefore $(K + V) \cap 
+(C + V) = \varnothing$. 
+\end{proof}
+
+The theorem above demonstrates that in a topological linear space, disjoint 
+compact set and closed set can be seperated by two disjoint open sets. 
+
+\begin{cor}
+Topological linear spaces are Hausdorff spaces. 
+\end{cor}
+\begin{proof}
+For any $x, y \in X$, let $K = \{x\}$ and $C = \{y\}$, and apply the 
+preceding theorem. 
+\end{proof}
+
+\begin{cor}
+If $\cB$ is a local base of a topological linear space $X$, then every 
+member of $\cB$ contains the closure of some member of $\cB$. 
+\end{cor}
+\begin{proof}
+In the proof of Theorem \ref{thm:topological_linear_spaces:seperation_theorem}, 
+since $C + V$ is open, it is true that $\closure{(K + V)}$ does not intersect 
+$C + V$. 
+This corollary follows if we set $K = \{ 0 \}$. 
+\end{proof}
+
+\subsection{Balanced Sets and Bounded Sets}
+The concept of balanced set is a generalization of the concept of ball in 
+normed space. 
+\begin{defn}[Balanced set]
+\index{balanced set}
+Let $X$ be a linear space, and let $B$ be a subset of $X$. 
+We say $B$ is \emph{balanced} if $\alpha B \subset B$ whenever $\abs{\alpha}
+ < 1$. 
+\end{defn}
+
+\begin{prop}
+\label{prop:topological_linear_spaces:balanced_set_properties}
+Let $X$ be a topological vector space. 
+The following hold true. 
+\begin{enumerate}
+    \item \label{prop:topological_linear_spaces:balanced_set_properties:1}
+    If $B \subseteq X$ is balanced, then $\closure{B}$ is balanced. 
+    \item \label{prop:topological_linear_spaces:balanced_set_properties:2}
+    If $B \subseteq X$ is balanced, and $0 \in \interior{A}$, then 
+    $\interior{B}$ is balanced. 
+    \item \label{prop:topological_linear_spaces:balanced_set_properties:3}
+    Every neighborhood of $0$ contains some neighborhood of $0$ which 
+    is balanced. 
+    \item \label{prop:topological_linear_spaces:balanced_set_properties:4}
+    Every convex neighborhood of $0$ contains some convex neighborhood 
+    of $0$ which is balanced. 
+\end{enumerate}
+\end{prop}
+\begin{proof}
+\ref{prop:topological_linear_spaces:balanced_set_properties:1}
+Omitted. 
+
+\ref{prop:topological_linear_spaces:balanced_set_properties:2}
+Suppose that $0 < \abs{\alpha} \le 1$. 
+Then 
+\begin{equation*}
+    \alpha \interior{B} = \interior{(\alpha B)} 
+    \subseteq \alpha B \subseteq B. 
+\end{equation*}
+Since $\alpha \interior{B}$ is open, it follows that $\alpha \interior{A} 
+\subseteq \interior{A}$. 
+Thanks to the assumption that $0 \in \interior{A}$, $\alpha \interior{A} 
+\subseteq \interior{A}$ holds true for the case $\alpha = 0$. 
+Hence, $\interior{A}$ is also a balanced set. 
+
+\ref{prop:topological_linear_spaces:balanced_set_properties:3}
+Let $U$ be a neighborhood of $0$. 
+By the continuity of scalar product, there is a $\delta > 0$ and a 
+neighborhood $V$ of $0$ such that $\alpha V \subseteq U$ whenever 
+$\abs{\alpha} < \delta$. 
+Put $W = \bigcup_{\abs{\alpha} < \delta} \alpha V$, which is clearly 
+neighborhood of $0$ that $W \subseteq U$. 
+Now we verify that $W$ is balanced. 
+Indeed, for any $x \in W$ and $\beta$ with $\abs{\beta} < 1$, there is an 
+$\alpha$ with $\abs{\alpha} < \delta$ such that $x \in \alpha V$. 
+Hence, $\abs{\beta \alpha} \le \abs{\alpha} \le \delta$, and $\beta x 
+\in \beta \alpha V \subset W$. 
+
+\ref{prop:topological_linear_spaces:balanced_set_properties:4}
+Let $U$ be a convex neighborhood of $0$, and let $A = \bigcap_
+{\abs{\alpha} = 1} \alpha U$. 
+Then $0 \in A$, and $A$ is convex since $\alpha U$ is convex for any 
+$\alpha \in \bK$. 
+From \ref{prop:topological_linear_spaces:balanced_set_properties:3} in this 
+proposition, there is a balanced neighborhood $W \subseteq U$. 
+For any $\alpha \in \bK$ with $\abs{\alpha} = 1$, we have $\alpha^{-1} W 
+\subseteq W$, and thus $W \subseteq \alpha W \subseteq \alpha U$. 
+Therefore, $W \subseteq W$, and $0 \in W \in \interior{A}$. 
+If we can verify that $A$ is a balanced set, then it follows that 
+$\interior{A}$ is balanced by \ref{prop:topological_linear_spaces:balanced_set_properties:2}
+of this proposition. 
+Indeed, let $r \in [0, 1]$, $\beta \in \bK$ with $\abs{\beta} = 1$, then 
+\begin{equation*}
+    \begin{aligned}
+        r\beta A = \bigcap_{\abs{\alpha} = 1} r \beta \alpha U 
+        = \bigcap_{\abs{\alpha} = 1} r \alpha U 
+        \subseteq \bigcap_{\abs{\alpha} = 1} \alpha U 
+        = A. 
+    \end{aligned}
+\end{equation*}
+Finally, it is not hard to show that $\interior{A}$ is convex. 
+Hence, $\interior{A}$ is what we want. 
+\end{proof}
+
+\begin{defn}[Locally convex space]
+Let $\cB$ be a local base of a topological linear space $X$. 
+Then $\cB$ is said to be balanced if every member of $\cB$ is balanced; 
+$\cB$ is said to be convex if every member of $\cB$ is convex. 
+
+If $X$ has a convex local base, then $X$ is said to be locally convex. 
+\end{defn}
+Locally convex topological linear spaces are of considerable interest. 
+\begin{cor}
+\begin{enumerate}
+    \item Every topological linear topological space has a balanced local 
+    base. 
+    \item Every locally convex topological linear space has a balanced 
+    convex local base. 
+\end{enumerate}
+\end{cor}
+
+Now we try to generalize the concept of boundedness to topological linear 
+spaces. 
+\begin{defn}[Bounded set]
+Let $E$ be a subset of a topological linear space $X$. 
+$E$ is said to be bounded if for every neighborhood $V$ of $0$, there 
+exists $s > 0$ such that $E \subseteq t V$ whenever $t > s$. 
+\end{defn}
+\begin{prop}
+\label{prop:topological_linear_spaces:bounded_sets_property}
+Let $E$ be a subset of a topological linear space $X$. 
+Then $E$ is bounded if and only if for every $\{ x_n \}_{n=1}^{\infty} 
+\subseteq E$ and $\{ \alpha_n \}_{n=1}^{\infty} \subset \bK$, 
+\begin{equation}
+    \label{equ:topological_linear_spaces:bounded_sets_property}
+    \alpha_n \to 0 \quad (n \to \infty) 
+    \implies \alpha_n x_n \to 0 \quad (n \to \infty).
+\end{equation} 
+\end{prop}
+\begin{proof}
+($\implies$)
+Suppose that $E$ is bounded, $V$ is balanced neighborhood of $0$, $\{ x_n \}
+_{n=1}^{\infty} \subseteq E$ and $\{ \alpha_n \}_{n=1}^{\infty} \subseteq 
+\bK$ with $\alpha_n \to \infty \quad (n \to \infty)$. 
+Then there is a $t > 0$ such that $E \subseteq tV$, and there is $N \in 
+\bNs$ such that $\abs{\alpha_n} t < 1$ whenever $n > N$. 
+Hence, since $V$ is balanced, 
+\begin{equation*}
+    \alpha_n x_n = \alpha_n t \times \frac{1}{t} x_n \in V, 
+\end{equation*}
+which implies $\alpha_n x_n \to \infty$ as $n \to \infty$ by definition. 
+
+Conversely, assume that condition 
+(\ref{prop:topological_linear_spaces:bounded_sets_property}) is satisfied, 
+and for the sake of contradiction $E$ is unbounded. 
+Then there exists neighborhood $V$ of $0$ such that for every $n \in \bNs$, 
+there is some $x_n \in E$ with $x_n \notin n V$. 
+Then $\frac{1}{n} x_n \notin V$ for all $n \in \bNs$, and thus 
+$\frac{1}{n}x_n$ does not converges $0$, which contradicts the condition  
+(\ref{prop:topological_linear_spaces:bounded_sets_property}). 
+Therefore, $E$ must be bounded. 
+\end{proof}
+
+\begin{thm}
+\label{thm:topological_linear_spaces:bounded_sets_base}
+Let $X$ be a topological linear space, and let $V$ be a neighborhood of $0$. 
+Then the following hold true. 
+\begin{enumerate}
+    \item \label{thm:topological_linear_spaces:bounded_sets_base:1}
+    If $\{ \alpha_n \}_{n=1}^{\infty} \subseteq \bR$ is a monotonically 
+    increasing sequence, then $X = \bigcup_{n=1}^\infty \alpha_n V$. 
+    \item \label{thm:topological_linear_spaces:bounded_sets_base:2}
+    Every compact set in $X$ is bounded. 
+    \item \label{thm:topological_linear_spaces:bounded_sets_base:3}
+    If $\{ \alpha_n \}_{n=1}^{\infty} \subseteq \bR$ is a 
+    monotonically decreasing sequence converging to $0$, then $\left\{ 
+    \alpha_n V: n \in \bNs \right\}$ is a local base of $X$. 
+\end{enumerate}
+\end{thm}
+\begin{proof}
+\ref{thm:topological_linear_spaces:bounded_sets_base:1}
+For any $x \in X$, the mapping $\alpha \mapsto \alpha x$ that maps $\bK$ 
+into $X$ is continuous. 
+Then $A_x = \{\alpha \in \bK: \alpha x \in V$ is open, since $V$ is open. 
+Noting that $0 \in A_x$, then for sufficient large $n$, $\frac{1}{\alpha_n} 
+x \in V$, namely, $x \in r_n V$. 
+
+\ref{thm:topological_linear_spaces:bounded_sets_base:2}
+Let $K$ be a compact set in $X$, and let $U$ be a neighborhood of $0$. 
+Then there is some balanced neighborhood $W$ of $0$ such that 
+$W \subseteq U$. 
+From \ref{thm:topological_linear_spaces:bounded_sets_base:1}, 
+\begin{equation*}
+    K \subseteq X = \bigcup_{n= 1}^\infty n W. 
+\end{equation*}
+By the compactness of $K$, there exists finitely many $n_1, n_2, \ldots, 
+n_N$ such that 
+\begin{equation*}
+    K \subseteq \bigcup_{k=1}^N n_k W. 
+\end{equation*}
+Assume without loss of generality that $n_1 < n_2 < \cdots < n_N$. 
+Since $0 < \frac{n_k}{n_{k+1}} < 1$  for $k = 1, 2, \ldots, N - 1$ and 
+$W$ is balanced, 
+\begin{equation*}
+    n_1 W \subseteq n_2 W \subseteq \cdots \subseteq n_N W. 
+\end{equation*}
+Hence, $K \subset n_N W \subset n_N U$. 
+
+\ref{thm:topological_linear_spaces:bounded_sets_base:3}
+Let $U$ be any neighborhood of $0$. 
+By the boundedness of $V$, there exists $s > 0$ such that $V \subseteq tU$ 
+for $t > s$. 
+Then it is valid to choose $n \in \bNs$ such that $\frac{1}{\delta_n} > s$. 
+In this case, $V \subseteq \frac{1}{\delta_n} U$, namely, $\delta_n V 
+\subseteq U$. 
+\end{proof}
+
+\subsection{Metriczability}
+\begin{thm}
+\label{thm:topological_linear_spaces:Metriczability}
+Let $(X, \cT)$ be a topological linear space which has a countable base. 
+Then there exists a distance function $d: X \times X \to \bR$ such that 
+\begin{enumerate}
+    \item $\cT$ is induced by $d$. 
+    \item Every open ball (in the sense of $d$ centered at $0$ is balanced. 
+    \item (Translation invariance) $d(x + z, y + z) = d(x, y)$ for any 
+    $x, y, z \in X$. 
+    \item If $(X, \cT)$ is locally convex, then every open ball in $X$ is 
+    convex. 
+\end{enumerate}
+\end{thm}
+\begin{proof}
+
+\end{proof}
+
+\subsection{Bounded Linear Operators}
+Having given the definition of bounded set, it is time to generalize the 
+concept of bounded linear operator to topological linear spaces. 
+\begin{defn}[Bounded linear operator in topological linear space]
+Let $X$, $Y$ be topological linear space.
+An linear operator $T: X \to Y$ is \emph{bounded} if $T$ maps every bounded 
+set to a bounded set. 
+\end{defn}
+
+\begin{thm}
+\label{thm:topological_linear_spaces:bounded_linear_operators_properties}
+Let $X$, $Y$ be topological linear space, and let $T: X \to Y$ be a linear 
+operator. 
+Then consider the following statements:
+\begin{enumerate}
+    \item \label{thm:topological_linear_spaces:bounded_linear_operators_properties:1}
+    $T$ is continuous at $0$. 
+    \item \label{thm:topological_linear_spaces:bounded_linear_operators_properties:2}
+    $T$ is continuous. 
+    \item \label{thm:topological_linear_spaces:bounded_linear_operators_properties:3}
+    $T$ is bounded. 
+    \item \label{thm:topological_linear_spaces:bounded_linear_operators_properties:4}
+    If $\{ x_n \}_{n=1}^{\infty} \subseteq X$ converges to $0$, then 
+    $\{ Tx_n: n \in \bNs \}$ is a bounded set. 
+    \item \label{thm:topological_linear_spaces:bounded_linear_operators_properties:5}
+    If $\{ x_n \}_{n=1}^{\infty} \subseteq X$ converges to $0$, then 
+    $Tx_n \to 0$ as $n \to \infty$. 
+\end{enumerate}
+We have the implications:
+\begin{equation*}
+    \ref{thm:topological_linear_spaces:bounded_linear_operators_properties:1} 
+    \iff 
+    \ref{thm:topological_linear_spaces:bounded_linear_operators_properties:2} 
+    \implies 
+    \ref{thm:topological_linear_spaces:bounded_linear_operators_properties:3} 
+    \implies 
+    \ref{thm:topological_linear_spaces:bounded_linear_operators_properties:4}. 
+\end{equation*}
+If further $X$ is metrizable, then 
+\begin{equation*}
+    \ref{thm:topological_linear_spaces:bounded_linear_operators_properties:4} 
+    \implies 
+    \ref{thm:topological_linear_spaces:bounded_linear_operators_properties:5} 
+    \implies
+    \ref{thm:topological_linear_spaces:bounded_linear_operators_properties:1}. 
+\end{equation*}
+\end{thm}
+\begin{proof}
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:1}
+$\implies$ 
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:2}
+Let $W$ be a neighborhood of $0$. 
+Then by the continuity of $T$, there is some neighborhood $W$ of $0$ 
+such that $TV \subseteq W$. 
+Hence, for any $x \in X$, if $y - x \in V$, it follows that $Ty - Tx = 
+T(y - x) \subset TV \subset W$, which implies $Ty \subset Tx + W$. 
+Thus, $T$ maps the neighborhood $x + V$ of $x$ into the neighborhood $Tx+W$ 
+of $Tx$, saying that $T$ is continuous at $x$. 
+
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:2}
+$\implies$ 
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:1}
+Trivial. 
+
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:2}
+$\implies$ 
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:3}
+Suppose that $E$ is a bounded set in $X$, and $W \subseteq Y$ is a 
+neighborhood of $0$. 
+There is a neighborhood $V\subseteq X$ of $9$ such that $TV \subseteq W$. 
+Since $E$ is bounded, there exists a positive number $s \in \bR$ such that 
+$E \subseteq tV$ whenever $t > s$, which implies that $TE \subseteq T(tV) 
+\subseteq t TV \subseteq t W$. 
+This means $TE$ is a bounded set, and thus $T$ is bounded. 
+
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:3}
+$\implies$ 
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:4}
+This follows from boundedness of the set $\{x_n: n \in \bNs\}$.
+
+Now assume that $T$ is metrizable in the rest of the proof. 
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:4}
+$\implies$ 
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:5}
+Suppose that \ref{thm:topological_linear_spaces:bounded_linear_operators_properties:4}
+is satisfied, and that $\{ x_n \}_{n=1}^{\infty}$ is a sequence in $X$ 
+converging to $0$. 
+By Theorem, there is some sequence $\{ \alpha_n \}_{n=1}^{\infty}$ in $\bR$ 
+converging to $\infty$ such that $\alpha_n x_n \to 0$ as $n \to \infty$. 
+Then by assumption, $\{T \alpha_n x_n: n \in \bNs\}$ is a bounded set. 
+The computation 
+\begin{equation*}
+    Tx_n = \frac{1}{\alpha_n} T(\alpha_n x_n)
+\end{equation*}
+yields that $Tx_n \to 0$ as $n \to \infty$. 
+
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:5}
+$\implies$ 
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:1}
+Suppose that condition statement 
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:5} 
+is satisfied, but $T$ is discontinuous at $0$. 
+That is, there exists a neighborhood $W \subseteq Y$ of $0$ such that 
+$T^{-1}(W)$ contains no neighborhood of $0 \in X$. 
+Since $X$ is metrizable, there exists a countable base $\{V_n: n \in \bNs\}$ 
+satisfying $V_{n + 1} + V_{n + 1} \subseteq V_n$ for all $n \in \bNs$. 
+Hence, it is valid to find a sequence $\{ x_n \}_{n=1}^{\infty}$ in $X$ 
+such that $x_n \in V_n \backslash T^{-1}(W)$. 
+Then $x_n \to 0$ while $Tx_n \not \to 0$, contradicting the condition 
+\ref{thm:topological_linear_spaces:bounded_linear_operators_properties:5}. 
+\end{proof}
+
+\begin{thm}
+\label{thm:topological_linear_spaces:linear_functional}
+Let $f$ be a non-zero linear functional on a topological linear space $X$. 
+Then the following following are equivalent. 
+\begin{enumerate}
+    \item \label{thm:topological_linear_spaces:linear_functional:1}
+    Functional $f$ is continuous. 
+    \item \label{thm:topological_linear_spaces:linear_functional:2}
+    The null space $\sN(f)$ is a closed subspace of $X$. 
+    \item \label{thm:topological_linear_spaces:linear_functional:3}
+    $\sN(f)$ is not dense in $X$, \ie, $\closure{(\sN(f))} \neq X$. 
+    \item \label{thm:topological_linear_spaces:linear_functional:4}
+    Functional $f$ is bounded in some neighborhood $V \subseteq X$ 
+    of $0$. 
+\end{enumerate}
+\end{thm}
+\begin{proof}
+\ref{thm:topological_linear_spaces:linear_functional:1}
+$\implies$ 
+\ref{thm:topological_linear_spaces:linear_functional:2}
+By the linearity of $f$, we know $\sN(f)$ is subspace of $X$; 
+And by the continuity of $f$, we know $\sN(f)$ is closed. 
+
+\ref{thm:topological_linear_spaces:linear_functional:2}
+$\implies$ 
+\ref{thm:topological_linear_spaces:linear_functional:3}
+As $\sN(f)$ is closed and $f$ is non-zero, we have $\closure{(\sN(f))} 
+= \sN(f) \neq X$. 
+
+\ref{thm:topological_linear_spaces:linear_functional:2}
+$\implies$ 
+\ref{thm:topological_linear_spaces:linear_functional:3}
+Suppose that $\sN(f)$ is not dense in $X$, then there is some $x_0 \in X$ 
+and neighborhood $V \subseteq X$ of $0$ such that $x_0 + V \cap 
+\closure{(\sN(f))} = \varnothing$. 
+With no harm to generality, assume that $V$ is balanced. 
+Now we show that $f(V)$ is bounded by contradiction. 
+Suppose that $f(V)$ is unbounded. 
+Then for any $\alpha \in \bK$, there is a $x \in V$ such that $\abs{f(x)} > 
+\alpha$. 
+Assuming that $f(x) = \abs{f(x)} \me^{\mi \theta}$, we have 
+\begin{equation*}
+    f\left( \frac{\alpha \me^{-\mi \theta} x}{\abs{f(x)}} \right) 
+    = \alpha. 
+\end{equation*}
+Since $\abs{\frac{\alpha \me^{-\mi \theta}}{\abs{f(x)}}} < 1$, we have 
+$\frac{\alpha \me^{-\mi \theta} x}{\abs{f(x)}} \in V$. 
+Hence, $f(V) = \bK$. 
+Therefore, there is some $y_0 \in V$ such that $f(y_0) = -f(x_0)$, or 
+equivalently $x_0 + y_0 \in \sN(f)$, in contradiction to our assumption. 
+
+\ref{thm:topological_linear_spaces:linear_functional:4}
+$\implies$ 
+\ref{thm:topological_linear_spaces:linear_functional:1}
+If statement \ref{thm:topological_linear_spaces:linear_functional:4} is 
+holds, then there exists a neighborhood $V$ of $0$ and positive real number 
+$M$ such that $\abs{f(x)} < M$ for any $x \in V$. 
+For any $\epsilon > 0$, put $W = \frac{\epsilon}{M} V$. 
+Then for any $y \in W$, there is a correspongding $x \in V$ such that 
+$y = \frac{\epsilon}{M} x$. 
+Hence, $\abs{f(y)} = \frac{\epsilon}{M}\abs{f(x)} < \epsilon$, which implies 
+that $f$ is continuous. 
+\end{proof}

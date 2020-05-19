@@ -1,0 +1,510 @@
+\chapter{Banach Spaces}
+\label{chp:banach_spaces}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Linear Spaces
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Norms}
+\begin{defn}
+\index{semi-norm}
+A real-valued function $p$ defined on a linear space $X$ is called a 
+semi-norm on $X$, if the following conditions are satisfied 
+\begin{enumerate}
+    \item (Subadditivity) $p(x+y) \le p(x) + p(y)$;
+    \item $p(\alpha x) = \abs{\alpha} p(x)$, 
+\end{enumerate}
+for any $x, y \in X$ and $\alpha \in \mathbb{K}$. 
+\end{defn}
+
+\begin{defn}[norm]
+Let $\bK = \bR$ or $\bC$ and $X$ be a linear space over $K$. 
+A norm $\norm{\wdot}: X \to \bR$ is a function such that 
+\begin{enumerate}
+    \item (positive definiteness) $\norm{x} \ge 0$ for every $x \in X$ and 
+    $\norm{x} = 0 \iff x = 0$. 
+    \item (absolute homogeneousness) $\norm{\alpha x} = \abs{\alpha} 
+    \norm{x}$ for any $x \in X$ and $\alpha \in \bK$. 
+    \item (triangle inequality) $\norm{x + y} \le \norm{x} + \norm{y}$ for 
+    any $x, y \in X$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[normed space]
+\index{normed (linear) space}
+\index{space!normed (linear) \~{}}
+A linear space $X$ equipped with a norm $\norm{\wdot}$ is called a 
+\emph{normed (linear) space}, denoted by $(X, \norm{\wdot})$. 
+\end{defn}
+
+For the sake of conciseness, we simply write $X$ for a normed space when it 
+is unambiguous. 
+
+Obviously, a normed space $(X, \norm{\wdot})$ is a metric space together 
+with the distance defined by $d(x, y) = \norm{x - y}$, called the induced 
+metric from the norm. 
+From now on, normed spaces mentioned will be implicitly equipped with the 
+distances induced from the norm. 
+Therefore, normed spaces are finer than metric spaces. 
+All definitions and theorems for metric spaces can be transferred to normed 
+spaces at once. 
+\index{Banach space}
+\index{space!Banach \~{}}
+Specifically, a complete normed space is called a \emph{Banach space}. 
+
+We have some basic facts about normed spaces, whose proofs has been omitted: 
+\begin{prop}
+The norm in a normed space is continuous.
+\end{prop}
+
+\begin{example}
+Consider the set $\bK^n$. 
+Define
+\begin{equation*}
+    \begin{aligned}
+        \norm{x}_2 &= \sqrt{\sum_{k=1}^{\infty} x_k^2},  \\ 
+        \norm{x}_1 &= \sum_{k=1}^{\infty} \abs{x_k},  \\
+        \norm{x}_\infty &= \max_{1 \le k \le n} \abs{x_k}.
+    \end{aligned}
+\end{equation*}
+where $x = \left( x_1, x_2, \ldots, x_n \right) \in \bK^n$. 
+It can be verified that all of them above are norms. 
+They are known as $2$-norm, $1$-norm and $\infty$-norm respectively. 
+\end{example}
+
+\begin{example}
+Consider the set $C[a, b]$. 
+For $f \in C[a, b]$, define 
+\begin{equation*}
+    \norm{f} = \max_{t \in [a, b]} \abs{f(t)}. 
+\end{equation*}
+The induced distance coincides with that given in Example 
+\ref{ex:metric_spaces:induction:cab}. 
+Under this norm, $C[a, b]$ is a Banach space. 
+\end{example}
+
+\begin{example}
+The linear space $l^\infty = \left\{ x = \left(x_1, x_2, \ldots \right): 
+x \text{ is bounded.} \right\}$ equipped with the norm 
+\begin{equation*}
+    \norm{x} = \sup_{n \in \bN^\ast} \abs{x_n} 
+\end{equation*}
+is an inseparable Banach space. 
+\end{example}
+
+\begin{example}
+The set $V[a, b]$ of all BV function (Definition 
+\ref{def:bounded_variation_function}) along with the norm 
+\begin{equation}
+    \label{equ:banach_spaces:norms:vab_norm}
+    \norm{x} = \abs{f(a)} + V_a^b(f)
+\end{equation}
+is a Banach space. 
+\end{example}
+\begin{proof}
+\textbf{Step 1. }
+Obviously, $\norm{f} \ge 0$ for every $f \in V[a, b]$ and $\norm{f} = 0$ 
+if $f = 0$. Assuming that $\norm{f} = 0$, then for any $t \in [a, b]$, 
+\begin{equation*}
+    \abs{f(t)} \le \abs{f(t) - f(a)} + f(a) \le V_a^b(f) + f(a) = 0. 
+\end{equation*}
+The absolute homogeneousness is easy to verified. 
+
+\textbf{Step 2. }
+Let $f, g \in V[a, b]$. We need to show $\norm{f + g} = \abs{f(a) + g(a)} 
++ V_a^b(f + g) \le \norm{f} + \norm{g} = \abs{f(a)} + \abs{g(a)} + 
+V_a^b(f) + V_a^b(g)$.
+For any partition $T: a = x_0 < x_1 < \cdots < x_n = b$, 
+\begin{equation*}
+    \begin{aligned}
+        V_T(f + g) &= \sum_{k = 1}^{n} 
+            \abs{f(x_k) + g(x_k) - f(x_{k-1} - g(x_{k-1}))} \\
+        &\le \sum_{k=1}^{n} \left[ \abs{f(x_k) - f(x_{k-1})} 
+            + \abs{g(x_k) - g(x_{k-1})} \right] \\
+        &= V_T(f) + V_T(g). 
+    \end{aligned}
+\end{equation*}
+Therefore, $V_a^b(f + g) \le V_a^b(f) + V_a^b(g)$. 
+Consequently, the function defined by Equation 
+(\ref{equ:banach_spaces:norms:vab_norm}) is a norm. 
+
+\textbf{Step 3. }
+Let $\{ f_n \}_{n=1}^{\infty}$ be a Cauchy sequence in $V[a, b]$. 
+Then for any $t \in [a, b]$, there exists $n, m \in \bN$ such that 
+\begin{equation*}
+    \begin{aligned}
+        \abs{f_n(t) - f(t)} &= \abs{f_n(t) - f_m(t) - f_n(a) - f_m(a) 
+            + f_m(a) + f_n(a)} \\
+        &\le V_a^b(f_n - f_m) + \abs{f_m(a) - f_n(a)} = \norm{f_n - f_m}. 
+    \end{aligned}
+\end{equation*}
+Therefore, for any $t \in [a, b]$, $\{ f_n(t)_n \}_{n=1}^{\infty}$ 
+converges, to $f(t)$ say. 
+We claim that $\{ f_n \}_{n=1}^{\infty}$ converges to $f$, which is a BV 
+function. 
+Indeed, for any $\epsilon > 0$, there exists $N \in \bN$ such that 
+$\norm{f_n - f_m} < \epsilon$ for any $n, m > N$, whence for any partition 
+$T: a = x_0 < x_1 < \cdots < x_p = b$, we have 
+\begin{equation*}
+    \abs{f_n(a) - f_m(a)} + V_T(f_n - f_m) < \epsilon. 
+\end{equation*}
+Letting $n \to \infty$ yields 
+\begin{equation*}
+    \abs{f(a) - f_m(a)} + V_T(f - f_m) \le \epsilon. 
+\end{equation*}
+It follows that for $m > N$, 
+\begin{equation*}
+    \abs{f(a) - f_m(a)} + V_a^b(f - f_m) \le \epsilon, 
+\end{equation*}
+which means $f \in V[a, b]$ (sum of BV functions is a BV function) 
+$\lim_{n \to \infty} f_n = f$. 
+\end{proof}
+
+\begin{defn}
+The linear space $X = C[a, b]$ along with the norm 
+\begin{equation*}
+    \norm{x} = \int_{a}^{b} \abs{x(t)} \diff t
+\end{equation*}
+is not complete. 
+\end{defn}
+
+\begin{prop}
+Suppose that $\{x_n\}_{n=1}^\infty, \{y_n\}_{n=1}^\infty$ are sequences in 
+a normed space $(X, \norm{\wdot})$ and $\{\alpha_n\}_{n=1}^\infty$ is a 
+sequence in $\bK$. 
+If $x_n \to x \in X$, $y_n \to y \in X$ and $\alpha_n \to \alpha$ as $n \to 
+\infty$, then $x_n + y_n \to x + y$ and $\alpha_n x_n \to \alpha x$. 
+\end{prop}
+
+\begin{thm}
+Let $X$ be a normed space and $\{x_n\}_{n=1}^\infty$ is a sequence in $X$. 
+If $X$ is complete and series $\sum_{n=1}^\infty \norm{x_n}$ converges, 
+then the series $\sum_{n=1}^\infty x_n$ converges and 
+\begin{equation*}
+    \norm{\sum_{n=1}^{\infty} x_n} \le \sum_{n}^{\infty} \norm{x_n}. 
+\end{equation*}
+
+Conversely, if $\sum_{n = 1}^{\infty} x_n$ converges always implies that 
+$\sum_{n = 1}^{\infty} x_n$ converges, then $X$ is complete. 
+\end{thm}
+\begin{proof}
+If $X$ is complete and $\sum_{n=1}^{\infty} \norm{x_n}$ is convergent, 
+setting $S_N = \sum_{n=1}^{N}$, then it suffices to prove that $\{S_n\}$ 
+is a Cauchy sequence, which is shown by 
+\begin{equation*}
+    \begin{aligned}
+        \norm{S_m - S_n} &= \norm{x_{n+1} + x_{n+2} + \ldots + x_{m}} \\ 
+        &\le \norm{x_{n+1}} + \norm{x_{n+2}} + \ldots + \norm{x_{m}} 
+            \to 0, \quad \text{as } n, m \to \infty. 
+    \end{aligned}
+\end{equation*}
+
+Suppose conversely, for every $\{ x_n \}_{n=1}^{\infty}$, convergence of 
+$\sum_{n=1}^{\infty} \abs{x_n}$ implies $\sum_{n=1}^{\infty} x_n$. 
+Assume that $\{ x_n \}_{n=1}^{\infty}$ is a Cauchy sequence in $X$. 
+Then for every $i \in \bN$, there exists $N_i \in \bN$ such that 
+\begin{equation*}
+    \norm{x_n - x_m} < \frac{1}{2^i}, \quad \text{for any } n, m > N_i. 
+\end{equation*}
+Choosing $\{ n_k \}_{k=1}^{\infty}$ such that $n_k > N_k$ and 
+$n_{k+1} > n_{k}$, then 
+\begin{equation*}
+    \norm{x_{n_{k+1}} - x_{n_k}} < \frac{1}{2^k}. 
+\end{equation*}
+Consider the series $x_{n_1} + \sum_{k=1}^{\infty} 
+(x_{n_{k + 1}} - x_{n_k})$, which is absolutely convergent by the above 
+Equation. 
+By our assumption, $x_{n_1} + \sum_{k=1}^{\infty} (x_{n_{k + 1}} - x_{n_k})$ 
+is convergent. 
+As $x_{n_{m+1}} = x_{n_1} + \sum_{k = 1}^{m} (x_{n_{k+1}} - x_{n_{k}})$, 
+$\{x_{n_k}\}_{k=1}^\infty$ converges to some $x \in X$. 
+Therefore, by Theorem 
+\ref{thm:metric_spaces:completeness:convergent_subsequence}, 
+$X$ is complete. 
+\end{proof}
+
+\begin{rmk}
+In general, absolute convergence in an arbitrary normed space does not 
+imply convergence. 
+\end{rmk}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Convex Sets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Convex Sets}
+\begin{defn}
+\index{convex set}
+Let $X$ be a linear space and $A \subseteq X$. 
+$A$ is a \emph{convex set} if for all $x, y \in A$ and for all $t \in [0, 1]$, 
+\begin{equation*}
+    tx + (1-t) y \in A.
+\end{equation*}
+\end{defn}
+
+About convex sets, we have a simple fact. 
+\begin{prop}
+The intersection of any class of convex sets remains convex. 
+\end{prop}
+Henceforce, it is fine to define the \emph{convex hull} of arbitrary set 
+$A$ as the intersection of all convex sets containing $A$, denoted by 
+$\co(A)$. 
+Clearly, the convex hull of a set $A$ is the smallest set that contains $A$. 
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{functional}{convex_hull}
+    \caption{Illustration of convex hull. }
+\end{figure}
+
+\begin{example}
+The unit ball $B(x, 1)$ in a normed space $X$ is a convex set 
+for any given $x \in X$. 
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: L^p Spaces
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$L^p$ Spaces}
+Recall that given $p \in [1, \infty]$ and measure space $(X, \cF, \mu)$, 
+space $L^p(X, \cF, \mu)$ consisting of all real valued measurable functions 
+$f$ such that $\abs{f} ^p$ is integrable ($1 \le p < \infty$) or that is  
+bounded a.e. (essentially bounded) ($p = \infty$), along with the norm 
+\begin{equation*}
+    \norm{f}_p = \left( \int_{X} \abs{f}^p \right) ^\frac{1}{p}, \quad 
+    p \in [0, 1)
+\end{equation*}
+or 
+\begin{equation*}
+    \norm{f}_\infty = \esssup \norm{f} 
+    \coloneqq \inf \left\{ a \in \bR_+: \mu(\abs{f} > a) = 0 \right\}
+\end{equation*}
+is a normed space. 
+See Chapter \ref{chp:lp_spaces}. 
+For the sake of conciseness, we simply write $L^p$ when it is unambiguous. 
+
+\begin{thm}
+The $L^p (1 \le p \le \infty)$ space is a Banach space.  
+\end{thm}
+\begin{proof}
+We first deal with the case $p \in [0, \infty)$. 
+Suppose that $\{ f_n \}_{n=1}^{\infty}$ is a Cauchy sequence in $L^p$. 
+Then by definition of Cauchy sequence we can find a subsequence 
+$\{ f_{n_k} \}_{k=1}^{\infty}$ of it such that 
+\begin{equation*}
+    \norm{f_{n_{i+1}} - f_{n_i}} < \frac{1}{2^i}, \quad i \in \bN^\ast.
+\end{equation*}
+For $k \in \bN^\ast$, put 
+\begin{equation*}
+    g_k = \abs{f_{n_1}} + \sum_{i=1}^{k} \abs{f_{n_{i+1}} - f_{n+i}} 
+\end{equation*}
+and 
+\begin{equation*}
+    g = \abs{f_{n_1}} + \sum_{i=1}^{\infty} \abs{f_{n_{i+1}} - f_{n+i}}. 
+\end{equation*}
+It follows from triangle inequality (Minkowski's inequality) that 
+\begin{equation*}
+    \norm{g_k}_p \le \norm{f_{n_1}}_p + 
+        \sum_{i=1}^{k} \norm{f_{n_{k+1}} - f_{n_k}}_p 
+    \le \norm{f_{n_1}}_p + 1. 
+\end{equation*}
+Since $g_k$ is monotonic and non negative, by Monotone Convergence Theorem 
+we have 
+\begin{equation*}
+    \int_{X} g^p \diff x = \lim_{k \to \infty} \int_{X} g_k^p \diff x 
+    \le \left( \norm{f_{n_1}} + 1 \right) ^p < \infty, 
+\end{equation*}
+which implies $g \in L^p$ and thus $g < \infty$ a.e.. 
+Therefore, $\lim_{i \to \infty} f_{n_i} = f_{n_1} + \sum_{i=1}^{\infty}$ 
+converges a.e.. 
+Setting $f =  \lim_{i \to \infty} f_{n_i}$, it follows from 
+\begin{equation*}
+    \abs{f} = \lim_{k \to \infty} \abs{f_{n_1} 
+        + \sum_{i=1}^{k} \left( f_{n_{i+1}} - f_{n_i} \right)} 
+    \le \lim_{k \to \infty} g_k = g, \quad \text{a.e.}
+\end{equation*}
+that $f \in L^p$. 
+Furhermore, 
+\begin{equation*}
+    \norm{f - f_{n_k}}_p = \norm{\sum_{i=k}^{\infty} 
+        (f_{n_{i+1}} - f_{n_k})}_p 
+    \le \sum_{i=k}^{\infty} \norm{ f_{n_{k+1}} - f_{n_k}}_p 
+    \le \frac{1}{2^{k-1}} \to 0
+\end{equation*}
+as $k \to \infty$. 
+In this way, we have found a convergent subsequence of $\{ f_n \}_{n=1}
+^{\infty}$. 
+Hence $L^p (1 \le p < \infty)$ is complete. 
+
+
+\end{proof}
+
+\begin{thm}
+\begin{enumerate}
+    \item For $p \in [0, \infty$, $L^p$ is separable. 
+    \item $L^\infty$ is inseparable. 
+\end{enumerate}
+\end{thm}
+\begin{proof}
+
+\end{proof}
+
+\section{Properties of Normed Spaces}
+\begin{thm}
+Every normed space is isometric to a dense subspace of a Banach space. 
+\end{thm}
+\begin{proof}
+The process of completion of normed space is the same as of metric space, 
+except that we have to make the set of all elements a vector space, by 
+introducing addition and scalar multiplication to it. 
+\end{proof}
+
+Suppose that $X$ is a linear space and $M$ is a subspace of $X$. 
+Define a relation $\sim$ in $X$ as $x \sim y \iff x - y \in M$. 
+It is easy to see that $\sim$ is a equivalence relationship. 
+
+\begin{defn}[Equivalent norms]
+Let $X$ be a linear space. 
+Two norms $\norm{\wdot}_1$, $\norm{\wdot}_2$ are said to be 
+\emph{equivalent} if there exists $c_1$, $c_2 \in \bR_+$ such that 
+\begin{equation*}
+    c_1 \norm{x}_1 \le \norm{x}_2 \le c_2 \norm{x}_1, \quad 
+    \text{for any } x \in X. 
+\end{equation*}
+\end{defn}
+It is easy to see that equivalence of norms is a equivalence relation. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Finite-dimensional Normed Spaces
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Finite-dimensional Normed Spaces}
+\begin{thm}
+The norms on a finite-dimensional normed space are equivalent. 
+\end{thm}
+\begin{proof}
+Let $\norm{\wdot}$ be a norm on a $n$-dimensional linear space $X$. 
+There exists $n$ linearly independent vectors $e_i$, $1 \le n \le n$ 
+in $X$ such that $X = \mspan \left\{ e_1, e_2, \ldots, e_n \right\}$. 
+Then it suffices to prove that $\norm{\wdot}$ on $X$ is equivalent to 
+a specified norm $\norm{\wdot}_\infty$, which is defined as 
+\begin{equation*}
+    \norm{x}_\infty = \max_{1 \le i \le n} \abs{\alpha_i} 
+\end{equation*}
+for any $x = \sum_{i=1}^{n} \alpha_i e_i \in X$, $\alpha_i \in \bK$, 
+$1 \le i \le n$. 
+It is easy to show that $\norm{\wdot}_\infty$ is a norm on $X$. 
+
+For $x = \sum_{i=1}^{n} \alpha_i e_i$, 
+\begin{equation}
+    \label{equ:banach_spaces:finite_dimensional:equivalent_norms:1}
+    \begin{aligned}
+        \norm{x} &= \norm{\sum_{i=1}^{n}\alpha_i e_i} 
+        \le \sum_{i=1}^{n} \norm{\alpha_i e_i} \\ 
+        &= \sum_{i=1}^{n} \abs{\alpha_i} \norm{e_i} 
+        \le \max_{1 \le i \le n} \sum_{i=1}^{n} \norm{e_i} \
+        = \norm{x}_\infty c_1, 
+    \end{aligned}
+\end{equation}
+where $c_1 \coloneqq \sum_{i=1}^{n} \norm{e_i}$. 
+Next, consider $f: \bK^n \to \bR$, $f(\alpha_1, \alpha_2, \ldots, \alpha_n) 
+= \norm{\sum_{i=1}^{n} \alpha_i e_i}$. 
+We claim that $f$ is continuous, since for for $(\alpha_1, \alpha_2, \ldots, 
+\alpha_n)$, $(\beta_1, \beta_2, \ldots, \beta_n) \in \bK^n$, 
+\begin{equation*}
+    \begin{aligned}
+        \abs{f(\alpha_1, \alpha_2, \ldots, \alpha_n) - 
+            f(\beta_1, \beta_2, \ldots, \beta_n)} 
+        &= \abs{\norm{\sum_{i=1}^{n} \alpha_i e_i} 
+            - \norm{\sum_{i=1}^{n} \beta_i e_i}} \\ 
+        &\le \norm{\sum_{i=1}^{n} \alpha_i e_i - 
+            \sum_{i=1}^{n} \beta_i e_i} 
+        = \norm{\sum_{i=1}^{n} (\alpha_i - \beta_i) e_i} \\
+        &\le \sum_{i=1}^{n} \abs{\alpha_i - \beta_i} \norm{e_i} 
+        \le \left( \max_{1 \le i \le n} \right) \sum_{i=1}^{n} \norm{e_i}. 
+    \end{aligned}
+\end{equation*}
+Let $\Omega = \left\{ \left(\alpha_1, \alpha_2, \ldots, \alpha_n \right): 
+\max_{1 \le i \le n} \abs{\alpha_i} = 1\right\}$, which is obviously is 
+a bounded closed subset of $\bK^n$ and thus compact in $\bK^n$. 
+This implies that $f$ attains its minimum on $\Omega$. 
+Let $c_2 = \min_{(\alpha_1, \alpha_2, \ldots, \alpha_n) \in \Omega} 
+\norm{\sum_{i=1}^{n} e_i}$. 
+Then we have for any $x = \sum_{i=1}^{n} \alpha_i e_i$, 
+\begin{equation}
+    \label{equ:banach_spaces:finite_dimensional:equivalent_norms:2}
+    \norm{x} = \max_{1 \le i \le n} \abs{\alpha_i} 
+        \norm{\frac{x}{\max_{1 \le i \le n} \abs{\alpha_i}}}
+    \ge c_2 \norm{x}_\infty.
+\end{equation}
+Combining, Equation (\ref{equ:banach_spaces:finite_dimensional:equivalent_norms:1}) 
+and (\ref{equ:banach_spaces:finite_dimensional:equivalent_norms:2}), it 
+follows that $\norm{\wdot}$ is equivalent to $\norm{\wdot}_\infty$. 
+\end{proof}
+
+Let $X$ be an $n$-dimensional normed space and define 
+\begin{equation*}
+    \begin{aligned}
+        T: X &\to \bK^n,  \\ 
+        x = \sum_{i=1}^{n} \alpha_i e_i &\mapsto 
+            (\alpha_1, \alpha_2, \ldots, \alpha_n) 
+    \end{aligned}
+\end{equation*}
+where $\left\{ e_1, e_2, \ldots, e_n \right\}$ is a basis of $X$. 
+And we further equip $\bK^n$ with the standard Euclidean norm. 
+Then by the theorem above, we know that $T$ is a topological homeomorphism 
+from $X \to \bK^n$. 
+In this sense, call $n$-dimensional normed spaces are topologically the same 
+as $\bK^n$. 
+
+We have already known that bounded closed sets in $\bK^n$ are compact, 
+and by the theorem above, so does in finite-dimensional normed space. 
+We can further show that this property is also a characterization of 
+finite-dimensional normed space. 
+Before stating the miraculous result, we need the following lemma: 
+\begin{lemma}[F.Riesz's Lemma]
+\label{lemma:banach_spaces:finite_dimensional:f_riesz_lemma}
+Let $X_9$ be a proper closed subspace in a normed space $X$. 
+Then for any $\epsilon > 0$, there exists $y_0 \in X$ such that 
+$\norm{y_0} = 1$ and $\norm{y_0 - x} > 1 - \epsilon$ for every $x \in X_0$. 
+\end{lemma}
+\begin{proof}
+As $X_0$ is a proper closed subsequence of $X$, we can find some point $y 
+\in X \ X_0$ and thus $d(y, X_0) = \inf_{x \in X_0} \norm{y - x} > 0$. 
+Setting $\epsilon > 0$, there exists $x_1 \in X_0$ such that $d(y, X_0) \le 
+\norm{y - x_1} < \frac{d(y, X_0)}{1 - \epsilon}$. 
+Set $y_0 = \frac{y - x_1}{\norm{y - x_1}}$. 
+Then $\norm{y_0} = 1$ and for any $x \in X_0$, 
+\begin{equation*}
+    \begin{aligned}
+        \norm{y_0 - x} 
+        &= \norm{\frac{y-x_1}{\norm{y - x_1}} - x} 
+        = \frac{1}{\norm{y - x_1}} \norm{y - \left( x_1 + \norm{y - x_1}x \right)} \\
+        &\ge \frac{d}{\norm{y - x_1}} > \frac{d}{\frac{d}{1-\epsilon}} = 1 - \epsilon. 
+    \end{aligned}
+\end{equation*}
+This completes the proof. 
+\end{proof}
+
+\begin{thm}
+A normed space is finite-dimensional if and only if every bounded closed 
+set in the space is compact. 
+\end{thm}
+\begin{proof}
+The necessity is the famous Heine-Borel Theorem. 
+
+For sufficiency, assume that every bounded closed subset in $X$ is compact 
+while $X$ is infinite-dimensional. 
+Let $S = \left\{ x \in X: \norm{x} = 1\right\}$. 
+Then $S$ is bounded and closed (Why?). 
+Firstly, choose some $x_1 \in S$ and let $X_0 = \mspan{x_1}$. 
+Then $X_0$ is a proper closed subspace of $X$, whence there exists $x_2 \in 
+S$ such that $\norm{x_2 - x_1} > \frac{1}{2}$ by Lemma 
+\ref{lemma:banach_spaces:finite_dimensional:f_riesz_lemma}. 
+Next, set $X_1 = \mspan \left\{ x_1, x_2\right\}$. 
+$X_1$ is a proper closed subspace of $X$, whence there exists $x_3 \in 
+S$ such that $\norm{x_2 - x_1} > \frac{1}{2}$, $\norm{x_3 - x_1} > 
+\frac{1}{2}$ by Lemma \ref{lemma:banach_spaces:finite_dimensional:f_riesz_lemma}. 
+Repeating this process, we obtain a sequence $\{ x_n \}_{n=1}^{\infty}$ 
+such that $\norm{x_n} = 1$ and $\norm{x_n - x_m} > \frac{1}{2}$ for any 
+$n, m \in \bN$, $n \neq m$. 
+Therefore, $\{ x_n \}_{n=1}^{\infty}$ is not compact because any subsequence 
+of $\{ x_n \}_{n=1}^{\infty}$ does not converges. 
+However, $\{ x_n \}_{n=1}^{\infty}$ is a bounded and closed subset in $X$, 
+which contradicting our hypothesis. 
+\end{proof}

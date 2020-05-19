@@ -1,0 +1,84 @@
+\chapter{Generalized Functions}
+\section{Background}
+Generalized functions (also called distributions) are extensions to the 
+classical notion of functions. Distribution theory reinterprets functions 
+as linear functions acting on a space of \emph{test functions}. The 
+different choices of the spaces of test functions lead to different spaces 
+of distributions. Conventional functions act by integration against a test 
+function, but many other linear functions do not arise in this way, and 
+these are the generalized functions.
+
+In physics, people find it convenient to introduce the so-called dirac 
+$\delta$ to describe formally the distributions of physical quantities. 
+The Dirac $\delta$ function is defined by 
+\begin{equation}
+\label{equ: dirac_cond1}
+    \delta_y (x) = \begin{cases}
+        \infty, & x = y \\
+        0, & x \neq y, 
+    \end{cases}
+\end{equation}
+along with 
+\begin{equation}
+\label{equ: dirac_cond2}
+    \int _{-\infty} ^\infty \delta_y(x) \diff x = 1.
+\end{equation}
+
+However, no classical function satisfies conditions \ref{equ: dirac_cond1} 
+and \ref{equ: dirac_cond2}. We can due with this problem with generalized 
+functions.
+
+\section{The space $D(\Omega)$}
+First, let us introduce some concepts and notations.
+
+\begin{defn}
+Let a multi-index $\alpha = (\alpha_1, \alpha_2, \ldots, 
+\alpha_n)$. Denote $\partial _j = \frac{\partial}{\partial_j}$, $j \in 
+\bZ ^+_n$ and 
+\begin{equation}
+    \partial_\alpha = \partial_{\alpha_i} \partial_{\alpha_i}  \dots 
+    \partial_{\alpha_n} u.
+\end{equation}
+For $\alpha = (0, 0, \ldots, 0)$, we set $\partial_\alpha$ the identity 
+mapping.
+\end{defn}
+
+By $C^{\infty} _0(\Omega)$, we denote those functions in $C^\infty(\Omega)$ 
+with compact support, \ie, those functions in $C^\infty(\Omega)$ vanishes 
+outside a compact set of $\Omega$.
+
+\begin{example}
+A standard example of the space $C^{\infty} _0(\bR ^n)$ is 
+\begin{equation}
+    j(x) = \begin{cases}
+        C_n \exp( - \frac{1}{1-\norm{x}^2 }) , & \norm{x} \le 1 \\
+        0, & \norm{x} > 1, 
+    \end{cases}
+\end{equation}
+where $C_n$ is defined as
+\begin{equation}
+    C_n = \left(\int _{\norm{x} \le 1} \exp(-\frac{1}{1 - \norm{x}^2})\diff 
+    x\right) ^{-1}.
+\end{equation}
+\end{example}
+
+\begin{defn}
+Denote $D(\Omega)$ a space consisting of exactly the functions in 
+$C_0^\infty(\Omega)$ along with the understanding of convergence as $\phi_n
+\in D(\Omega)$ converges to $\phi \in D(\Omega)$ if the following 
+requirements are satisfied:
+\begin{enumerate}
+    \item there exists a compact subset $K \in \Omega$ such that 
+    \begin{equation}
+        \phi(x) = 0, \text{for any } x \in \Omega \backslash K \text{ and 
+        any } n, 
+    \end{equation}
+    \item for any fixed multi-index $\alpha$, $\partial _\alpha \phi_n$ 
+    converges uniformly to $\partial _\alpha \phi$ on $K$, \ie
+    \begin{equation}
+        \max _{x\in K} \abs{\partial _\alpha \phi _n - \partial _\alpha \phi}
+        \to 0 (n \to \infty).
+    \end{equation}
+
+\end{enumerate}
+\end{defn}

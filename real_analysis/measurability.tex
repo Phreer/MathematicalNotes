@@ -1,0 +1,115 @@
+\chapter{Lebesgue Measurability}
+This chapter is mainly focused on Lebesgue measurability. First we need 
+to clarify some concepts. 
+Suppose $\{f_n\}$ is a sequence of extended-real-valued functions on 
+$X$. 
+If
+\begin{equation}
+    f(x) = \lim_{n\to\infty} f_n(x)
+\end{equation}
+exists for every point in $X$, then we call $f$ the point wise limit of 
+sequence $\{f_n\}$. $\sup_n f_n$ and $\limsup _n f_n$ are functions defined 
+on $X$ that 
+\begin{align}
+    \left(\sup_n f_n \right)(x) &= \sup_n f_n(x), \\
+    \left(\limsup_{n\to\infty}f_n\right) (x) &= \limsup_{n\to\infty} f_n(x).
+\end{align}
+
+\begin{thm}
+\label{thm: measurability_of_sup}
+If ${f_n}$ is a sequence of measurable functions $X \to [-\infty, \infty]$ 
+and $h = \sup_n f_n$, $g = \limsup_{n\to\infty} f_n$, then $h$ and $g$ are 
+measurable functions.
+\end{thm}
+
+\begin{defn}
+\index{Simple functions}
+A complex function $s$ on a measurable set $X$ is called a simple function 
+if its range consists of only finitely many values. Among these are 
+nonnegative simple functions, whose range is a finite subset of $[0, 
+\infty)$. Note that we explicitly exclude $\infty$ from the values of 
+simple functions.
+\end{defn}
+A simple function can be represented as 
+\begin{equation}
+    s = \sum_{i = 1}^n s_i \chi_{A_i}.
+\end{equation}
+Simple functions play an essential role in real analysis, since they are 
+very good approximation to measurable functions. In fact \dots.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Lebesgue's Monotone Convergence Theorem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thm}[Lebesgue's Monotone Convergence Theorem]
+\index{theorem!Lebesgue's Monotone Convergence Theorem}
+\index{Lebesgue's Monotone Convergence Theorem}
+Let $\{f_n\}$ be a sequence of measurable functions on $X$, and suppose 
+that
+\begin{enumerate}
+    \item $0 \le f_1 \le f_2 \le \cdots \le \infty$;
+    \item $f_n(x) \to f(x)$ as $n\to \infty$ for any $x \in X$.
+\end{enumerate}
+Then $f$ is measurable, and 
+\begin{equation}
+    \int _X f_n(x) \diff \mu \to \int _X f(x) \diff \mu.
+\end{equation}
+\end{thm}
+
+\begin{proof}
+Since $\int f_n \le \int f_{n+1}$, there exists an $\alpha \in [0, \infty]$ 
+such that 
+\begin{equation}
+    \int f_n \to \alpha.
+\end{equation}
+Since $f = \sup f_n$, with theorem \ref{thm: measurability_of_sup}, 
+we know that $f$ is measurable. Besides, $\int f_n \le \int f$ for every 
+$n$, so $\alpha \le \int f$.
+
+Let $s$ be any simple measurable function satisfying $0 \le s \le f$, 
+$c$ be a constant in $(0, 1)$ and denote 
+\begin{equation}
+    E_n = \{x: f_n(x) \le cs(x) \} \ \ (n=1, 2, \cdots).
+\end{equation}
+Then we make two observations 
+\begin{enumerate}
+    \item For any $n$, $E_n$ is measurable, $E_n \subseteq E_{n+1}$, and 
+    $X = \bigcup_n E_n$. To see the last identity, consider some $x \in X$.
+    If $f(x) = 0$, then clearly $x \in E_1$; else $f(x) > 0$, then since 
+    $0< s \le f$, $\lim_{n\to\infty}f_n=f$ and $c < 1$, $x \in E_n$ for 
+    some sufficiently large $n$.
+    \item 
+\end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Fatou's Lemma
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thm}[Fatou's Lemma]
+\index{Lemma!Fatou's Lemma}
+\index{Fatou's Lemma}
+If $\{f_n\}$ is a sequence of measurable nonnegative functions. then 
+\begin{equation}
+\label{equ: fatou}
+    \int_X \left( \liminf _{n\to\infty} f_n(x)\right) \diff \mu \le 
+    \liminf_{n\to\infty} \int_X f_n(x) \diff \mu.
+\end{equation}
+\end{thm}
+
+\begin{proof}
+Let $g_k(x) = \inf_{i \ge k} f_i(x)$. Then $g_k(x) \le f_k(x)$ and $g_k$ is 
+a measurable function by theorem \ref{thm: measurability_of_sup}. Thus 
+\begin{equation}
+    \int_X g_k(x) \diff \mu \le \int_X f_k(x) \diff \mu, \forall k \in 
+    \bN^\ast.
+\end{equation}
+Noticing that $0 \le g_1(x) \le g_2(x) \le \cdots$ and $\lim_{k\to \infty}
+g_k = \limsup_{n\to\infty}f_n$, by Lebesgue's monotone convergence theorem, 
+$\int_X g_k(x) \diff \mu$ converges to left side of equation 
+\ref{equ: fatou} as $k\to\infty$. Hence 
+\begin{equation}
+    \liminf_{k\to \infty} \int_X g \diff\mu 
+    = \lim_{k\to\infty}g_k(x)\diff\mu 
+    = \int_X \liminf_{n\to\infty} f_n \diff \mu 
+    \le \liminf _{k\to\infty} \int_X f_n(x) \diff \mu.
+\end{equation} 
+\end{proof}

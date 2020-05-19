@@ -1,0 +1,65 @@
+\chapter{$L^p$ Spaces}
+\label{chp:lp_spaces}
+\section{$L^2$ Spaces}
+\begin{defn}[$L^p$ space]
+\index{$L^p$ space}
+\index{space!$L^p$ \~{}}
+Suppose $a$, $b \in \bR$, $p \in [1, \infty)$ and $-\infty < a < b < \infty$. 
+Let $L^p([a, b])$ denote all the Lebesgue measurable functions 
+$u: [a,b] \to \bR$ such that 
+\begin{equation}
+    \int _a ^b \abs{u(x)} ^p \diff x < \infty.
+\end{equation}
+When not leading to ambiguousness, we may omit the domain where the 
+functions are defined, just writing $L^p$.
+\end{defn}
+
+Addition and scalar multiplication can be introduced as the ordinary 
+pointwise addition and scalar multiplication of functions. 
+Naturally, the domain of $L^p$ can be easily extend to $\bR ^n$, $n \ge 1$.
+
+\begin{thm}
+\label{thm: l2inl1}
+Square-integrable functions are absolutely integrable, \ie, $L^2 \in L^1$.
+\end{thm}
+\begin{proof}
+Proof is easily obtained by the inequality
+\begin{equation}
+    \abs{u} \le \frac{1 + u^2}{2}.
+\end{equation}
+\end{proof}
+\begin{thm}
+    $L^p$ space is a linear space.
+\end{thm}
+\begin{proof}
+Suppose $u, v \in L_2$. From the basic inequality, we have 
+\begin{equation}
+    \abs{uv} \le \frac{u^2 + v^2}{2}.
+\end{equation}
+Along with theorem \ref{thm: l2inl1}, $uv$ is square-integrable.
+\begin{equation}
+    (u + v) ^2 = u ^2 + 2uv + v^2, 
+\end{equation}
+which means $u+v$ is a square-integrable function, \ie, $u + v \in L_2$.
+
+Obviously, $\alpha u$ is square-integrable for any $alpha \in \bR$.
+\end{proof}
+
+By introducing inner product to $L_2$, we make $L_2$ a Hilbert space. 
+Define
+\begin{equation}
+\label{equ:l2inp}
+    \inp{u}{v} = \int _a ^b u(x)v(x) \diff x.
+\end{equation}
+By induction, norm on $L_2$ is given as 
+\begin{equation}
+    \norm{u} = \sqrt{\inp{u}{u}}.
+\end{equation}
+
+\begin{thm}
+With inner product defined in \ref{equ:l2inp}, $L_2$ is a Hilbert space.
+\end{thm}
+\begin{proof}
+Clearly, formula \ref{equ:l2inp} is well-defined inner product of $L_2$. 
+Then the only thing left is to prove $L_2$ is complete. 
+\end{proof}

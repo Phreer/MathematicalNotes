@@ -1,0 +1,209 @@
+\chapter{Eigenvalues and Eigenvectors}
+
+\section{Introduction}
+\begin{defn}
+Suppose $A$ is a $n$ by $n$ matrix. A complex number $\lambda$ is an 
+eigenvalue of $A$ if there exists a nonzero vector $v \in \br^n$ such that 
+\begin{equation}
+\label{equ: eigen_def}
+    Av = \lambda v.
+\end{equation} 
+And $v$ is called an eigenvector of $A$ corresponding to $\lambda$.
+\end{defn}
+
+Transforming the equation \ref{equ: eigen_def} to $(A-\lambda I)v = 0$, we 
+know that $v$ is in the null space of $(A - \lambda I)$. In the meanwhile, 
+any vector in the null space of $A - \lambda I$ is a eigenvector of 
+eigenvalue $lambda$. 
+Since $v$ is nonzero, we have $A-\lambda I$ is singular, that is, 
+\begin{equation}
+\label{equ: characteristic_equ}
+    \det(A - \lambda I) = 0.
+\end{equation}
+Equation \ref{equ: characteristic_equ} is named the characteristic equation 
+for eigenvalues to satisfy. Conversely, any $\lambda$ satisfying the 
+characteristic equation, $A - \lambda I$ is singular and has nontrivial 
+null space, leading to $Av = \lambda v$ for some $v$. Thus we have the 
+following theorem 
+\begin{thm}
+Let $A$ be an $n$ by $n$ matrix. Then $\lambda$ is an eigenvalue of $A$ 
+if and only if $\lambda$ is a root of the characteristic equation 
+\ref{equ: characteristic_equ}.
+\end{thm}
+
+Obviously, equation \ref{equ: characteristic_equ} is a polynomial of order 
+$n$ with respect to $\lambda$. By the fundamental theorem of algebra, 
+it has $n$ roots in $\bc$, and hence $n$ eigenvalues in $\bc$.
+
+\section{Diagonalization of Matrices}
+Now we assume that a $n$ by $n$ matrix $A$ has $n$ linearly independent 
+eigenvectors $x_1, x_2, \ldots, x_n$, and denote $X = (x_1, x_2, \ldots, 
+x_n)$. By definition, we have $Ax_i = \lambda_i x_i$, $i = 1, 2, \ldots, n$.
+Thus 
+\begin{equation}
+    AX = A(x_1, \ldots, x_n) = (Ax_1, \ldots, Ax_n)
+    = (x_1, \ldots, x_n) \begin{pmatrix}
+    \lambda_{1}    &                  &        &                   \\
+                   & \lambda_2        &        &                   \\
+                   &                  & \ddots &                   \\
+                   &                  &        & \lambda_n
+    \end{pmatrix} 
+    = A \Lambda. 
+\end{equation}
+By linearly independence of the column vectors of $X$, $X$ is invertible. 
+Hence, we can write $AX = X\Lambda$ in two good ways:
+\begin{equation}
+    X^{-1} A X = \Lambda \textrm{ or } A = X \Lambda X^{-1}. 
+\end{equation}
+That is, we have diagonalize $A$ thanks to $X$. The $k$th power of $A$ then 
+can be computed simply by 
+\begin{equation}
+    A^k = (X\Lambda X^{-1})^k = X\Lambda^k X^{-1}.
+\end{equation}
+$A^k$ shares the eigenvectors with $A$ and its eigenvalues are the $k$th 
+power of that of $A$, which is quite straightforward geometrically. An 
+interesting result is that $A^k$ tends to zero matrix if the absolute 
+values of all eigenvalues are less than $1$.
+
+\begin{rmk}
+Note that there is no connection with invertibility and 
+diagonalizability. Invertibility is concerned with eigenvalues (Whether the 
+matrix has a zero eigenvalue or not) while diagonalizability is concerned 
+with the number of linearly independent eigenvectors. 
+\end{rmk}
+
+\begin{thm}
+A matrix $A$ with $n$ distinct eigenvalues is diagonalizable.
+\end{thm}
+
+\subsection{Application of Diagonalization}
+\begin{example}[Fibonacci Number]
+The Fibonacci number is given iteratively by 
+\begin{equation}
+\label{equ: fabonacci_number}
+    F_{n+2} = F_{n} + F_{n + 1} 
+\end{equation}
+and $F_0 = 0$, $F_1 = 1$. Our goal is to obtain a formula for $F_n$.
+
+Let 
+\begin{equation}
+    u_n = \begin{pmatrix}
+        F_{n+1} \\
+        F_{n}
+    \end{pmatrix}.
+\end{equation}
+Then we can rewrite \ref{equ: fabonacci_number} as $u_{n+1} = Au_{n}$ 
+where 
+\begin{equation}
+    A = \begin{pmatrix}
+        1 & 1 \\
+        1 & 0 
+    \end{pmatrix}.
+\end{equation}
+It is easy to find that $A$ has eigenvalues 
+\begin{equation}
+    \lambda_1 = \frac{1 + \sqrt{5}}{2} \textrm{ and } 
+    \lambda_2 = \frac{1 - \sqrt{5}}{2}
+\end{equation}
+with the corresponding eigenvectors 
+\begin{equation}
+    x_1 = \begin{pmatrix}
+        \lambda_1 \\
+        1
+    \end{pmatrix}
+    \textrm{ and }
+    x_2 = \begin{pmatrix}
+        \lambda_2 \\
+        1
+    \end{pmatrix}.
+\end{equation}
+Then $u_0$ can be decomposed to $u_0 = \frac{x_1 - x_2}
+{\lambda_1 - \lambda_2}$, and $u_{n} = A^nu_0 = X\Lambda ^n X^{-1} u_0$. 
+\end{example}
+
+\begin{example}[Linear Constant Coefficient Differential Equations]
+    
+    
+\end{example}[Linear Constant Coefficient Differential Equations]
+
+\section{Square Root of Positive Definite Matrix}
+For positive definite matrix, it is reasonable to give the definition of 
+square root of a matrix. 
+\begin{defn}
+Let $G$ be a positive definite matrix. The square root of $G$ is the 
+positive definite matrix $A$ that $A^2 = G$.
+\end{defn}
+This definition is well-defined by the next theorem.
+\begin{thm}
+Every positive definite matrix has one and only one square root.
+\end{thm}
+\begin{proof}
+\emph{Existence.} $G$ can be reformulated to $G = V^T \Lambda V$ where 
+$\Sigma = (\lambda_1, \cdots, \lambda_n)$ is the matrix of eigenvalues. 
+Denoting $\Lambda^{\frac{1}{2}} = (\sqrt{\lambda_1}, \cdots, 
+\sqrt{\lambda_n})$ and $B = V^T \Lambda^\frac{1}{2} V$, we have 
+\begin{equation}
+    G = V^T \Lambda^\frac{1}{2} V V^T \Lambda^{\frac{1}{2}} V
+    = (V^T \Lambda ^{\frac{1}{2}} V) ^2 = B^2.
+\end{equation}
+Clearly, $B$ has positive eigenvalues $\sqrt{\lambda_1}, \cdots, 
+\sqrt{\lambda_n}$. 
+
+\emph{Uniqueness.} Suppose there exists another positive definite 
+matrix $A$ such that $A^2 = G$. Then $A$ can be decompose as 
+\begin{equation}
+    A = P^T D P, 
+\end{equation}
+where $D = \diag(d_1, d_2, \cdots, d_n)$. Then $P G P^T = P A^2 P^T 
+= P (P^T D P) ^2 P^T = D^2$. That is, $P$ diagonalize $G$, and it follows 
+that up to permutation $d_1^2, d_2^2, \cdots, d_n^2$ are equal to 
+$\lambda_1, \lambda_2, \cdots, \lambda_n$. Without loss of generality, 
+we assume $\lambda_i = d_i$, $i = 1, 2, \cdots, n$. Thus $P C P^T = 
+\Lambda^\frac{1}{2}$, or equivalently, 
+\begin{equation}
+    A = P^T \Lambda^\frac{1}{2} P. 
+\end{equation}
+
+Since $G = B^2 = A^2$, we obtain 
+\begin{equation}
+    \begin{aligned}
+        B^2 &= A^2 \\ \Leftrightarrow
+        V^T \Lambda V &= P^T \Lambda P \\ \Leftrightarrow 
+        (P V^T) \Lambda &= \Lambda (P V^T). 
+    \end{aligned}
+\end{equation}
+Let $W = P V^T$. Then $W$ is commutative with $\Lambda$. 
+
+Suppose 
+\begin{equation*}
+    \Lambda = \begin{pmatrix}
+        \lambda_{i_1}I_1 &                  &        &                   \\
+                         & \lambda_{i_2}I_2 &        &                   \\
+                         &                  & \ddots &                   \\
+                         &                  &        & \lambda_{i_k}I_k
+    \end{pmatrix},
+\end{equation*}
+where $\lambda_{i_j}$ are distinct eigenvalues of $A$ and $I_j$ are 
+identity matrix. Partition $W$ with the same manner, we have 
+\begin{equation*}
+    W = \begin{pmatrix}
+        W_{1, 1}   &    \cdots    &  W_{1, k}         \\
+        W_{2, 1}   &    \cdots    &  W_{2, k}         \\
+        \vdots     &    \ddots    &  \vdots           \\
+        W_{k, 1}   &    \cdots    &  W_{k, k}
+    \end{pmatrix}.
+\end{equation*}
+It follows from $W \Lambda = \Lambda W$ that $\lambda_j W_{i, j} = \lambda
+W_{i, j}$. Since $\lambda_i \neq \lambda_j$ if $i \neq j$, we have 
+$W_{i, j} = 0$ for $i \neq j$. Therefore, it yields that 
+\begin{equation}
+    W\Lambda^\frac{1}{2} = \Lambda\frac{1}{2}W, 
+\end{equation}
+since $\Lambda$ and $\Lambda\frac{1}{2}$ share the same structure. Finally, 
+Noting that $W$ is orthogonal, $\Lambda\frac{1}{2} = W^T \Lambda\frac{1}{2}
+W$. 
+
+Hence, $B = V^T \Lambda^\frac{1}{2} V 
+= V^T (V P^T \Lambda^\frac{1}{2} PV^T) V
+= P^T \Lambda^\frac{1}{2} P = A$.
+\end{proof}

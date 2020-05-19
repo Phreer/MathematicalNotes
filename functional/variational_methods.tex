@@ -1,0 +1,23 @@
+\chapter{Variational Methods}
+Many problems in functional analysis can be formed in the pattern solving 
+\begin{equation}
+    F(u) = 0, 
+\end{equation}
+where $u$ is in a Banach space $V$.
+
+\begin{defn}
+Let $X$ and $Y$ be two normed vector space and $U \in X$ is a open subset 
+of $V$. A function $f: U \to Y$ is called Fréchet-differentiable at $x$ if 
+there exists a bounded linear operator $A: X \to Y$ such that 
+\begin{equation}
+    \lim _{\norm{h} \to 0} \frac{\norm{f(x+h) - f(x) - Ah}_X}
+    {\norm{h}_V} = 0.
+\end{equation}
+We write $D f(x) = A$ and call it the Fréchet derivative of $f$ at $x$.
+The directional (Gateaux-) derivative of $f$ at $x$ in the direction $v$ 
+is defined as 
+\begin{equation}
+    D_vf(x) = \inp{v}{Df(x)}.
+\end{equation}
+\end{defn}
+

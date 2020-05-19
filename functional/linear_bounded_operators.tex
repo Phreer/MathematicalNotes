@@ -1,0 +1,1467 @@
+\chapter{Bounded Linear Operators}
+The operator theory is one of the most essential topics in functional 
+analysis. 
+In this chapter, we will encounter the four ``great theorems'' in 
+functional analysis, \ie, 
+\begin{enumerate*}
+    \item Banach-Steinhaus Theorem (Uniform Boundedness Theorem); 
+    \item Banach Open Mapping Theorem; 
+    \item Inverse Mapping Theorem; 
+    \item Hahn-Banach Theorem. 
+\end{enumerate*}
+
+\section{Bounded Linear Operators and Bounded Linear Functionals} 
+\begin{defn}[Linear operator, linear functional]
+\index{linear functional}
+\index{linear operator}
+Let $X$ and $Y$ be two normed spaces and $D(T)$ be a subspace of $X$. 
+A \emph{linear operator} $T$ from $D(T)$ to $Y$ is a mapping that is linear, 
+\ie, 
+\begin{enumerate}
+    \item $T(x + y) = Tx + Ty$ for any $x, y \in D(T)$; 
+    \item $T(\alpha x) = \alpha Tx$ for any $\alpha \in \bK$ and 
+    $x \in D(T)$. 
+\end{enumerate}
+Denote by $R(T)$ the range of $T$. 
+
+A linear operator $f: X \to Y$ is said to be a \emph{linear functional} 
+If $Y = \bK$. 
+\end{defn}
+
+\begin{defn}[bounded linear operator]
+Let $X$ and $Y$ be two normed spaces and $T: D(T) \subseteq X \to Y$. 
+$T$ is said to be bounded if there exists a constant $M \in \bR_+$ such that 
+$\norm{Tx} \le M \norm{x}$ for every $x \in D(T)$. 
+\end{defn}
+
+An linear operator $T: X \to Y$ is bounded if and only if there exists $M 
+\in \bR_+$ such that $Tx \le M$ for every $x \in X$ satisfying $\norm{x} \le 
+1$. 
+
+\begin{prop}
+If linear operator $T: X \to Y$ is continuous at some $x_0 \in X$, then $T$ 
+is continuous on $X$. 
+\end{prop}
+\begin{proof}
+This is trivial. 
+\end{proof}
+
+\begin{prop}
+A linear operator $T: X \to Y$ is injective if and only if for every 
+$x \in X$ such that $x \neq 0$, $Tx \neq 0$. 
+\end{prop}
+
+\begin{thm}
+Let $X$ be a finite dimensional linear space and $T: X \to X$ be a linear 
+operator. 
+$T$ is a injective if and only if $T$ is surjective. 
+\end{thm}
+\begin{proof}
+To be completed. 
+\end{proof}
+\begin{rmk}
+However, an injective operator on infinite dimensional space may not be 
+surjective. 
+For example, consider $X = l^2$ and $T: X \to X, x = \left(x_1, x_2, 
+\ldots \right) \mapsto \left(0, x_1, x_2, \ldots \right)$. 
+Then obviously $T$ is injective but not surjective. 
+\end{rmk}
+
+\begin{thm}
+A linear operator $T: X \to Y$ is continuous if and only if $T$ is bounded. 
+\end{thm}
+\begin{proof}
+Supposing that $T$ is bounded, then $\norm{Tx} \le M\norm{x}$ implies the 
+continuity of $T$. 
+
+Conversely, supposing $T$ is continuous, then there exists sequence 
+$\{ x_n \}_{n=1}^{\infty}$ such that $\norm{Tx_n} > n\norm{x_n}$ for 
+$n \in \bN^\ast$. 
+Setting $y_n = \frac{x_n}{n \norm{x_n}}$, $n \in \bN^\ast$, then $\norm{y_n} 
+= \frac{1}{n}$. 
+Thus $y_n \to 0$ as $n \to \infty$. 
+However, $\norm{Ty_n} = \frac{\norm{Tx_n}}{n \norm{x_n}} > 1$, whence $Ty_n$ 
+does not converges to $T0$, contradicting the assumption that $T$ is 
+continuous.
+\end{proof}
+
+\begin{defn}[operator norm]
+\index{operator norm}
+Let $T$ be a bounded linear operator from $X$ to $Y$. 
+Define 
+\begin{equation*}
+    \norm{T} = \sup_{\substack{x \in X \\ x \neq 0}} \frac{\norm{Tx}}{\norm{x}}.
+\end{equation*}
+We call $\norm{T}$ the operator norm of $T$.
+\end{defn}
+It can be proven that 
+\begin{equation*}
+    \norm{T} = \inf \left\{ M \in \bR_{+}: \norm{Tx} \le M \norm{x} 
+        \text{ for every } x \in X \right\}.
+\end{equation*}
+Moreover, 
+\begin{equation*}
+    \norm{T} = \sup_{\norm{x} = 1} \norm{Tx} 
+    = \sup_{\norm{x} \le 1} \norm{Tx}. 
+\end{equation*}
+Indeed, on the one hand, by definition 
+\begin{equation*}
+    \begin{aligned}
+        \norm{T} &= \sup_{x \neq 0} \frac{\norm{Tx}}{\norm{x}} 
+        \ge \sup_{\norm{x} \le 1} \frac{\norm{Tx}}{\norm{x}} 
+        &\ge \sup_{\norm{x} \le 1} \norm{Tx} 
+        \ge \sup_{\norm{x} = 1} \norm{Tx}. 
+    \end{aligned}
+\end{equation*}
+On the other hand, for $x \neq 0$, 
+\begin{equation*}
+    \frac{\norm{Tx}}{\norm{x}} = \norm{T\left( \frac{x}{\norm{x}} \right)} 
+    \le \sup_{\norm{x} = 1} \norm{Tx}, 
+\end{equation*}
+implying that $\norm{T} = \sup_{x \neq 0} \frac{\norm{Tx}}{\norm{x}} 
+\le \sup_{\norm{x} = 1} \norm{Tx}$. 
+
+\begin{example}
+Consider the $n$-dimensional Euclidean space $\bR^n$. 
+Let $A = (a_{ij})_{n \times n}$ be an $n \times n$ matrix and define $T_A: X 
+\to X, x \mapsto y$ where $y$ is obtained by matrix multiplication $Ax$. 
+Then $A$ is a bounded as by conventional Cauchy-Schwarz's Inequality 
+(\ref{equ:inequality:cauchy_schwarz_inequality_rn}), 
+\begin{equation*}
+    \begin{aligned}
+        \norm{T_A x} &= \left( \sum_{i=1}^{n} 
+            \abs{\sum_{j=1}^{n} a_{ij}x_j}^2 \right)^\frac{1}{2} 
+        \le \left( \sum_{i=1}^{n} 
+                \left( \sum_{j=1}^{n} \abs{a_{ij}}^2 
+                    \sum_{j=1}^{n} \abs{x_{j}}^2 \right) 
+            \right) \frac{1}{2} \\
+        &= \norm{x}_2 
+            \left( \sum_{i=1}^{n} \sum_{j=1}^{n} 
+            \abs{a_{ij}}^2 \right) ^\frac{1}{2}. 
+    \end{aligned}
+\end{equation*}
+\end{example}
+
+\begin{example}
+\label{ex:bounded_linear_operators:integral_functional}
+Let $g \in C[a, b]$ and define $T: C[a, b] \to \bK, f \mapsto 
+\int_{a}^{b} f(t)g(t) \diff t$. 
+Then $T$ is a linear functional on $C[a, b]$ and 
+\begin{equation*}
+    \abs{Tf} \le \int_{a}^{b} \abs{f g} \diff t 
+    \le \max_{a \le t \le b} \abs{f(t)} \int_{a}^{b} \abs{g} \diff t 
+    = \norm{f} \int_{a}^{b} \abs{g} \diff t. 
+\end{equation*}
+Thus $T$ is bounded and $\norm{T} \le \int_{a}^{b} \abs{g} \diff t$. 
+We next show that $\norm{T} = \int_{a}^{b} \abs{g} \diff t$. 
+\begin{proof}
+Letting $h(t) = \sgn g(t) = \frac{g(t)}{\abs{g(t)}}$ if $g(t) \neq 0$ 
+else $0$, then we have $\abs{h(t)} \le 1$ and $\conj{h(t)} g(t) = 
+\abs{g(t)}$ for every $t \in [a, b]$. 
+By Luzin's Theorem, for any $\epsilon > 0$, there exists $f \in C[a, b]$ 
+such that $\norm{f} \le 1$ and $m(\Omega) \le \epsilon$ where $m$ is the 
+Lebesgue measure and 
+\begin{equation*}
+    \Omega = \{t \in [a, b] : f(t) \neq \conj{h(t)} \}.
+\end{equation*}
+Then 
+\begin{equation*}
+    \begin{aligned}
+        \norm{T} \ge \abs{Tf} &= \abs{\int_{a}^{b} f g \diff t} 
+        = \abs{\int_{a}^{b} \conj{h} g \diff t 
+            + \int_{a}^{b} (f - \conj{h})g \diff t} \\
+        &\ge \int_{a}^{b} \abs{g} \diff t 
+            - \int_{a}^{b} \abs{f - \conj{h}} \abs{g} \diff t 
+        \ge \int_{a}^{b} \abs{g} \diff t - 2 \epsilon \norm{g}. 
+    \end{aligned}
+\end{equation*}
+Since $\epsilon$ is arbitrary, we arrive at $\norm{T} \ge
+\int_{a}^{b} g \diff t$, which completes the proof.
+\end{proof}
+\end{example}
+
+\begin{example}
+Let $X = l^p$ and $Y = l^q$ where $p, q$ are conjugate indices. 
+Define $T: X \to Y, x = \left(x_1, x_2, \ldots \right) \mapsto 
+y = \left(y_1, y_2, \ldots \right)$, where $y_i = \sum_{j=1}^{\infty} 
+a_{ij} x_j$ and the infinite matrix $A = (a_{ij})_{1 \le i, j < \infty}$ 
+satisfies 
+\begin{equation*}
+    \sum_{i=1}^{\infty} \sum_{j=1}^{\infty} \abs{a_{ij}}^q < \infty.
+\end{equation*}
+We shall prove $\norm{T} \ge \left( \sum_{i=1}^{\infty} \sum_{j=1}^{\infty} 
+\abs{a_{ij}}^q \right) ^\frac{1}{q}$. 
+\end{example}
+\begin{proof}
+By Hölder's Inequality (\ref{equ:inequalities:holder_inequality}), 
+\begin{equation*}
+    \begin{aligned}
+        \norm{Tx}^q = \sum_{i=1}^{\infty} 
+            \abs{\sum_{j=1}^{\infty} a_{ij} x_j}^q 
+        &\le \sum_{i=1}^{\infty} \left( 
+                \left( \sum_{j=1}^{\infty} \abs{a_{ij}}^q \right)^\frac{1}{q}
+                \left( \sum_{j=1}^{\infty} \abs{x_j}^p \right)^\frac{1}{p}
+            \right) ^q \\ 
+        &= \sum_{i=1}^{\infty} \left( 
+            \left( \sum_{j=1}^{\infty} \abs{a_{ij}}^q \right)^\frac{1}{q}
+        \right) ^q \norm{x}_p ^q.
+    \end{aligned}
+\end{equation*}
+This implies $\norm{Tx} \le \left( \sum_{i=1}^{\infty} \sum_{j=1}^{\infty} 
+\abs{a_{ij}}^q \right) ^\frac{1}{q} \norm{x}_p$.
+\end{proof}
+
+\begin{example}
+Let $T: C^1[a, b] \to C[a, b], f \mapsto \frac{\diff f}{\diff t}$. 
+We point out that $T$ is unbounded. 
+Indeed, letting $g_n = \sin(nt)$, then $\norm{g_n} \le 1$ but 
+\begin{equation*}
+    \norm{\frac{\diff g_n}{\diff t}} = \norm{n \cos nt} = n \to \infty 
+\end{equation*}
+as $n \to \infty$. 
+\end{example}
+
+\begin{example}
+\label{ex:bounded_linear_operators:integral_kernel}
+Let $K(s, t)$ be a continuous function on $[a, b] \times [a, b]$ and define 
+$T: C[a, b] \to C[a, b], (Tf)(t) = \int_{a}^{b} K(t, s) f(s) \diff s$. 
+We claim that 
+\begin{equation*}
+    \norm{T} = \max_{a \le t \le b} \int_{a}^{b} \abs{K(t, s)} \diff s. 
+\end{equation*}
+Firstly, for $f \in C[a, b]$, 
+\begin{equation*}
+    \begin{aligned}
+        \abs{(Tf)(t)} &= \abs{\int_{a}^{b} K(t, s) f(s) \diff s} 
+        \le \int_{a}^{b} \abs{K(t, s) f(s)} \diff s \\
+        &\le \norm{f} \int_{a}^{b} \abs{K(t, s)} \diff s.
+    \end{aligned}
+\end{equation*}
+Thus, $\norm{Tf} \le \norm{f} \max_{t \in [a, b]} \int_{a}^{b} 
+\abs{K(t, s)} \diff s$ and therefore $\norm{T} \le \max_{t \in [a, b]} 
+\int_{a}^{b} \abs{K(t, s)} \diff s$. 
+Letting $\beta = \max_{t \in [a, b]} \int_{a}^{b} \abs{K(t, s)} \diff s$, 
+As $\int_{a}^{b} \abs{K(t, s)} \diff s$ is continuous on $[a, b]$, 
+$t_0 = \argmax_{t \in [a, b]} \int_{a}^{b} \abs{K(t, s)} \diff s$ exists. 
+Hence, 
+\begin{equation*}
+    \norm{Tf} \ge \abs{(Tf)(t_0)} = \int_{a}^{b} K(t_0, s) f(s) \diff s 
+    = \abs{Af}
+\end{equation*}
+where $A \coloneqq \int_{a}^{b} K(t_0, s) f(s) \diff s$ is a continuous 
+linear functional. 
+And by Example \ref{ex:bounded_linear_operators:integral_functional}, 
+\begin{equation*}
+    \norm{A} = \int_{a}^{b} \abs{K(t_0, s)} \diff s.
+\end{equation*}
+Therefore, $\norm{T} \ge \norm{A} = \int_{a}^{b} \abs{K(t_0, s)} \diff s = 
+\max_{t \in [a, b]} \int_{a}^{b} \abs{K(t, s)} \diff s$. 
+\end{example}
+
+Now we present some classical results on finite dimensional normed space. 
+Let $A = (a_{ij})_{m \times n}$ be an $m \times n$ matrix and $X = \bK^n$, 
+$Y = \bK^m$ equipped with $p$-norm. 
+Define $T: X \to Y, x \mapsto Ax$. 
+We want to study $\norm{A}_p \coloneqq \sup_{x \neq 0} 
+\frac{\norm{Ax}}{\norm{x}}$ for $p = 1, 2, \infty$. 
+\begin{thm}
+It holds true that
+\begin{enumerate}
+    \item \label{thm:bounded_linear_operator:matrix_norms:p2}
+    $\norm{A}_2 = \left( \rho_1(A^\ast A) \right) ^\frac{1}{2} 
+    = \sigma_1(A)$ where $\rho_i(A)$ (\resp, $\sigma(A)$) is the $i$-th largest eigenvalue 
+    (\resp, singular value) of matrix $A$. 
+    \item \label{thm:bounded_linear_operator:matrix_norms:p1}
+    $\norm{A}_1 = \norm{A}_{1, \infty} \coloneqq \max_{1 \le j \le n} \sum_{i=1}^{n} \abs{a_{ij}}$. 
+    \item \label{thm:bounded_linear_operator:matrix_norms:p_infinity}
+    $\norm{A}_\infty = \max_{1 \le i \le m} \sum_{j=1}^{n} \abs{a_{ij}}$. 
+\end{enumerate} 
+\end{thm}
+\begin{proof}
+Assume that $A$ is not a zero matrix. 
+
+\ref{thm:bounded_linear_operator:matrix_norms:p2}
+As we know $A^\ast A$ is a hermitian and positive semi-definite matrix, 
+there exists $\left\{ e_1, e_2, \ldots, e_3 \right\} \subseteq \bK^n$ and 
+$\lambda_1 \ge \lambda_2 \ge \ldots \ge\lambda_n \ge 0$ such that 
+$A^\ast A e_i = \lambda e_i, \quad 1 \le i \le n$ and $e_1, e_2, \ldots, 
+e_n$ are orthogonal and normalized. 
+
+For $x \in \bK^n$, we have the decomposition $x = \sum_{i=1}^{n} c_i e_i$ 
+for some $c_1, c_2, \ldots, c_n \in \bK$ and $\norm{x}_2 = \left( 
+\sum_{i=1}^{n} \abs{c_i}^2 \right) ^\frac{1}{2}$. 
+Then $\norm{Ax}_2 = (Ax)^\ast (Ax) = x^\ast A^\ast A x = \sum_{i=1}^{n} 
+\lambda_i \abs{c_i}^2$. 
+It follows that 
+\begin{equation*}
+    \frac{\norm{Ax}_2}{\norm{x}_2} = \left( \frac{\sum_{i=1}^{n} \lambda_i 
+    \abs{c_i}^2}{\sum_{i=1}^{n}\abs{c_i}^2} \right)^\frac{1}{2} 
+    \le \sqrt{\lambda_1}. 
+\end{equation*}
+In the meantime, the above inequality can be achieved if $c_i = 0$ for all 
+$i \in \{2, 2, \ldots, n\}$, this completes the proof of 
+(\ref{thm:bounded_linear_operator:matrix_norms:p2}). 
+
+\ref{thm:bounded_linear_operator:matrix_norms:p1}
+For $x \in \bK^n$, 
+\begin{equation*}
+    \begin{aligned}
+        \norm{Ax}_1 &= \sum_{i=1}^{m} \abs{(Ax)_i} 
+        = \sum_{i=1}^{m} \abs{\sum_{j=1}^{n} a_{ij} x_j} \\ 
+        &\le \sum_{i=1}^{m} \sum_{i=j}^{n} \abs{a_{ij}} \abs{x_j} 
+        = \sum_{j=1}^{n} \abs{x_j} \sum_{i=1}^{m} \abs{a_{ij}} 
+        \le \norm{A}_{1, \infty} \norm{x}_1, 
+    \end{aligned}
+\end{equation*}
+and this achieves equality for $x = e_{j_0}$ whose $i$-th entry is equal to 
+$1$ while others are equal to $0$.
+This implies $\norm{A}_1 \le \norm{A}_{1, \infty}$. 
+
+\ref{thm:bounded_linear_operator:matrix_norms:p_infinity}
+Firstly, for $x \in \bK^n$, 
+\begin{equation*}
+    \norm{Ax}_\infty = \max_{1 \le i \le m} \abs{\sum_{j=1}^{n} a_{ij} x_j} 
+    \le \max_{1 \le i \le m} \sum_{j=1}^{n} \abs{a_{ij}} \abs{x_j} 
+    \le \left( \max_{1 \le i \le m} \sum_{j=1}^{n} \abs{a_{ij}} \right) 
+        \norm{x}_\infty, 
+\end{equation*}
+which implies $\norm{A}_\infty \le \max_{1 \le i \le m} \sum_{j=1}^{n} 
+\abs{a_{ij}}$. 
+And the inequality above achieves equality for $x = \left(x_1, x_2, 
+\ldots, x_n \right)$ such that 
+\begin{equation*}
+x_j = \conj{(\sgn a_{i_0j})}
+\end{equation*} 
+where $i_0 = \argmax_{1 \le i \le m} \sum_{j=1}^{n} \abs{a_ij}$. 
+Indeed, 
+\begin{equation*}
+    \begin{aligned}
+        \norm{Ax}_\infty = \max_{1 \le i \le m} \abs{\sum_{j=1}^{n} a_{ij} x_j} 
+        \ge \sum_{j=1}^{n} \abs{a_{i_0j} x_j} 
+        = \sum_{j=1}^{n} \abs{a_{i_0j}} 
+        \ge \sum_{j=1}^{n} \abs{a_{i_0j}} \norm{x}_\infty.
+    \end{aligned}
+\end{equation*}
+This completes our proof. 
+\end{proof}
+
+Let $X, Y$ be two normed space. 
+Denote by $\sB(X, Y)$ the set of all bounded linear operators from $X$ to 
+$Y$. 
+Define for $A, B \in \sB(X, Y)$, $x \in X$ and $\alpha \in \bK$, 
+\begin{equation*}
+    \begin{aligned}
+        (A + B)(x) = Ax + Bx, \quad
+        (\alpha A)(x) = \alpha (Ax). 
+    \end{aligned}
+\end{equation*}
+Then $\sB(X, Y)$ is a linear space. 
+For the sake of simplicity, if $X = Y$, we write $\sB(X)$ for $\sB(X, X)$. 
+
+\begin{thm}
+Equipped with the operator norm $\norm{\wdot}$, $\sB (X, Y)$ is a normed 
+space. 
+\end{thm}
+\begin{proof}
+It suffices to prove that $\norm{\wdot}$ is a norm on $\sB(X, Y)$. 
+Here we only verify the triangle inequality since the other two condition 
+is obvious. 
+For $A, B \in \sB(X, Y)$, 
+\begin{equation*}
+    \begin{aligned}
+        \norm{A + B} &= \sup_{\norm{x} = 1} \norm{Ax + Bx} 
+        \le \sup_{\norm{x} = 1} \left( \norm{Ax} + \norm{Bx} \right) \\
+        &\le \sup_{\norm{x} = 1} \norm{Ax} + \sup_{\norm{x} = 1} \norm{Bx} 
+        = \norm{A} + \norm{B}. 
+    \end{aligned}
+\end{equation*}
+\end{proof}
+
+\begin{thm}
+\label{thm:linear_operators:completeness_bounded_linear_spaces_operator_norm}
+Let $X, Y$ be two normed space. 
+If $Y$ is a Banach space, then $\cB(X, Y)$ is a Banach space. 
+\end{thm}
+\begin{proof}
+Let $\{ A_n \}_{n=1}^{\infty}$ be a Cauchy sequence in $B(X, Y)$. 
+Then for any $\epsilon > 0$, there exists $N \in \bN^\ast$ such that 
+for $n, m > N$, 
+\begin{equation}
+    \label{equ:linear_operators:banach_space_bounded_linear_space:1}
+    \norm{A_n - A_m} < \epsilon
+\end{equation}
+which implies 
+\begin{equation*}
+    \begin{aligned}
+        \norm{A_n x - A_m x} &= \norm{(A_n - A_m)x} 
+        \le \norm{A_n - A_m} \norm{x} \\ 
+        &< \epsilon \norm{x}, \quad \text{for any } x \in X. 
+    \end{aligned}
+\end{equation*}
+Thus $\{ A_nx \}_{n=1}^{\infty}$ is a Cauchy sequence in $Y$ for every $x \in X$. 
+Since $Y$ is a Banach space, these Cauchy sequences converges. 
+Denote $Ax = \lim_{n \to \infty} A_n x$ for every $x \in X$. 
+Clearly, $A$ is a linear operator from $X$ to $Y$. 
+By Equation 
+(\ref{equ:linear_operators:banach_space_bounded_linear_space:1}), there 
+for $\norm{x} = 1$, 
+\begin{equation*}
+    \norm{A_nx - A_m x} < \epsilon, \quad \text{for any } n, m > N. 
+\end{equation*} 
+Letting $m \to \infty$ yields for $\norm{x} = 1$, 
+\begin{equation*}
+    \norm{A_n x - Ax} \le \epsilon, \quad \text{for any } n > N, 
+\end{equation*}
+which means $\norm{A_n - A} \to 0$ as $n \to \infty$, $A_n - A \in B(X, Y)$ 
+and thus $A \in \sB(X, Y)$. 
+\end{proof}
+
+In particular, the set $\sB(X, \bK)$ of all bounded linear functionals on 
+$X$ is denoted by $X^\ast$, which is also known as the \emph{dual space} or 
+\emph{conjugate space} of $X$. 
+Since $\bK$ is complete for the case $\bK = \bR$ or $\bK = \bC$, the dual 
+space of $X$ is always a Banach space. 
+
+\begin{defn}
+Let $\{ A_n \}_{n=1}^{\infty}$ be a sequence in $\sB(X, Y)$ and $A \in 
+\sB(X, Y)$. 
+If $\lim_{n \to \infty} \norm{A_n - A} = 0$, then we say that $\{ A_n \}
+_{n=1}^{\infty}$ \emph{converges uniformly} to $A$. 
+If for every $x \in X$, 
+\begin{equation*}
+    \lim_{n \to \infty} A_n x = Ax, 
+\end{equation*}
+then we say that $\{ A_n \}_{n=1}^{\infty}$, then we say $\{ A_n \}
+_{n=1}^{\infty}$ \emph{converges strongly} to $A$. 
+\end{defn}
+\begin{rmk}
+It is not hard to verify that uniform convergence implies strong convergence. 
+The converse holds true in finite dimensional space, but false in infinite 
+dimensional space. 
+For instance, let $X = Y = l^p (p \ge 1)$ and for all $n \in \bN^\ast$, 
+\begin{equation*}
+    A_n x = (x_n, x_{n+1}, \ldots), \quad 
+    \text{for any } x = (x_1, x_2, \ldots) \in X. 
+\end{equation*}
+For every $x \in X$ and $\epsilon > 0$, there exists $N \in \bN^\ast$ 
+such that 
+\begin{equation*}
+    \sum_{k = n}^{\infty} \abs{x_k}^p < \epsilon, \quad 
+    \text{for any } n > N. 
+\end{equation*}
+Therefore, for any $n > N$ and $x \in X$, 
+\begin{equation*}
+    \norm{A_nx} = \left( \sum_{k = n}^{\infty} \abs{x_k} \right)^\frac{1}{p} 
+    < \epsilon ^\frac{1}{p}, 
+\end{equation*}
+implying that $\{ A_n x \}_{n=1}^{\infty}$ converges strongly to zero. 
+However, since $\norm{A_n} = 1$ for all $n \in \bNs$, sequence 
+$\{ A_n \}_{n=1}^{\infty}$ would never converges to zero operator. 
+\end{rmk}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Banach-Steinhaus Theorem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Banach-Steinhaus Theorem}
+\begin{thm}[Banach-Steinhaus Theorem, Uniform Bounded Principle, 
+    The Resonance Theorem]
+\index{theorem!Banach-Steinhaus \~{}}
+\index{theorem!The Resonance \~{}}
+\index{Uniform Bounded Principle}
+\label{thm:banach_steinhaus_theorem}
+Let $X$ be a Banach space and $Y$ be a normed space. 
+Suppose that $I$ is a index set and $\left\{ T_\alpha: 
+\alpha \in I \right\}$ is a subset of $\sB(X, Y)$. 
+If for every $x \in X$, 
+\begin{equation*}
+    \sup_{\alpha \in I} \norm{T_\alpha x} < \infty, 
+\end{equation*}
+then $\{ T_n \}_{n=1}^{\infty}$ is uniformly bounded, \ie, 
+\begin{equation*}
+    \sup_{\alpha \in I} \norm{T _\alpha} < \infty.
+\end{equation*}
+\end{thm}
+\begin{proof}
+Define 
+\begin{equation*}
+    p(x) = \sup_{\alpha \in I} \norm{T_\alpha x}, \quad x \in X. 
+\end{equation*}
+It is not difficult to verify that for every $x, y \in X$ and $\lambda \in 
+\bK$, 
+\begin{enumerate}
+    \item $p(x) < \infty$; 
+    \item $p(\lambda x) = \abs{\lambda} p(x)$; 
+    \item $p(x + y) \le p(x) + p(y)$. 
+\end{enumerate}
+For every $k \in \bN$, let 
+\begin{equation*}
+    \begin{aligned}
+        M_k = \left\{ x \in X: p(x) \le k \right\} 
+        = \bigcap_{\alpha \in I} 
+            \left\{ x \in X: \norm{T_\alpha x} \le k \right\}. 
+    \end{aligned}
+\end{equation*}
+As $T_\alpha$ is continuous on $X$, 
+\begin{equation*}
+    \left\{ x \in X: \norm{T_\alpha} \le k \right\}
+\end{equation*}
+is closed in $X$ and consequently, $M_k$ is closed in $X$. 
+
+Noticing that 
+\begin{equation*}
+    \bigcup_{k \in \bN} M_k = X, 
+\end{equation*}
+by Baire's Category Theorem, $X$ is the second category set, since $X$ is a 
+Banach space. 
+Thus there exists some $k_0$ and nonempty closed ball $\overline{B} = 
+\overline{B(x_0, r)}$ such that $\overline{B} \subseteq M_{k_0}$. 
+
+For any $x \in X$, $x_0 \pm \frac{x}{\norm{x}} r_0 \in \overline{B}$. 
+Hence, 
+\begin{equation*}
+    \begin{aligned}
+        p(\frac{2r_0 x}{\norm{x}}) &= p\left( 
+            \left( x_0 + \frac{x}{\norm{x}} r_0 \right) 
+            - \left( x_0 - \frac{x}{\norm{x}} r_0 \right) \right) \\
+        &\le p \left( x_0 + \frac{x}{\norm{x}} r_0 \right) 
+            + p \left( x_0 - \frac{x}{\norm{x}} r_0 \right) 
+        \le 2k_0, 
+    \end{aligned}
+\end{equation*}
+which implies 
+\begin{equation*}
+    \begin{aligned}
+        & p(x) \le \frac{2k_0}{2r_0} \norm{x} = \frac{k_0}{r_0} \norm{x} \\
+        & \implies
+        \norm{T_\alpha x} \le \frac{k_0}{r_0} \norm{x}, \quad 
+            \text{for any } \alpha \in I \\
+        & \implies
+        \norm{T_\alpha} \le \frac{k_0}{r_0}, \quad 
+            \text{for any } \alpha \in I \\
+        & \implies \sup_{\alpha \in I} \norm{T_\alpha} < \infty. 
+    \end{aligned}
+\end{equation*}
+This completes the proof. 
+\end{proof}
+
+Banach-Steinhaus Theorem is one of the most essential theorems in functional 
+analysis. 
+Here are some applications of it. 
+
+\begin{thm}
+\label{thm:bounded_linear_operators:strong_convergence_uniformly_bounded_dense}
+Let $X$ be a normed space and $Y$ be a Banach space. 
+Suppose that $\{ T_n \}_{n=1}^{\infty}$ is a sequence in $\sB(X, Y)$ which 
+satisfies 
+\begin{enumerate}
+    \item $\{ T_n \}_{n=1}^{\infty}$ is uniformly bounded, \ie, 
+    $\sup_{n \in \bNs} \norm{T_n} < \infty$; 
+    \item there exists a dense subset $G$ of $X$ such that $\{ T_n x \}
+    _{n=1}^{\infty}$ converges on $G$ (\ie, for all $x \in G$). 
+\end{enumerate}
+Then $\{ T_n \}_{n=1}^{\infty}$ converges strongly to some $T \in 
+\sB(X, Y)$ and 
+\begin{equation*}
+    \norm{T} \le \liminf_{n \to \infty} \norm{T_n}. 
+\end{equation*}
+\end{thm}
+\begin{proof}
+Let $\epsilon > 0$ and 
+\begin{equation*}
+    M = \sup_{n \in \bNs} \norm{T_n} < \infty. 
+\end{equation*}
+Since $G$ is dense, for every $x \in X$, there exists $y \in G$ such that 
+$\norm{y - x} < \frac{\epsilon}{3M}$. 
+By assumption, there exists $N \in \bNs$ such that for every $n, m > N$, 
+\begin{equation*}
+    \norm{T_n y - T_m y} < \frac{\epsilon}{3}.
+\end{equation*}
+It follows from 
+\begin{equation*}
+    \begin{aligned}
+        \norm{T_n x - T_m x} &\le \norm{T_n x - T_n y} 
+            + \norm{T_n y - T_m y} + \norm{T_m x - T_m y} \\
+        &< \norm{T_n} \norm{x - y} + \frac{\epsilon}{3} 
+            + \norm{T_m} \norm{x - y} 
+        \le 2 M \norm{x - y} + \frac{\epsilon}{3} < \epsilon 
+    \end{aligned}
+\end{equation*}
+that $\{ T_n x \}_{n=1}^{\infty}$ is a Cauchy sequence, whence it converges 
+to some element of $X$, since $Y$ is a Banach space. 
+Denoting 
+\begin{equation*}
+    Tx = \lim_{n \to \infty} T_n x, 
+\end{equation*}
+it is clear that $T$ is a linear operator. 
+Also, 
+\begin{equation*}
+    \norm{Tx} = \lim_{n \to \infty} \norm{T_n x} 
+    \le \liminf_{n \to \infty} \norm{T_n} \norm{x}, 
+\end{equation*}
+implying that $\norm{T} \le \liminf_{n \to \infty} \norm{Tn}$. 
+\end{proof}
+
+In Theorem 
+\ref{thm:linear_operators:completeness_bounded_linear_spaces_operator_norm}, 
+we have illustrated that if $Y$ is a Banach space, then $\sB(X, Y)$ is 
+complete in the sense of uniform convergence. 
+As an application of the Banach-Steinhaus Theorem, if we further assume that 
+$X$ is also a Banach space, then $\sB(X, Y)$ is complete in the sense of 
+strong convergence. 
+\begin{thm}
+Let $X, Y$ be two Banach spaces. 
+Then $\sB(X, Y)$ is complete in the sense of strong convergence. 
+\end{thm}
+\begin{proof}
+Let $\left\{ T_n \right\}$ be such that 
+\begin{equation*}
+    \lim_{n \to \infty} T_n x
+\end{equation*}
+exists for every $x \in X$. 
+Then $\sup_{n \in \bNs} \norm{T_n x} < \infty$ for every $x \in X$. 
+By the Banach-Steinhaus Theorem \ref{thm:banach_steinhaus_theorem}, 
+$\sup_{n \in \bNs} \norm{T_n} < \infty$. 
+And by the theorem above, there $\{T_n\}$ converges strongly to some linear 
+bounded operator from $X$ to $Y$. 
+\end{proof}
+
+Now we apply the Banach-Steinhaus Theorem to prove the convergence of 
+quadrature formula of integral. 
+In numerical analysis, given a function on $[a, b] \subseteq \bR$ and 
+$\alpha_{nk} \in \bK, t_{nk} \in \bR, k \in \{ 1, 2, \ldots, n \}, 
+n \in \bNs$ such that $a \le t_{n1} \le t_{n2} \le \cdots \le t_{nn} \le b$, 
+the quadrature formula 
+\begin{equation*}
+    \sum_{k=1}^{n} \alpha_{nk} f(t_{nk}) 
+\end{equation*}
+is widely used to approximate the integral $\int_{a}^{b} f(t) \diff$. 
+It remains a problem that how can we choose coefficients $\alpha_{nk}$ 
+such that 
+\begin{equation*}
+    A_n(f) = \sum_{k=1}^{n} \alpha_{nk} f(t_{nk}) 
+\end{equation*}
+converges to $\int_{a}^{b} f(t) \diff t$ as $n \to \infty$. 
+
+\begin{thm}
+The quadrature formula converges for every every $f \in C[a, b]$, \ie, 
+\begin{equation*}
+    \lim_{n \to \infty} A_n(f) = \int_{a}^{b} f(t) \diff t
+\end{equation*}
+if and only if the following conditions hold true: 
+\begin{enumerate}
+    \item \label{enu:bounded_linear_operator:quadrature_formula:1}
+    there exists $M > 0$ such that $\sum_{k=1}^{k} 
+    \abs{\alpha_{nk}} \le M$; 
+    \item \label{enu:bounded_linear_operator:quadrature_formula:2}
+    for every polynomial function $p$, $\{ A_n(p) \}_{n=1}^{\infty}$ 
+    converges to $\int_{a}^{b} p(t) \diff t$. 
+\end{enumerate}
+\end{thm}
+\begin{proof}
+($\Leftarrow$ )
+Let $X = C[a, b]$, $Y = \bK$ and define 
+\begin{equation*}
+    Tf = \int_{a}^{b} f(t) \diff t, \quad 
+    T_n f = \sum_{k=1}^{n} \alpha_{nk} f(t_{nk}) 
+\end{equation*}
+for every $n \in \bNs$. 
+Observing that $\norm{T_n} = \sum_{k=1}^{n} \abs{\alpha_{nk}} < M$ 
+for every $n \in \bN$ and polynomial functions are dense in $C[a, b]$, 
+it follows from Theorem 
+\ref{thm:bounded_linear_operators:strong_convergence_uniformly_bounded_dense}
+that $\{ T_n \}_{n=1}^{\infty}$ converges strongly to $T$. 
+
+($\Rightarrow$)
+Assuming that $\{ T_n \}_{n=1}^{\infty}$ converges strongly on $C[a, b]$, 
+$\{ T_n x \}_{n=1}^{\infty}$converges bounded for every $x \in X$. 
+Thus $\{ \norm{T_n x} = \sum_{k=1}^{n} \abs{\alpha_{nk}} \}_{n=1}^{\infty}$ 
+is bounded for every $x \in C[a, b]$. 
+By the Banach-Steinhaus Theorem, condition 
+\ref{enu:bounded_linear_operator:quadrature_formula:1} holds true. 
+Condition \ref{enu:bounded_linear_operator:quadrature_formula:2} is obvious. 
+\end{proof}
+
+Another well-known result of the Banach-Steinhaus Theorem is the divergence 
+of the Fourier series. 
+Denote by $C_{2 \uppi}$ the linear subspace of $C[-\infty, \infty]$ consisting 
+of all $2\uppi$-periodic functions. 
+We make $C_{2 \uppi}$ a normed space by equipping it with norm 
+\begin{equation*}
+    \norm{f}_\infty = \max_{t \in \bR} \abs{f(t)}, \quad 
+    \text{for every } f \in C_{2 \uppi}. 
+\end{equation*}
+One can show that $C_{2 \uppi}$ is a Banach space. 
+Recall that for $f \in C_{2 \uppi}$, its Fourier series is 
+\begin{equation*}
+    f(t) \sim \frac{a_0}{2} + \sum_{k=1}^{\infty} 
+        \left( a_k \cos kt + b_k \sin kt \right) 
+\end{equation*}
+where 
+\begin{equation*}
+    \begin{aligned}
+        a_k &= \frac{1}{\uppi} \int_{-\uppi}^{\uppi} f(t) \cos kt \diff t, \\ 
+        b_k &= \frac{1}{\uppi} \int_{-\uppi}^{\uppi} f(t) \sin kt \diff t. 
+    \end{aligned}
+\end{equation*}
+We are concerned with the convergence of 
+\begin{equation*}
+    \begin{aligned}
+        (S_nf)(t) &= \frac{a_0}{2} + \sum_{k=1}^{n} 
+            \left( a_k \cos kt + b_k \sin kt \right) \\ 
+        &= \frac{1}{2 \uppi} \int_{-\uppi}^{\uppi} f(s) \diff s 
+            + \sum_{k=1}^{n} \frac{1}{\uppi} 
+            \int_{-\uppi}^{\uppi} f(s) 
+                \left( \cos ks \cos kt + \sin ks \sin kt 
+                \right) \diff s \\
+        &= \frac{1}{\uppi} \int_{-\uppi}^{\uppi} f(s) \left( \frac{1}{2} 
+            + \sum_{k=1}^{n} \cos k(s - t) \right) \diff s \\ 
+        &= \int_{-\uppi}^{\uppi} f(s) K_n(s, t) \diff s
+    \end{aligned}
+\end{equation*}
+where $K_n(s, t) = \frac{\sin (n + \frac{1}{2}) (s - t)}
+{2 \uppi \sin \frac{1}{2}(s - t)}$ is the Dirichlet kernel. 
+We show that for every $t \in [\uppi, 2\uppi]$, there exists $f \in C_{2\uppi}$ 
+such that $\{ S_n(f) \}_{n=1}^{\infty}$ is divergent. 
+Without loss of generality, assume that $t = 0$. 
+Let 
+\begin{equation*}
+    T_n f = (S_n f)(0) = \int_{-\uppi}^{\uppi} f(s) K_n(s, 0) \diff s. 
+\end{equation*}
+By Example \ref{ex:bounded_linear_operators:integral_kernel}, 
+\begin{equation*}
+    \begin{aligned}
+        \norm{T_n} &= \frac{1}{2 \uppi} K_n(s, 0) \diff s \\
+        &\ge \frac{1}{2 \uppi} \int_{-\uppi}^{\uppi} 
+            \frac{\abs{\sin (n+\frac{1}{2} s)}}{\abs{\frac{s}{2}}} \diff s\\ 
+        &= \frac{2}{\uppi} \int_{0}^{\uppi} 
+            \frac{\abs{\sin (n + \frac{1}{2} s)}}{s} \diff s \\
+        &= \int_{0}^{(2n + 1) \uppi} \frac{\abs{\sin u}}{u} \diff u \to \infty
+    \end{aligned}
+\end{equation*}
+as $n \to \infty$. 
+Here, 
+\begin{equation*}
+    \begin{aligned}
+        \int_{0}^{\infty} &\ge \sum_{n=1}^{\infty} 
+            \int_{2(n-1) \uppi}^{2n \uppi} \frac{\sin u}{u} \diff u \\
+        &\ge \sum_{n=1}^{\infty} 
+            \int_{2(n-1) \uppi + \frac{4}{\uppi}}^{2n \uppi + \frac{4}{\uppi}} 
+                \frac{\sin u}{u} \diff u \\
+        &\ge \frac{\sqrt{2}}{2} \sum_{n=1}^{\infty} 
+            \frac{1}{2n \uppi} \frac{\uppi}{4} \to \infty. 
+    \end{aligned}
+\end{equation*}
+Thus $\{ \norm{T_n} \}_{n=1}^{\infty}$ is unbounded. 
+By the Banach-Steinhaus Theorem, there exists $f \in C_{2 \uppi}$ such that 
+$\norm{T_n f}$ is unbounded. 
+Hence for such $f$, $T_n f$ does not converge. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Section: Open Mapping Theorem and Closed Graph Theorem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Open Mapping Theorem and Closed Graph Theorem}
+Let $X, Y, Z$ be normed space, $T_1 \in \sB(X, Y)$ and $T_2 \in \sB(Y, Z)$. 
+Then we define the product of operators as $T = T_2 T_1 = T_2 \circ T_1$. 
+Clearly, $T \in \sB(X, Z)$. 
+Also, 
+\begin{equation*}
+    \begin{aligned}
+        \norm{Tx} = \norm{T_2 (T_1 x)} 
+        \le \norm{T_2} \norm{T_1 x} 
+        \le \norm{T_2} \norm{T_1} \norm{x}, 
+    \end{aligned}
+\end{equation*}
+which implies that $\norm{T} = \norm{T_2 T_1} \le \norm{T_2}\norm{T_1}$. 
+
+\begin{defn}[inverse operator]
+Let $X, Y$ be linear operator and $T$ is a bounded linear operator from 
+$D(T) \subseteq X$ to $Y$. 
+We say $T$ is \emph{invertible} if there exists a linear operator 
+$T^{-1}: R(T) \to D(T)$ such that 
+\begin{equation*}
+    T^{-1} \circ T = I_{D(T)}, \quad 
+    T \circ T^{-1} = I_{R(T)}
+\end{equation*}
+where $I_{D(T)}: D(T) \to D(T), I_R(T): R(T) \to R(T)$ are the identity 
+operators. 
+We call $T^{-1}$ is the \emph{inverse (operator)} of $T$. 
+\end{defn}
+
+Clearly, $T$ admits the inverse $T ^{-1}$ if and only if $T$ is one-to-one.
+Besides, the inverse operator of a invertible operator is unique. 
+
+\begin{thm}
+Let $X$, $Y$ be two normed spaces and $T: X \to Y$ be a surjective linear 
+operator. 
+If there exists a positive real number $m$ such that for every 
+$x \in X$. 
+\begin{equation*}
+    \norm{Tx} \ge m \norm{x}, 
+\end{equation*}
+then $T$ has a bounded inverse operator $T^{-1}$. 
+\end{thm}
+\begin{proof}
+Obviously, $T$ is injective and thus has an inverse operator $T^{-1}$. 
+It remains to show that $T^{-1}$ is bounded. 
+For $y \in Y$, 
+\begin{equation*}
+    \norm{y} = \norm{T T^{-1} y} \ge m \norm{T^{-1} y}, 
+\end{equation*}
+which implies that 
+\begin{equation*}
+    \norm{T^{-1} y} \le \frac{1}{m} \norm{y}. 
+\end{equation*}
+It follows that $T^{-1} \in \sB(X, Y)$. 
+\end{proof}
+
+For $T \in \sB(X)$, denote $T^n = T \circ T^{n-1}$ for $n = \bNs$ and 
+$T^0 = I_X$. 
+Then $\norm{T^n} \le \norm{T}^n$ and $T^n \in \sB(X)$. 
+
+\begin{thm}
+\label{thm:bounded_linear_operators:i_substract_t_invertible}
+Let $X$ be a Banach space and $T \in \sB(X)$. 
+If $\norm{T} < 1$, then $I - T$ has a bounded inverse operator and 
+$\norm{(I - T)^{-1}} \le \frac{1}{1 - \norm{T}}$. 
+\end{thm}
+\begin{proof}
+Consider the series $S = \sum_{k=1}^{\infty} T^k$ and let 
+$S_n = \sum_{k=1}^{n} T^k$. 
+For $n, m \in \bNs$, $m > n$, 
+\begin{equation*}
+    \norm{S_m - S_n} = \norm{\sum_{k=n}^{m-1} T^k} 
+    \le \sum_{k=n}^{m-1} \norm{T}^k 
+\end{equation*}
+is a Cauchy sequence as $\norm{T} < 1$. 
+Since $\sB(X, Y)$ is a Banach space, $\{ S_n \}_{n=1}^{\infty}$ has a limit, 
+say $S$ in $\sB(X, Y)$. 
+Observe that 
+\begin{equation*}
+    \begin{aligned}
+        \begin{aligned}
+            (I - T) S &= \lim_{n \to \infty} (I - T) \sum_{k=1}^{n} T^k \\
+            &= \lim_{n \to \infty} (I + T + \cdots + T^{n-1}) 
+                - (T + T^2 + \ldots + T^n) \\
+            &= \lim_{n \to \infty} (I - T^n) = I. 
+        \end{aligned}
+    \end{aligned}
+\end{equation*}
+Likewise, $S(I - T) = I$. 
+Therefore, $I - T)^{-1} = S$ and 
+\begin{equation*}
+    \norm{S} = \norm{\sum_{n=0}^{\infty} T^n} 
+    \le \sum_{n=0}^{\infty} \norm{T}^n = \frac{1}{1-\norm{T}}. 
+\end{equation*}
+This completes the proof. 
+\end{proof}
+
+\begin{cor}
+\label{cor:bounded_linear_operators:t_plus_delta_t_invertible}
+Let $X$ be a Banach space and $T \in \sB(X)$ have a bounded inverse operator. 
+Then for any operator $\Delta T \in \sB(X)$ with 
+\begin{equation*}
+    \norm{\Delta T} < \frac{1}{\norm{T^{-1}}}, 
+\end{equation*}
+$T + \Delta T$ has a bounded inverse operator and 
+\begin{equation*}
+    (T + \Delta T)^{-1} = \sum_{k=0}^{\infty} (-1)^k 
+        \left( T^{-1} \Delta T \right)^k T^{-1}. 
+\end{equation*}
+\end{cor}
+\begin{proof}
+Let $S = T + \Delta T = T (I + T^{-1} \Delta T)$. 
+As $\norm{T^{-1}\Delta T} \le \norm{T ^{-1}} \norm{\Delta T} < 1$, 
+$I + T ^{-1} \Delta T$ has the bounded inverse 
+\begin{equation*}
+    \left( I + T ^{-1} \Delta T \right) ^{-1} 
+    = \sum_{n=0}^{\infty} (-1)^n \left( T ^{-1} \Delta T \right)^n. 
+\end{equation*}
+Then 
+\begin{equation*}
+    S ^{-1} = \left( I + T ^{-1} \Delta T \right) ^{-1} T ^{-1} 
+    = \sum_{k=0}^{\infty} (-1)^k \left( T ^{-1} \Delta T \right)^k T ^{-1} 
+\end{equation*}
+is bounded. 
+\end{proof}
+
+Now we proceed with the main theorems in this section: the Open Mapping 
+Theorem and the Closed Graph Theorem. 
+Note that most theorems requires completeness of the space. 
+
+\begin{defn}[Open mapping]
+A mapping that maps every open set to an open set is called an open mapping. 
+\end{defn}
+
+\begin{thm}[Banach Open Mapping Theorem]
+\index{theorem!Banach Open Mappint \~{}}
+Let $X, Y$ be Banach spaces and $T: X \to Y \in \sB(X, Y)$. 
+If $T$ is surjective, then $T$ is an open mapping. 
+\end{thm}
+\begin{proof}
+\textbf{Step 1. }
+As $X = \bigcup_{k=1}^\infty \overline{B(0, k)}$, $Y = TX = \bigcup_{k=1}
+^\infty T\overline{B(0, k)}$ and $Y$ is complete, by Baire's Category 
+Theorem, there exists some $k_0 \in \bNs$ such that $T\overline{B(0, k_0)}$ 
+is dense in some open ball $B_Y(y_0, r_0)$ in $Y$. 
+Here, we use $B$ and $B_Y$ to denote the open balls in $X$ and $Y$ 
+respectively. 
+
+\textbf{Step 2. }
+We claim that there exists $\delta > 0$ such that for any $\epsilon > 0$, 
+$T \overline{B(0, \epsilon)}$ is dense in $\overline{B_Y(0, \delta 
+\epsilon)}$. 
+Setting $\delta = \frac{r_0}{k_0}$, $\epsilon > 0$ and letting $y \in 
+\overline{B_Y(0, \epsilon \delta)}$, then $y_0 \pm \frac{k_0}{\epsilon} y$ 
+satisfies 
+\begin{equation*}
+    \norm{y_0 \pm \frac{k_0}{\epsilon} y - y_0} 
+    = \frac{k_0}{\epsilon} \norm{y} 
+    < \frac{k_0}{\epsilon} \epsilon \delta = r_0, 
+\end{equation*}
+which is $y_0 \pm \frac{k_0}{\epsilon} y \in B_Y(y_0, r_0)$. 
+Hence, we can find a sequence $\{ x_n \}_{n=1}^{\infty}$, 
+$\{ x_n' \}_{n=1}^{\infty}$ in $\overline{B(0, k_0)}$ such that 
+\begin{equation*}
+    Tx_n \to y_0 + \frac{k_0}{\epsilon} y, \quad 
+    Tx_n' \to y_0 - \frac{k_0}{\epsilon} y \quad (n \to \infty)
+\end{equation*}
+since $T \overline{B(0, k_0)}$ is dense in $\overline{B(0, k_0)}$. 
+Then 
+\begin{equation*}
+    T \left( \frac{\epsilon}{2k_0} (x_n - x_n') \right) \to y 
+    \quad (n \to \infty)
+\end{equation*}
+Note that 
+\begin{equation*}
+    \frac{\epsilon}{2k_0}(x_n - x_n') \subseteq \overline{B(0, \epsilon)}.
+\end{equation*}
+Thus we succeed to prove our claim that $T \overline{B(0, \epsilon \delta)}$ 
+is dense in $B_Y(0, \epsilon \delta)$ for any $\epsilon > 0$. 
+
+\textbf{Step 3. }
+Now we try to prove the key claim: for the $\delta$ given above and 
+any $r > 0$, it holds that $T \overline{B(0, r)} \supseteq B_Y(0, 
+\frac{1}{2} r \delta)$. 
+By the linearity of $T$, it suffices to prove the case $r = 1$. 
+Choosing $y_0 \in B_Y(0, \frac{1}{2} \delta)$, by previous claim, there 
+exists $x_1 \in \overline{B(0, \frac{1}{2})}$ such that 
+\begin{equation*}
+    \norm{T x_1 - y_0}< \frac{1}{2^2} \delta. 
+\end{equation*}
+Further, let $y_1 = y_0 - Tx_1 \in B_Y(0, \frac{1}{2^2} \delta)$, 
+there exists $x_2 \in \overline{B(0, k_0)}$ such that 
+\begin{equation*}
+    \norm{y_1 - T x_2} < \frac{1}{2^3} \delta. 
+\end{equation*}
+Repeating the process, we obtain sequences $\{ x_n \}_{n=1}^{\infty} 
+\subseteq X$ and $\{ y_n \}_{n=1}^{\infty} \subseteq Y$ such that 
+$\norm{x_n} \le \frac{1}{2^n}$, $y_n = y_{n-1} - Tx_n = y_0 - 
+T\left( \sum_{i=1}^{n} x_n \right)$ and $\norm{y_n} < \frac{1}{2^{n+1}} 
+\delta$. 
+Tt follows from the completeness of $X$ and the fact that $\sum_{n=1}^
+{\infty} \le \sum_{n=1}^{\infty} \frac{1}{2^n} = 1$ that $\sum_{n=1}^{\infty} 
+x_n$ is convergent to some element $x_0$ say, of $X$ such that $\norm{x_0} 
+< 1$. 
+Letting $n \to \infty$ yields that $y_0 = Tx_0$. 
+
+\textbf{Step 4. }
+Now we are prepared to show that $T$ is a open mapping. 
+Let $G$ be an open subset in $X$ and $x \in G$. 
+Then there exists $r_0 > 0$ such that $\overline{B(x, \frac{r_0}{2})} 
+\subseteq B(x, r_0) \subseteq G$. 
+By Step 3, $T \overline{B(0, r)} \supseteq B_Y(0, \frac{1}{2}r \delta)$. 
+Hence, 
+\begin{equation*}
+    \begin{aligned}
+        T \overline{B(x, \frac{r_0}{2})} 
+        &= T\left( x + \overline{B(0, \frac{r_0}{2})} \right) \\
+        &= Tx + T \overline{B(0, r)} 
+        \supseteq Tx + S_1(0, \frac{1}{4} r_0 \delta), 
+    \end{aligned}
+\end{equation*}
+which implies that $Tx$ is a inner point of $TG$. 
+Thus $TG$ is an open subset in $Y$ and we establish the conclusion. 
+\end{proof}
+
+The famous Inverse Mapping Theorem is an application of the Open Mapping 
+Theorem. 
+\begin{thm}[Inverse Mapping Theorem]
+Let $T$ be a bijective linear operator from a Banach space $X$ to a Banach 
+space $Y$. 
+Then $T^{-1} \subset \sB(Y, X)$. 
+\end{thm}
+\begin{proof}
+It suffices to show that for every open subset $G \subseteq X$, 
+$\left( T^{-1} \right) ^{-1}(G)$ is open in $Y$. 
+Note that $\left( T^{-1} \right) ^{-1}(G) = T(G)$. 
+By the Open Mapping Theorem, $TG$ is open in $Y$, which proves the result. 
+\end{proof}
+
+\begin{cor}
+Let $\norm{\wdot}$ and $\norm{\wdot}$ be two norms on a linear space $X$ 
+that is complete under each of these two norms. 
+If there exists a constant $C > 0$ such that for every $x \in  X$, 
+\begin{equation*}
+    \norm{\wdot}_2 \le C \norm{\wdot}_1, 
+\end{equation*} 
+then $\norm{\wdot}_1$ and $\norm{\wdot}_2$ are equivalent. 
+\end{cor}
+\begin{proof}
+Letting $X = (X, \norm{\wdot}_1), X_2 = (X, \norm{\wdot}_2)$, then by 
+assumption, both $X_1$, $X_2$ are Banach space. 
+Define 
+\begin{equation*}
+    \begin{aligned}
+        T: X_1 &\to X_2 \\
+        x &\mapsto x.
+    \end{aligned}
+\end{equation*}
+It follows that for every $x \in X$, $\norm{Tx}_2 \le C \norm{x}_1$, namely, 
+$T \in \sB(X_1, X_2)$. 
+Since $T$ is bijective, by the Inverse Mapping Theorem, $T^{-1}$ is a 
+bounded linear operator from $X_2$ to $X_1$. 
+This means there exists a constant $D > 0$ such that for every $x \in X$, 
+\begin{equation*}
+    \norm{x}_1 \le \norm{T^{-1}x} \le D \norm{x}_2.
+\end{equation*}
+Thus the conclusion follows immediately. 
+\end{proof}
+
+\begin{defn}[Graph]
+Let $X, Y$ be normed space and $T: X \to Y$ is a linear operator. 
+The \emph{graph} of $T$ is the set 
+\begin{equation*}
+    G(T) = \{(x, Tx): x \in X\}.
+\end{equation*}
+Then $G(T)$ is a subset of $X \times Y$ on which we define a norm as 
+\begin{equation*}
+    \norm{(x, y)} = \norm{x}_X + \norm{y}_Y, \quad 
+    \text{for every } (x, y) \in X \times Y.
+\end{equation*}
+\end{defn}
+
+If $T$ is a linear operator, then $G(T)$ is clearly a linear subspace of 
+$X \times Y$. 
+$T$ is said to be a \emph{closed operator} if $G(T)$ is a closed subspace 
+of $X \times Y$. 
+
+\begin{prop}
+Let $X, Y$ be normed spaces and $T: X \to Y$ be a linear operator. 
+Then $T$ is a closed operator if and only if for every sequence 
+$\{ x_n \}_{n=1}^{\infty} \subseteq X$, 
+\begin{equation*}
+    x_n \to x, \quad T x_n \to y \quad (n \to \infty) 
+    \implies y = Tx. 
+\end{equation*}
+\end{prop}
+\begin{proof}
+This is a direct result from the definition of closed operator. 
+\end{proof}
+
+\begin{thm}[Closed Graph Theorem]
+Let $X$, $Y$ be Banach space and $T: X \to Y$ is a linear operator. 
+Then $T$ is bounded if and only if its graph $G(T)$ is closed in 
+$X \times Y$, \ie, $T$ is a closed operator. 
+\end{thm}
+\begin{proof}
+($\Rightarrow$)
+Suppose $T$ is bounded and let $\{ x_n \}_{n=1}^{\infty}$ be a sequence in 
+$X$ such that $(x_n, Tx_n) \to (x, y)$ as $n \to \infty$. 
+Then 
+\begin{equation*}
+    y = \lim_{n \to \infty} T x_n 
+    = T\left( \lim_{n \to \infty} x_n \right) 
+    = Tx, 
+\end{equation*}
+which implies $(x, y) = (x, Tx) \in G(T)$. 
+Hence $T$ is a closed operator. 
+
+($\Leftarrow$)
+Suppose that $T$ is a closed operator. 
+Then $G(T)$ is a linear closed subspace in $X \times Y$. 
+Since $X, Y$ are Banach spaces, so is $X \times Y$. 
+Define 
+\begin{equation*}
+    \begin{aligned}
+        \tilde T: G(T) &\to X, \\
+        (x, Tx) &\mapsto x. 
+    \end{aligned}
+\end{equation*}
+It is clear that $\tilde T$ is bijective. 
+As $\norm{\tilde T (x, Tx)} = \norm{x} \le \norm{x} + \norm{Tx} = 
+\norm{(x, Tx)}$, $\tilde T$ is bounded. 
+By the Inverse Mapping Theorem, there exists $C > 0$ such that 
+\begin{equation*}
+    \norm{\tilde T^{-1} x} = \norm{(x, Tx)} \le C \norm{x}, 
+\end{equation*}
+which is 
+\begin{equation*}
+    \norm{Tx} \le (C - 1) \norm{x}. 
+\end{equation*}
+This completes the proof. 
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Section: Spectrum of Linear Operators
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Spectrum of Linear Operators}
+We consider the linear operator 
+\begin{equation*}
+    T_\lambda = \lambda I - T. 
+\end{equation*}
+\begin{defn}
+\index{spectrum}
+\index{spectrum!point \~{}}
+\index{spectrum!continuous \~{}}
+\index{spectrum!residual \~{}}
+\index{regular point}
+\index{resolvent set}
+\index{resolvent}
+Let $X$ be a normed space and $T$ be a linear operator from $D(T) \subseteq X$ 
+to $X$. 
+For $\lambda \in \bK$, there are several possible cases: 
+\begin{enumerate}
+    \item 
+    $R(T_\lambda)$ has a dense range in $X$ and admits a bounded inverse. 
+    We call $\lambda$ a \emph{regular point} of $T$ and denote by $\rho(T)$ 
+    the set of all regular points of $T$. 
+    Then $\rho(T)$ is called the \emph{resolvent set} of $T$ and $\sigma(T) 
+    \coloneqq \bK \backslash \rho(T)$ is called the \emph{spectrum} of $T$. 
+    And the inverse $(I - \lambda T)^{-1}$ denoted by $R(\lambda, T)$ is 
+    called the \emph{resolvent} at $\lambda$ of $T$. 
+
+    \item $T_\lambda$ is not injective, namely, there exists $x \in X, 
+    x \neq 0$ such that $(T - \lambda I)x = 0$. 
+    In this case, $T_\lambda$ does not have an inverse. 
+    We call $\lambda$ is an \emph{eigenvalue} of $T$ and $x$ an 
+    \emph{eigenvector} of $T$. 
+    The nullspace of $T_\lambda$ is called the \emph{eigenspace} of $T$ 
+    corresponding to the eigenvalue $\lambda$ of $T$. 
+    The dimension of the eigenspace corresponding to the eigenvalue 
+    $\lambda$ of $T$ is called the \emph{multiplicity} of $\lambda$. 
+    The set $\sigma_p(T)$ of all eigenvalues of $T$ is called the 
+    \emph{point spectrum} of $T$. 
+
+    \item $T_\lambda$ has an unbounded inverse whose domain 
+    $R(\lambda I - T)$ is dense in $X$.
+    We call the totality of such $\lambda$ the \emph{continuous spectrum} 
+    of $T$, denoted by $\sigma_C(T)$. 
+
+    \item $T_\lambda$ has an inverse whose domian is not dense in $X$. 
+    We call the totality of such $\lambda$ the \emph{residual spectrum} of 
+    $T$, denoted by $\sigma_R(T)$.
+    
+\end{enumerate}
+\end{defn}
+
+\begin{thm}
+Let $X$ be a Banach space and $T \in B(X)$. 
+Then $\sigma(T)$ is bounded and closed. 
+In fact, $\sigma(T) \subseteq \{ \lambda \in \bK: \abs{\lambda} \le \norm{T} 
+\}$. 
+\end{thm}
+\begin{proof}
+For $\abs{\lambda_0} > \norm{T}$, then $\lambda_0 I - T = \lambda_0 
+(I - \frac{1}{\lambda_0} T)$. 
+Since $\norm{\frac{1}{\lambda_0} T} = \frac{\norm{T}}{\lambda_0}< 1$, by Theorem 
+\ref{thm:bounded_linear_operators:i_substract_t_invertible}, $I - \lambda_0 T$ 
+has an bounded inverse and 
+\begin{equation*}
+    (\lambda_0 I - T)^{-1} = \frac{1}{\lambda_0} \sum_{k=0}^{\infty} 
+        \left( \frac{T}{\lambda_0} \right) ^k.
+\end{equation*}
+Therefore, $\lambda_0 \in \rho(T)$ and $\sigma(T) \subseteq \left\{ 
+\lambda \in \bK: \abs{\lambda} \le \norm{T} \right\}$. 
+To prove that $\sigma(T)$ is closed, it suffices to show that $\rho(T)$ is 
+open. 
+Letting $\lambda_0$ be a resolvent point of $T$, then by Corollary 
+\ref{cor:bounded_linear_operators:t_plus_delta_t_invertible}, for 
+$\delta < \norm{(\lambda I - T) ^{-1}}$, $\lambda I - T - \delta I$ has 
+bounded inverse. 
+Thus $(\lambda_0 - \delta, \lambda_0 + \delta)$ is contained in $\rho(T)$, 
+whence $\rho(T)$ is a open set. 
+\end{proof}
+
+\begin{example}
+Consider $T: C[a, b] \to C[a, b], T(f)(t) = t f(t)$. 
+
+For $\lambda \in \bR$, $\left[ (T - \lambda T) f \right](t) 
+= (t - \lambda) f(t)$. 
+Thus if $\lambda \notin [a, b]$, $\left[ (T - \lambda T) ^{-1} f \right](t) 
+= \frac{1}{t - \lambda} f(t)$. 
+If $\lambda \in [a, b]$, then $\left[ (T - \lambda T) f \right](\lambda) 
+= (\lambda - \lambda) f(\lambda) = 0$. 
+Thus $T - \lambda I$ is not surjective and $\sigma(T) = [a, b]$. 
+Suppose that $(I - \lambda T)f = 0$. 
+Then 
+\begin{equation*}
+    (t - \lambda) f(t) \equiv 0 \implies 
+    f(t) = 0 \quad \text{for every } t \neq \lambda \implies 
+    f(t) \equiv 0. 
+\end{equation*}
+Hence, $\sigma_p(T) = \varnothing$. 
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Hahn-Banach Theorem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Hahn-Banach Theorem and its Applications}
+For convenience, we introduce the notation of restriction of operators. 
+Let $X, Y$ be sets and let $f: X \to Y$. 
+If $D$ is a subset of $X$, then we refer to $f_{\chi_D}$ as a function from 
+$D$ to $Y$ such that $f_{\chi_D}(x) = f(x)$ for all $x \in D$. 
+If we further let $X$ be equipped with a norm $\norm{\wdot}$, then $(G, 
+\norm{\wdot}_D)$ denotes the normed subspace of $(X, \norm{\wdot})$ with 
+$\norm{x}_D = \norm{x}$ for all $x \in D$. 
+If $f \in D^\ast$, then the operator norm of $f$ is denoted by $\norm{f}_D$. 
+
+\begin{thm}[Hahn-Banach Theorem over $\bR$]
+\label{thm:bounded_linear_operator:hahn_banach_real}
+Let $M$ be linear subspace of a linear space $X$ over $\bR$, and let $p: X 
+\to \bR$ be a sublinear functional, \ie, for every $x, y \in X$ and $\alpha 
+> 0$, it holds true that 
+\begin{enumerate}
+    \item $p(\alpha x) = \alpha p(x)$. 
+    \item $(x + y) \le p(x) + p(y)$. 
+\end{enumerate}
+If $f$ is a linear functional on $M$ such that $f(x) \le p(x)$ for all 
+$x \in M$, then there exists a linear functional $F$ on $X$ such that 
+\begin{enumerate}
+    \item $F_{\chi_M} = f$. 
+    \item $F(x) \le p(x)$ for all $x \in X$. 
+\end{enumerate}
+\end{thm}
+\begin{proof}
+Let 
+\begin{equation*}
+    \begin{aligned}
+        \Omega = \{ (Y, F_Y): 
+        &Y \text{ is a linear subspace of } X, 
+        F_Y \text{ is a linear functional on } Y, \\
+        &M \subseteq Y, 
+        F_{Y \chi_M} = f, 
+        F_Y(x) \le p(x) \text{ for all } x \in X \}.
+    \end{aligned}
+\end{equation*}
+We introduce an ordering relation $\le$ on $\Omega$ as 
+\begin{equation*}
+    (Y_1, F_{Y_1}) \le (Y_2, F_{Y_2}) \iff 
+    Y_1 \subseteq Y_2, \quad F_{Y_1 \chi_{Y_1}} = F_{Y_2}. 
+\end{equation*}
+We shall use the Zorn's Lemma \ref{lemma:zorn_lemma} on $\Omega$. 
+To this end, we first show that every totally ordered subset of $\Omega$ 
+has an upper bound. 
+Let $\Omega_0$ be a totally ordered subset of $\Omega$, and define 
+\begin{equation*}
+    \begin{aligned}
+        Y_0 &= \bigcup_{Y \subseteq \Omega_0} Y \\
+        F_{Y_0}(x) &= F_{Y_n}(x), \quad x \in Y_n. 
+    \end{aligned}
+\end{equation*}
+Then $(Y_0, F_{Y_0}) \subseteq \Omega$ and for every $Y \subset 
+\Omega$, $(Y, F_Y) \le (Y_0, F_{Y_0})$. 
+It follows from Zorn's Lemma that $\Omega$ contains a maximal element 
+$(Y_\infty, F_{Y_\infty})$. 
+
+We contend that $Y_\infty = X$. 
+For the sake of contradiction we assume that there exists $x_0 \in X$ such 
+that $x_0 \in Y_\infty$. 
+Letting $\tilde Y = \mspan Y \cup \{x_0\}$, then every $x \in tilde Y$ can 
+be written uniquely as the form $x = y + \alpha x_0$ with $y \in Y_\infty$ 
+and $\alpha \in \bR$. 
+Define a linear functional extending $F_{Y_\infty}$ on $\tilde Y$ as 
+\begin{equation*}
+    \tilde F (x) = \tilde F (y + \alpha x_0) 
+    = \tilde F (y) + \alpha \tilde F (x_0) 
+    = F_\infty (y) + \alpha \beta
+\end{equation*}
+where $\beta = \tilde F(x_0)$ should be a constant real number. 
+Besides, we hope that $\tilde F$ also obeys 
+\begin{equation}
+    \label{equ:bounded_linear_operator:hahn_banach:1}
+    \tilde F(y + \alpha x_0) 
+    = F_{Y_\infty} (y) + \alpha \beta 
+    \le p(y + \alpha x_0) \quad 
+    \text{for all } y \in Y_\infty, \alpha \in \bR.
+\end{equation}
+If $\alpha = 0$, then Equation (\ref{equ:bounded_linear_operator:hahn_banach:1}) 
+is satisfied by definition; 
+if $\alpha > 0$, then it follows that 
+\begin{equation*}
+    \begin{aligned}
+        &F_{Y_\infty} (y) + \alpha \beta 
+        \le p(y + \alpha x_0) \quad 
+        \text{for all } y \in Y_\infty, \alpha \in \bR \\
+        \iff &\beta \le -F_{Y_\infty}(\frac{y}{\alpha}) 
+            + p(\frac{y}{\alpha} + x_0) \quad 
+            \text{for all } y \in Y_\infty, \alpha \in \bR \\
+        \iff &\beta \le -F_{Y_\infty}(y) + p(y + x_0) \quad 
+            \text{for all } y \in Y_\infty;
+    \end{aligned}
+\end{equation*}
+If $\alpha < 0$, likewise it follows that 
+\begin{equation*}
+    \begin{aligned}
+        &F_{Y_\infty} (y) + \alpha \beta 
+        \le p(y + \alpha x_0) \quad 
+        \text{for all } y \in Y_\infty, \alpha \in \bR \\
+        \iff &F_{Y_\infty}(-\frac{y}{\alpha}) 
+            - p(-\frac{y}{\alpha} - x_0) 
+            \le \beta \quad 
+            \text{for all } y \in Y_\infty, \alpha \in \bR \\
+        \iff &F_{Y_\infty}(y) - p(y - x_0) 
+            \le \beta \quad 
+            \text{for all } y \in Y_\infty.
+    \end{aligned}
+\end{equation*}
+Therefore, such $\beta$ exists if and only if for any $y, y' \in Y_\infty$, 
+\begin{equation*}
+    F_{Y_\infty}(y') - p(y' - x_0) \le \beta \le -F(y) + p(y + x_0)
+\end{equation*}
+which is equivalent to 
+\begin{equation*}
+    \sup_{y \in Y_\infty} (F_{Y_\infty}(y) - p(y - x_0)) 
+    \le \beta 
+    \le \inf_{y \in Y_\infty} (-F_{Y_\infty}(y) + p(y + x_0)).
+\end{equation*}
+We claim that this is indeed the case by checking that for any 
+$y, y' \in Y_\infty$, 
+\begin{equation*}
+    \begin{aligned}
+        -F_{Y_\infty}(y) &+ p(y + x_0) 
+            - F_{Y_\infty}(y') + p(y' - x_0) \\
+        &= -F_{Y_\infty}(y + y') + p(y + x_0) + p(y' - x_0) \\
+        &\ge -F_{Y_\infty}(y + y') + p(y + y') 
+        \ge 0.
+    \end{aligned}
+\end{equation*}
+This means $(\tilde Y, \tilde F) \in \Omega$ and $(Y_\infty, F_{Y_\infty})
+< (\tilde Y, \tilde F)$, contradicting the fact that $(Y_\infty, 
+F_{Y_\infty})$ is an maximal element. 
+Hence $Y_\infty = X$, which completes the proof. 
+\end{proof}
+
+\begin{thm}[Hahn-Banach Theorem]
+Let $X$ be a normed space, $G \subseteq X$ be a linear subspace, and let 
+$f \in G^\ast$. 
+Then there exists $F \in X^\ast$ such that $F_{\chi_G} = f$ and $\norm{F} 
+= \norm{f}_G$.
+\end{thm}
+\begin{proof}
+We first prove the case that $\bK = \bR$. 
+Define $p: X \to \bR, x \mapsto \norm{f}_G \norm{x}$. 
+Then for any $x \in G$, 
+\begin{equation*}
+    f(x) \le \abs{f(x)} \le \norm{f}_G \norm{x} = p(x). 
+\end{equation*}
+By the Hahn-Banach Theorem over $\bR$ 
+\ref{thm:bounded_linear_operator:hahn_banach_real}, there exists a linear 
+functional $F$ such that $F_{\chi_{G}} = f$ and $F(x) \le p(x)$ for all 
+$x \in X$. 
+This means $F(x) \le p(x) = \norm{f}_G \norm{x}$ and $F(-x) \le p(x) = 
+\norm{f}_G \norm{x}$, implying $\norm{F} \le \norm{f}_G$ and $F \in X^\ast$. 
+Since $\norm{F} \ge \norm{f}_G$, we have $\norm{f}_G = \norm{F}$. 
+This is exactly what we want. 
+
+Next, we proceed with the case that $\bK = \bC$. 
+Suppose $f(x) = \phi(x) + \mi \psi(x)$, where $\phi$, $\psi$ are real-valued 
+functions, which can be viewed as linear functionals over $\bR$. 
+Noticing that 
+\begin{equation*}
+    f(\mi x) = \phi(\mi x) + \mi \psi(\mi x) = \mi \phi(x) - \psi(x) 
+    = \mi f(x),  
+\end{equation*}
+we get $\phi(x) = \psi(ix)$ for all $x \in X$. 
+Then it follows from the fact that for $x \in G$, 
+\begin{equation*}
+    \phi(x) \le \abs{f(x)} \le \norm{f}_G \norm{x} = p(x)
+\end{equation*}
+that there exists a bounded linear functional $\Phi$ such that 
+\begin{enumerate}
+    \item $\Phi_{\chi_G} = f$. 
+    \item $\Phi(x) \le p(x) = \norm{f}_G \norm{x}$ for all $x \in X$. 
+\end{enumerate}
+by the Hahn-Banach Theorem over $\bR$. 
+
+Define $F(x) = \Phi(x) - \mi \Phi(\mi x)$. 
+Then it is easy to show the following three facts: 
+\begin{enumerate}
+    \item $F$ is a linear functional over $\bK$. 
+    \item $F_{\chi_{G}} = f$. 
+    \item $\abs{f(x)} \le p(x)$ for all $x \in X$. 
+    Indeed, for any $x \in X$, assuming that $F(x) = \me^{\mi \theta} 
+    \abs{F(x)}$, 
+    then 
+    \begin{equation*}
+        \abs{F(x)} = e^{- \mi \theta} F(x)
+        = F(\me ^{- \mi \theta} x) = \Phi(\me ^{- \mi \theta} x) 
+        \le \norm{f}_G \norm{\me ^{- \mi \theta} x} 
+        = \norm{f}_G \norm{x}.
+    \end{equation*}
+\end{enumerate}
+Repeating the process with which we proved the case of real linear space 
+finally completes the proof. 
+\end{proof}
+
+\begin{cor}
+LEt $X$ be a normed space, and let $x_0 \in X$ with $x_0 \neq 0$. 
+Then there exists an $f \in X^\ast$ such that $f(x_0) = \norm{x_0}$ and 
+$\norm{f} = 1$. 
+\end{cor}
+\begin{proof}
+Let $G = \mspan \{x_0\}$ and define $f_0: G \to \bK$ as $f_0(\alpha x_0) 
+= \alpha \norm{x_0}$ for all $x \in X$. 
+Then $f_0 \in G^\ast$. 
+By the Hahn-Banach Theorem, $f_0$ extends to some $f \in X^\ast$ that 
+satisfies our requirement. 
+\end{proof}
+
+\begin{cor}
+Let $X$ be a normed space, and let $G$ be a subspace of $X$. 
+If $x \in X$ satisfies $d = d(x_0, G) = \inf_{x \in G} \norm{x, x_0} > 0$, 
+then there exists $f \in X^\ast$ such that $f(x_0) = 1$, $f(x) = 0$ for any
+$x \in G$ and $\norm{f} = \frac{1}{\alpha}$. 
+\end{cor}
+\begin{proof}
+Let $G_1 = \mspan G \cup \{x_0\}$ and define $f_1: G_1 \to \bR$ as 
+$(\alpha x_0 + x) = \alpha$, which clearly belongs to $G_1$. 
+We compute 
+\begin{equation*}
+    \begin{aligned}
+        \norm{f}_{G_1} &= \sup_{\alpha x_0 + x \neq 0} 
+        \frac{\abs{f_1(\alpha x_0 + x)}}{\norm{\alpha x_0 + x}} 
+        = \sup_{\substack{\alpha \neq 0 \\ x \in G}} \frac{\abs{\alpha}}{\norm{\alpha x_0 + x}} \\
+        &= \sup_{\substack{\alpha \neq 0 \\ x \in G}} \frac{1}{\norm{x_0 + \frac{x}{\alpha}}} 
+        = \sup_{x \in G} \frac{1}{\norm{x - x_0}} = \frac{1}{d}. 
+    \end{aligned}
+\end{equation*}
+Then the conclusion follows as a result of the Hahn-Banach Theorem.
+\end{proof}
+
+\begin{prop}
+Let $X$ be a normed space. 
+Then 
+\begin{equation*}
+\norm{x} = \sup_{\substack{f \in X^\ast \\ f \neq 0}} 
+\frac{f(x)}{\norm{f}} 
+= \sup_{\substack{f \in X^\ast \\ \norm{f} = 1}} f(x)
+\end{equation*}
+\end{prop}
+\begin{proof}
+Here we only deal with the first equality. 
+We assume without loss of generality that $x \in X$ is such that $x \neq 0$. 
+For any $f \in X^\ast$ such that $f \neq 0$, $\abs{f(x)} \le \norm{f} 
+\norm{x}$ yields $\frac{\abs{f(x)}}{\norm{f}} \le \norm{x}$. 
+Therefore, $\norm{x} \ge \sup_{\substack{f \in X^\ast \\ f \neq 0}} 
+\frac{f(x)}{\norm{f}}$. 
+
+On the other hand, by the Hahn-Banach Theorem, there exists an 
+$f_0 \in X^\ast$ such that $f_0(x) = 1$ and $\norm{f_0} = 1$. 
+Hence, 
+\begin{equation*}
+    \sup_{\substack{f \in X^\ast \\ f \neq 0}} 
+    \frac{f(x)}{\norm{f}} 
+    \ge \frac{\norm{x} f_0(x)}{\norm{f_0}} = \norm{x}, 
+\end{equation*}
+which completes the proof. 
+\end{proof}
